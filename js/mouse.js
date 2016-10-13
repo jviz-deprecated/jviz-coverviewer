@@ -43,6 +43,9 @@ jviz.modules.coverviewer.prototype.mouseDown = function(e, x, y)
   //Clear the background
   this.backgroundClear();
 
+  //Clear the label
+  this.labelClear();
+
   //Emit the click down event
   this.emit('mouse:down', this._draw.start, this._draw.end);
 };
@@ -67,22 +70,29 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
 
     //Emit the move event
     this.emit('mouse:move', this._draw.start, this._draw.end);
+
+    //Continue
+    return;
   }
 
   //Check click first
   //if(this.cover.clickfirst === true) { this.cover.clickfirst = false; }
 
+  //Get the draw zone
+  var draw = this._canvas.draw();
+
   //Show the hover position
-  /*
-  if(this.cover.draw.margin.left <= x && x <= this.cover.draw.margin.left + this.cover.draw.width)
+  if(draw.margin.left <= x && x <= draw.margin.left + draw.width)
   {
+    //Calculate the position
+    this._draw.position = Math.floor(this._draw.start + x - draw.margin.left);
+
     //Draw the hover line
-    this.CoverTrackDrawHover(x, y);
+    //this.CoverTrackDrawHover(x, y);
 
     //Draw the label
-    this.CoverTrackDrawLabel(x);
+    this.labelDraw(x, y);
   }
-  */
 };
 
 //Mouse click up event
