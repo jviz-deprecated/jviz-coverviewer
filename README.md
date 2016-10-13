@@ -16,6 +16,10 @@ jviz install coverviewer
 
 ### API
 
+#### coverviewer.move(status)
+
+Enable or disable the move action. If no argument is provided, this method will return the actual status.
+
 ### Events
 
 ## License
