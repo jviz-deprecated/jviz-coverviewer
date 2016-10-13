@@ -6,6 +6,9 @@ jviz.modules.coverviewer.prototype.resizeEvent = function()
 
   //Add the resize event
   $(window).resize(function(){ self.resize(); });
+
+  //Resize the first time
+  this.resize();
 };
 
 //Resize the panel
@@ -13,6 +16,15 @@ jviz.modules.coverviewer.prototype.resize = function()
 {
   //Resize the canvas element
   this._canvas.resize();
+
+  //Get the draw element
+  var draw = this._canvas.draw();
+
+  //Calculate the draw zone
+  this._draw.height = draw.height;
+
+  //Calculate the label position y
+  this._label.posy = this._height - draw.margin.bottom + this._label.margin;
 
   //Draw the graphic
   this.draw();
