@@ -16,4 +16,7 @@ jviz.modules.coverviewer.prototype.resize = function()
 
   //Draw the graphic
   this.draw();
+
+  //Emit the resize event
+  this.emit('resize', this._draw.start, this._draw.end, this._draw.length);
 };
