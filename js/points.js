@@ -59,3 +59,13 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
     canvas.Text({ x: lt_x, y: lt_y, text: lt_text, color: lt_color, font: lt_font, size: lt_size });
   }
 };
+
+//Clear the points layer
+jviz.modules.coverviewer.prototype.pointsClear = function()
+{
+  //Get the canvas layer
+  var canvas = this._canvas.layer(this._points.layer);
+
+  //Clear the layer
+  canvas.Clear();
+};
