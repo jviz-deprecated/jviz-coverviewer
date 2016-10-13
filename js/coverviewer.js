@@ -114,6 +114,9 @@ jviz.modules.coverviewer = function(opt)
   this._draw.click.start = 0; //Click orginal position
   this._draw.click.value = 0; //Click value
 
+  //Call the events factory
+  jviz.factory.events(this);
+
   //Register the resize event
   this.resizeEvent();
 
