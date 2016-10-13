@@ -87,9 +87,6 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
     //Calculate the position
     this._draw.position = Math.floor(this._draw.start + x - draw.margin.left);
 
-    //Draw the hover line
-    //this.CoverTrackDrawHover(x, y);
-
     //Draw the label
     this.labelDraw(x, y);
   }
