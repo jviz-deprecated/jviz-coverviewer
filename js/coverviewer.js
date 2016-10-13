@@ -26,7 +26,7 @@ jviz.modules.coverviewer = function(opt)
   this._loading = false;
 
   //Margins
-  this._margins = { top: 10, bottom: 20, left: 40, right: 40 };
+  this._margins = { top: 10, bottom: 30, left: 40, right: 40 };
 
   //Default layout width
   this._width = (typeof opt.width !== 'undefined') ? opt.width : '100%';
@@ -59,21 +59,49 @@ jviz.modules.coverviewer = function(opt)
   this._samples.names = []; //Samples names
   this._samples.active = []; //Samples active
   this._samples.empty = []; //Samples empty array
+  this._samples.layer = 2;
 
+  //Samples line
+  this._samples.line = {};
+  this._samples.line.opacity = 1.0; //Samples lines opacity
+  this._samples.line.width = 2; //Samples lines width
+  this._samples.line.join = 'round'; //Background lines join
+
+  //Background samples
+  this._bg = {};
+  this._bg.layer = 0; //Background layer
+  this._bg.color = jviz.colors.navy.hex; //Background lines color
+  this._bg.opacity = 0; //Background lines opacity
+  this._bg.width = 2; //Background lines stroke width
+  this._bg.join = 'round'; //Background lines join
+
+  //Points definition
+  this._points = {};
+  this._points.layer = 1; //Points layer
+  this._points.gap = 1000; //Control points nucleotides gap
+  this._points.letter = 'K'; //Control points letter
+  this._points.margin = 20; //Points margin
+
+  //Points line
+  this._points.line = {};
+  this._points.line.color = jviz.colors.navy4.hex; //Points line color
+  this._points.line.width = 1; //Points line width
+  this._points.line.opacity = 0.3; //Points line opacity
+
+  //Points text
+  this._points.text = {};
+  this._points.text.font = jviz.font.normal; //Points Text font
+  this._points.text.size = '12px'; //Points text size
+  this._points.text.color = jviz.colors.navy4.hex; //Points text color
+  this._points.text.margin = { top: 15, left: 4 }; //Points text margin
+  
   //Draw object
   this._draw = {};
   this._draw.start = 0; //Draw start position
   this._draw.end = 0; //Draw end positon
   this._draw.length = 0; //Draw length
+  this._draw.height = this._canvas.draw().height; //Draw zone height
   this._draw.move = false; //Draw on move
-
-  //Draw the background
-  this._draw.bg = {};
-  this._draw.bg.layer = 1; //Background layer
-  this._draw.bg.color = jviz.colors.navy.hex; //Background lines color
-  this._draw.bg.opacity = 0; //Background lines opacity
-  this._draw.bg.width = 2; //Background lines stroke width
-  this._draw.bg.join = 'round'; //Background lines join
 
   //Draw the marks
   this._draw.marks = {};
