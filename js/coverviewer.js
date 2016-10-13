@@ -14,7 +14,7 @@ jviz.modules.coverviewer = function(opt)
   this._parent = opt.parent;
 
   //Number of layers
-  this._layers = 4;
+  this._layers = 5;
 
   //Title
   this._title = 'CoverViewer';
@@ -45,6 +45,7 @@ jviz.modules.coverviewer = function(opt)
 
   //Data
   this._data = {};
+  this._data.has = false; //Has data
   this._data.chromosome = ''; //Data chromosome
   this._data.start = 0; //Data start position
   this._data.end = 0; //Data end position
@@ -99,13 +100,35 @@ jviz.modules.coverviewer = function(opt)
   this._marks = {};
   this._marks.layer = 0; //Marks layer
 
+  //Label
+  this._label = {};
+  this._label.layer = 4; //Label layer
+  this._label.width = 90; //Label width
+  this._label.height = 20; //Label height
+  this._label.posx = 0; //Position x
+  this._label.posy = 0; //Position y
+  this._label.margin = 5; //Label margin top
+
+  //Label rectangle
+  this._label.rect = {};
+  this._label.rect.color = jviz.colors.blue3.hex; //Fill color
+  this._label.rect.radius = 5; //Label rectangle radius
+
+  //Label text
+  this._label.text = {};
+  this._label.text.font = jviz.font.normal; //Label text font
+  this._label.text.size = '11px'; //Label text size
+  this._label.text.align = 'center'; //Label text align
+  this._label.text.color = jviz.colors.white.hex; //Label text color
+
   //Draw object
   this._draw = {};
   this._draw.start = 0; //Draw start position
   this._draw.end = 0; //Draw end positon
   this._draw.length = 0; //Draw length
-  this._draw.height = this._canvas.draw().height; //Draw zone height
+  this._draw.height = 0 //Draw zone height
   this._draw.move = false; //Draw on move
+  this._draw.position = 0; //Draw over position
 
   //Draw click
   this._draw.click = {};
