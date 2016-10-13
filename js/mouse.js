@@ -42,6 +42,9 @@ jviz.modules.coverviewer.prototype.mouseDown = function(e, x, y)
 
   //Clear the background
   this.backgroundClear();
+
+  //Emit the click down event
+  this.emit('mouse:down', this._draw.start, this._draw.end);
 };
 
 //Mouse move event
@@ -61,6 +64,9 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
 
     //Draw the region
     this.draw();
+
+    //Emit the move event
+    this.emit('mouse:move', this._draw.start, this._draw.end);
   }
 
   //Check click first
@@ -89,4 +95,7 @@ jviz.modules.coverviewer.prototype.mouseUp = function(e, x, y)
 
   //Draw the region
   this.draw();
+
+  //Emit the mouse up event
+  this.emit('mouse:up', this._draw.start, this._draw.end);
 };
