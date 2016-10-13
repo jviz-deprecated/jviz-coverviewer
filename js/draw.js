@@ -4,6 +4,9 @@ jviz.modules.coverviewer.prototype.draw = function(start)
   //Save the start position
   if(typeof start !== 'undefined'){ this._draw.start = parseInt(start); }
 
+  //Check if has data to display
+  if(this._data.has === false){ return; }
+
   //Get the actual draw
   var draw = this._canvas.draw();
 
@@ -58,4 +61,7 @@ jviz.modules.coverviewer.prototype.clear = function()
 
   //Clear the samples
   this.samplesClear();
+
+  //Clear the label
+  this.labelClear();
 };
