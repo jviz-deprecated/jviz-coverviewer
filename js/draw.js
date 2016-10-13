@@ -91,7 +91,7 @@ jviz.modules.coverviewer.prototype.drawBackground = function()
   }
 
   //Draw all the lines
-  for(var j = 0; j < 1; j++)
+  for(var j = 0; j < this._samples.count; j++)
   {
     //Draw the line
     canvas.Line(lines[j]);
