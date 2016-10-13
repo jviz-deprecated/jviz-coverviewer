@@ -62,7 +62,10 @@ jviz.modules.coverviewer.prototype.drawBackground = function()
   canvas.Clear();
 
   //Lines array
-  var lines = jviz.array.create(this._samples.count, []);
+  var lines = [];
+
+  //Initialize the array
+  for(var j = 0; j < this._samples.count; j++){ lines[j] = []; }
 
   //Real position counter
   var p = draw.margin.left;
@@ -88,13 +91,13 @@ jviz.modules.coverviewer.prototype.drawBackground = function()
   }
 
   //Draw all the lines
-  for(var j = 0; j < this._samples.count; j++)
+  for(var j = 0; j < 1; j++)
   {
     //Draw the line
     canvas.Line(lines[j]);
 
     //Set the line style
-    canvas.Stroke({ width: this._draw.bg.stroke, color: this._draw.bg.color, opacity: this._draw.bg.opacity });
+    canvas.Stroke({ width: this._draw.bg.width, color: this._draw.bg.color, opacity: this._draw.bg.opacity, join: this._draw.bg.join });
   }
 
   //Initialize the position y for the cover label
