@@ -69,7 +69,7 @@ jviz.modules.coverviewer = function(opt)
 
   //Background samples
   this._bg = {};
-  this._bg.layer = 0; //Background layer
+  this._bg.layer = 1; //Background layer
   this._bg.color = jviz.colors.navy.hex; //Background lines color
   this._bg.opacity = 0; //Background lines opacity
   this._bg.width = 2; //Background lines stroke width
@@ -77,24 +77,28 @@ jviz.modules.coverviewer = function(opt)
 
   //Points definition
   this._points = {};
-  this._points.layer = 1; //Points layer
+  this._points.layer = 2; //Points layer
   this._points.gap = 1000; //Control points nucleotides gap
   this._points.letter = 'K'; //Control points letter
-  this._points.margin = 20; //Points margin
+  this._points.margin = 30; //Points margin
 
   //Points line
   this._points.line = {};
-  this._points.line.color = jviz.colors.navy4.hex; //Points line color
+  this._points.line.color = jviz.colors.navy3.hex; //Points line color
   this._points.line.width = 1; //Points line width
-  this._points.line.opacity = 0.3; //Points line opacity
+  this._points.line.opacity = 0.4; //Points line opacity
 
   //Points text
   this._points.text = {};
   this._points.text.font = jviz.font.normal; //Points Text font
   this._points.text.size = '12px'; //Points text size
-  this._points.text.color = jviz.colors.navy4.hex; //Points text color
+  this._points.text.color = jviz.colors.navy3.hex; //Points text color
   this._points.text.margin = { top: 15, left: 4 }; //Points text margin
-  
+
+  //Marks
+  this._marks = {};
+  this._marks.layer = 0; //Marks layer
+
   //Draw object
   this._draw = {};
   this._draw.start = 0; //Draw start position
@@ -103,9 +107,18 @@ jviz.modules.coverviewer = function(opt)
   this._draw.height = this._canvas.draw().height; //Draw zone height
   this._draw.move = false; //Draw on move
 
-  //Draw the marks
-  this._draw.marks = {};
-  this._draw.marks.layer = 0; //Marks layer
+  //Draw click
+  this._draw.click = {};
+  this._draw.click.first = false; //Prevent errors
+  this._draw.click.point = 0//Click point
+  this._draw.click.start = 0; //Click orginal position
+  this._draw.click.value = 0; //Click value
+
+  //Register the resize event
+  this.resizeEvent();
+
+  //Register the mouse action events
+  this.mouseEvent();
 
   //Parse the samples
   if(typeof opt.samples !== 'undefined'){ this.samples(opt.samples); }
