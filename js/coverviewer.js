@@ -59,7 +59,7 @@ jviz.modules.coverviewer = function(opt)
   this._samples.names = []; //Samples names
   this._samples.active = []; //Samples active
   this._samples.empty = []; //Samples empty array
-  this._samples.layer = 2;
+  this._samples.layer = 3; //Samples layer
 
   //Samples line
   this._samples.line = {};
@@ -113,6 +113,13 @@ jviz.modules.coverviewer = function(opt)
   this._draw.click.point = 0//Click point
   this._draw.click.start = 0; //Click orginal position
   this._draw.click.value = 0; //Click value
+
+  //Colors
+  this._colors = [];
+
+  //Add the colors
+  this._colors = this._colors.concat(jviz.colors.get(2, [ 'navy', 'grey', 'white' ]));
+  this._colors = this._colors.concat(jviz.colors.get(1, [ 'navy', 'grey', 'white' ]));
 
   //Call the events factory
   jviz.factory.events(this);
