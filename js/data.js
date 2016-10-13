@@ -54,10 +54,22 @@ jviz.modules.coverviewer.prototype.dataParse = function()
     var cover = this._data.values[key];
 
     //Get the min value
-    Math.min(jviz.array.min(cover), this._data.min);
+    //Math.min(jviz.array.min(cover), this._data.min);
 
     //Get the max value
-    Math.max(jviz.array.max(cover), this._data.max);
+    //Math.max(jviz.array.max(cover), this._data.max);
+
+    //Get the cover min value
+    var cover_min = jviz.array.min(cover);
+
+    //Compare
+    if(cover_min < this._data.min){ this._data.min = cover_min; }
+
+    //Get the cover max value
+    var cover_max = jviz.array.max(cover);
+
+    //Compare the values
+    if(this._data.max < cover_max){ this._data.max = cover_max; } 
   }
 
   //Check 0 value in max
