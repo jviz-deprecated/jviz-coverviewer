@@ -70,9 +70,10 @@ jviz.modules.coverviewer = function(opt)
   //Draw the background
   this._draw.bg = {};
   this._draw.bg.layer = 1; //Background layer
-  this._draw.bg.color = jviz.colors.navy; //Background lines color
+  this._draw.bg.color = jviz.colors.navy.hex; //Background lines color
   this._draw.bg.opacity = 0; //Background lines opacity
-  this._draw.bg.stroke = 2; //Background lines stroke
+  this._draw.bg.width = 2; //Background lines stroke width
+  this._draw.bg.join = 'round'; //Background lines join
 
   //Draw the marks
   this._draw.marks = {};
