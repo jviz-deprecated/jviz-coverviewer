@@ -63,9 +63,6 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
 //Clear the points layer
 jviz.modules.coverviewer.prototype.pointsClear = function()
 {
-  //Get the canvas layer
-  var canvas = this._canvas.layer(this._points.layer);
-
   //Clear the layer
-  canvas.Clear();
+  this._canvas.layer(this._points.layer).Clear();
 };
