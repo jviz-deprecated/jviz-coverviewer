@@ -40,3 +40,26 @@ jviz.modules.coverviewer.prototype.draw = function(opt)
   //Draw the samples
   this.samplesDraw();
 };
+
+//Manage the move status
+jviz.modules.coverviewer.prototype.move = function(status)
+{
+  //Check the status
+  if(typeof status === 'undefined'){ return this._draw.move; }
+
+  //Update the move status
+  this._draw.move = status;
+};
+
+//Clear
+jviz.modules.coverviewer.prototype.clear = function()
+{
+  //Clear the background
+  this.backgroundClear();
+
+  //Clear the points
+  this.pointsClear();
+
+  //Clear the samples
+  this.samplesClear();
+};
