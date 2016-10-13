@@ -1,12 +1,8 @@
 //CoverViewer draw
-jviz.modules.coverviewer.prototype.draw = function(opt)
+jviz.modules.coverviewer.prototype.draw = function(start)
 {
-  //Check the option
-  if(typeof opt === 'object')
-  {
-    //Save the start position
-    if(typeof opt.start !== 'undefined'){ this._draw.start = parseInt(opt.start); }
-  }
+  //Save the start position
+  if(typeof start !== 'undefined'){ this._draw.start = parseInt(start); }
 
   //Get the actual draw
   var draw = this._canvas.draw();
