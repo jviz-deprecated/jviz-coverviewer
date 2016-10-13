@@ -14,7 +14,10 @@ jviz.modules.coverviewer.prototype.samples = function(data)
   this._samples.count = data.length;
 
   //Initialize the active samples list
-  this._samples.active = [];
+  this._samples.active.list = jviz.array.create(data.length, false);
+
+  //Initialize the active samples index
+  this._samples.active.index = [];
 
   //Initialize the samples empty array
   this._samples.empty = jviz.array.zeros(data.length);
@@ -27,7 +30,7 @@ jviz.modules.coverviewer.prototype.samples = function(data)
 jviz.modules.coverviewer.prototype.samplesDraw = function()
 {
   //Check the active samples count
-  if(this._samples.active.length === 0){ return; }
+  if(this._samples.active.index.length === 0){ return; }
 
   //Get the draw zone
   var draw = this._canvas.draw();
@@ -42,7 +45,7 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
   var lines = [];
 
   //Initialize the array
-  for(var j = 0; j < this._samples.active.length; j++){ lines[j] = []; }
+  for(var j = 0; j < this._samples.active.index.length; j++){ lines[j] = []; }
 
   //Real position counter
   var p = draw.margin.left;
@@ -54,10 +57,10 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
     var cover = (typeof this._data.normalized[i] === 'undefined') ? this._samples.empty : this._data.normalized[i];
 
     //Draw the lines
-    for(var j = 0; j < this._samples.active.length; j++)
+    for(var j = 0; j < this._samples.active.index.length; j++)
     {
       //Get the index
-      var index = this._samples.active[j];
+      var index = this._samples.active.index[j];
 
       //Calculate the y position
       var py = this._height - draw.margin.bottom - cover[index];
@@ -71,16 +74,13 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
   }
 
   //Draw all the lines
-  for(var j = 0; j < this._samples.active.length; j++)
+  for(var j = 0; j < this._samples.active.index.length; j++)
   {
-    //Get the index
-    var index = this._samples.active[j];
-
     //Draw the line
     canvas.Line(lines[j]);
 
     //Set the line style
-    canvas.Stroke({ width: this._samples.line.width, color: this._colors[index] });
+    canvas.Stroke({ width: this._samples.line.width, color: this._colors[j] });
   }
 };
 
@@ -97,8 +97,14 @@ jviz.modules.coverviewer.prototype.showSample = function(index)
   //Check the index value
   if(index < 0 || this._samples.count <= index){ return jviz.console.error('Invalid sample index'); }
 
+  //Check if sample is active now
+  if(this._samples.active.list[index] === true){ return; }
+
   //Activate the sample
-  this._samples.active.push(index);
+  this._samples.active.list[index] = true;
+
+  //Save the sample index
+  this._samples.active.index.push(index);
 
   //Draw the actual position
   this.draw();
@@ -107,8 +113,14 @@ jviz.modules.coverviewer.prototype.showSample = function(index)
 //Hide a sample
 jviz.modules.coverviewer.prototype.hideSample = function(index)
 {
+  //Check the index value
+  if(index < 0 || this._samples.count <= index){ return jviz.console.error('Invalid sample index'); }
+
   //Desactivate the sample
-  this._samples.active = jviz.array.remove(this._samples.active, index);
+  this._samples.active.list[index] = false;
+
+  //Remove the index
+  this._samples.active.index = jviz.array.remove(this._samples.active.index, index);
 
   //Clear the samples layer
   this.samplesClear();
@@ -121,8 +133,21 @@ jviz.modules.coverviewer.prototype.hideSample = function(index)
 jviz.modules.coverviewer.prototype.isSample = function(n)
 {
   //Get the index
-  var index = this._samples.active.indexOf(n);
+  var index = this._samples.active.index.indexOf(n);
 
   //Return if sample is active
   return (index === -1) ? false : true;
+};
+
+//Get the sample color
+jviz.modules.coverviewer.prototype.samplesColor = function(n)
+{
+  //Check if sample is active
+  if(this._samples.active.list[n] === false){ return this._bg.color; }
+
+  //Get the sample index
+  var index = this._samples.active.index.indexOf(n);
+
+  //Return the color
+  return this._colors[index];
 };
