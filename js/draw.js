@@ -37,10 +37,11 @@ jviz.modules.coverviewer.prototype.draw = function(opt)
   this.drawBackground();
 
   //Draw the control points
+  this.pointsDraw();
   //this.PointsDraw(canvas, this.cover.draw.start, this.cover.draw.end, this.cover.height, this.cover.draw.margin);
 
   //Draw the samples
-  this.drawSamples();
+  this.samplesDraw();
 
   //Reset the draw move
   this._draw.move = false;
@@ -56,7 +57,7 @@ jviz.modules.coverviewer.prototype.drawBackground = function()
   var draw = this._canvas.draw();
 
   //Get the canvas layer
-  var canvas = this._canvas.layer(this._draw.bg.layer);
+  var canvas = this._canvas.layer(this._bg.layer);
 
   //Clear the layer
   canvas.Clear();
@@ -97,7 +98,7 @@ jviz.modules.coverviewer.prototype.drawBackground = function()
     canvas.Line(lines[j]);
 
     //Set the line style
-    canvas.Stroke({ width: this._draw.bg.width, color: this._draw.bg.color, opacity: this._draw.bg.opacity, join: this._draw.bg.join });
+    canvas.Stroke({ width: this._bg.width, color: this._bg.color, opacity: this._bg.opacity, join: this._bg.join });
   }
 
   //Initialize the position y for the cover label
@@ -105,9 +106,4 @@ jviz.modules.coverviewer.prototype.drawBackground = function()
 
   //Initialize the height for the line
   //this.cover.hover.height = this.cover.draw.height;
-};
-
-//Draw the samples
-jviz.modules.coverviewer.prototype.drawSamples = function()
-{
 };
