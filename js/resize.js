@@ -26,6 +26,9 @@ jviz.modules.coverviewer.prototype.resize = function()
   //Calculate the label position y
   this._label.posy = this._height - draw.margin.bottom + this._label.margin;
 
+  //Calculate the label line height
+  this._label.line.height = draw.height;
+
   //Draw the graphic
   this.draw();
 
