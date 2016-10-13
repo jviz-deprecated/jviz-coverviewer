@@ -87,7 +87,8 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
 //Clear the samples layer
 jviz.modules.coverviewer.prototype.samplesClear = function()
 {
-
+  //Clear the samples layer
+  this._canvas.layer(this._samples.layer).Clear();
 };
 
 //Display a sample
@@ -108,6 +109,9 @@ jviz.modules.coverviewer.prototype.hideSample = function(index)
 {
   //Desactivate the sample
   this._samples.active = jviz.array.remove(this._samples.active, index);
+
+  //Clear the samples layer
+  this.samplesClear();
 
   //Draw the actual positon
   this.draw();
