@@ -5,7 +5,7 @@ jviz.modules.coverviewer = function(opt)
   if(typeof opt !== 'object'){ var opt = {}; }
 
   //Save the ideogram ID
-  this._id = (typeof opt.id === 'undefined') ? jviz.utils.getID({ prefix: 'coverviwer', length: 5 }) : opt.id;
+  this._id = (typeof opt.id === 'undefined') ? jviz.utils.getID({ prefix: 'coverviewer', length: 5 }) : opt.id;
 
   //Save the ideogram class
   this._class = (typeof opt.class === 'undefined') ? 'jviz-modules-coverviewer' : opt.class;
