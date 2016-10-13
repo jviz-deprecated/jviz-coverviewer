@@ -58,9 +58,13 @@ jviz.modules.coverviewer = function(opt)
   this._samples = {};
   this._samples.count = 0; //Count the number of samples
   this._samples.names = []; //Samples names
-  this._samples.active = []; //Samples active
   this._samples.empty = []; //Samples empty array
   this._samples.layer = 3; //Samples layer
+
+  //Samples active
+  this._samples.active = {};
+  this._samples.active.list = []; //Samples active list
+  this._samples.active.index = []; //Samples active index
 
   //Samples line
   this._samples.line = {};
@@ -120,6 +124,18 @@ jviz.modules.coverviewer = function(opt)
   this._label.text.size = '11px'; //Label text size
   this._label.text.align = 'center'; //Label text align
   this._label.text.color = jviz.colors.white.hex; //Label text color
+
+  //Label line
+  this._label.line = {};
+  this._label.line.width = 1; // Line width
+  this._label.line.height = 0; //Line height
+  this._label.line.color = jviz.colors.blue3.hex; //Fill color
+  this._label.line.opacity = 0.4; //Label line opacity
+
+  //Label circle
+  this._label.circle = {};
+  this._label.circle.radius = 3; //Circle radius
+  this._label.circle.opacity = 0.9; //Circle opacity
 
   //Draw object
   this._draw = {};
