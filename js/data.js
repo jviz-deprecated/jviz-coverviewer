@@ -31,6 +31,9 @@ jviz.modules.coverviewer.prototype.data = function(data)
   //Save the values
   this._data.values = data.values;
 
+  //Set has data as true
+  this._data.has = true;
+
   //Parse the data values
   this.dataParse();
 
