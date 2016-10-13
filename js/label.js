@@ -1,5 +1,5 @@
 //Draw the label
-jviz.modules.coverviewer.prototype.labelDraw = function(px)
+jviz.modules.coverviewer.prototype.labelDraw = function(px, py)
 {
   //Get the up layer
   var canvas = this._canvas.layer(this._label.layer);
@@ -7,6 +7,32 @@ jviz.modules.coverviewer.prototype.labelDraw = function(px)
   //Clear the canvas
   canvas.Clear();
 
+  //Draw the label line
+  this.labelLineDraw(canvas, px, py);
+
+  //Draw the label box
+  this.labelBoxDraw(canvas, px, py);
+
+  //Draw the label circles
+  this.labelCirclesDraw(canvas, px, py);
+};
+
+//Draw the label line
+jviz.modules.coverviewer.prototype.labelLineDraw = function(canvas, px, py)
+{
+  //Get the draw
+  var draw = this._canvas.draw();
+
+  //Draw the line
+  canvas.Line([[ px, draw.margin.top], [px, draw.margin.top + this._label.line.height ]]);
+
+  //Add the style
+  canvas.Stroke({ width: this._label.line.width, color: this._label.line.color, opacity: this._label.line.opacity });
+};
+
+//Draw the label box
+jviz.modules.coverviewer.prototype.labelBoxDraw = function(canvas, px, py)
+{
   //Save the position x
   var posx = px;
 
@@ -54,6 +80,41 @@ jviz.modules.coverviewer.prototype.labelDraw = function(px)
 
   //Set the style
   canvas.Fill(this._label.rect.color);
+};
+
+//Draw the label circle
+jviz.modules.coverviewer.prototype.labelCirclesDraw = function(canvas, px, py)
+{
+  //Get the draw
+  var draw = this._canvas.draw();
+
+  //Get the actual position
+  var pos = this._draw.position;
+
+  //Get the cover for this position
+  var cover = (typeof this._data.normalized[pos] === 'undefined') ? this._samples.empty : this._data.normalized[pos];
+
+  //Create one circle for each bam file
+  for(var i = 0; i < this._samples.count; i++)
+  {
+    //Create the new object circle
+    var circ = {};
+
+    //Calculate the position x
+    circ.posx = px;
+
+    //Calculate the position y
+    circ.posy = this._height - draw.margin.bottom - cover[i];
+
+    //Set the radius
+    canvas.Circle({ x: circ.posx, y: circ.posy, radius: this._label.circle.radius });
+
+    //Get the color
+    circ.color = this.samplesColor(i);
+
+    //Add the style
+    canvas.Fill({ color: circ.color, opacity: this._label.circle.opacity });
+  }
 };
 
 //Clear the label
