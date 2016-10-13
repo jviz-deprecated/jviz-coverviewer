@@ -28,3 +28,9 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
 {
 
 };
+
+//Clear the samples layer
+jviz.modules.coverviewer.prototype.samplesClear = function()
+{
+
+};
