@@ -10,6 +10,7 @@
 <script type="text/javascript" src="./build/coverviewer.js"></script>
 <!-- Test files -->
 <script type="text/javascript" src="./test/data.js"></script>
+<script type="text/javascript" src="./test/samples.js"></script>
 <!-- Styles -->
 <style>body { padding: 50px !important; } </style>
 <!-- Main script -->
@@ -23,8 +24,20 @@
     //Options
     var opt = { id: 'MyCoverViewer', parent: 'test' };
 
+    //Add the samples
+    opt.samples = test_samples;
+
+    //Add the data
+    opt.data = test_data;
+
     //Build the coverviewer element
     el = new jviz.modules.coverviewer(opt);
+
+    //Add the mouse down event
+    el.on('mouse:down', function(start, end){ console.log('Down: ' + start + ' - ' + end); });
+
+    //Add the mouse up event
+    el.on('mouse:up', function(start, end){ console.log('Up: ' + start + ' - ' + end); });
   });
 </script>
 <!-- Test div -->
