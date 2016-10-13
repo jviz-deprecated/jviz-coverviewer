@@ -62,9 +62,6 @@ jviz.modules.coverviewer.prototype.backgroundDraw = function()
 //Clear the background
 jviz.modules.coverviewer.prototype.backgroundClear = function()
 {
-  //Get the canvas layer
-  var canvas = this._canvas.layer(this._bg.layer);
-
   //Clear the layer
-  canvas.Clear();
+  this._canvas.layer(this._bg.layer).Clear();
 };
