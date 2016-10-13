@@ -69,7 +69,7 @@ jviz.modules.coverviewer.prototype.dataParse = function()
     var cover_max = jviz.array.max(cover);
 
     //Compare the values
-    if(this._data.max < cover_max){ this._data.max = cover_max; } 
+    if(this._data.max < cover_max){ this._data.max = cover_max; }
   }
 
   //Check 0 value in max
@@ -94,7 +94,7 @@ jviz.modules.coverviewer.prototype.dataParse = function()
       var h = this._data.values[key][j]/this._data.max;
 
       //Save the value
-      this._data.normalized[key][j] = Math.floor(h * this._height);
+      this._data.normalized[key][j] = Math.floor(h * this._draw.height);
     }
   }
 
