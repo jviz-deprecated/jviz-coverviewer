@@ -19,6 +19,12 @@ jviz.modules.coverviewer.prototype.samples = function(data)
   //Initialize the samples empty array
   this._samples.empty = jviz.array.zeros(data.length);
 
-  //Calulates the background lines opacity
-  this._draw.bg.opacity = (this._samples.count === 0) ? 0 : 1 / this._samples.count;
+  //Calulate the background lines opacity
+  this._bg.opacity = (this._samples.count === 0) ? 0 : 1 / this._samples.count;
+};
+
+//Draw the samples
+jviz.modules.coverviewer.prototype.samplesDraw = function()
+{
+
 };
