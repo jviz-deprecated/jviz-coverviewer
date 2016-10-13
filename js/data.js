@@ -16,6 +16,9 @@ jviz.modules.coverviewer.prototype.data = function(data)
   //Check the values
   if(typeof data.values === 'undefined'){ return jviz.console.error('Undefined data values'); }
 
+  //Set loading as true
+  this.loading(true);
+
   //Save the chromosome
   this._data.chromosome = data.chromosome;
 
@@ -36,6 +39,9 @@ jviz.modules.coverviewer.prototype.data = function(data)
 
   //Draw the data
   this.draw();
+
+  //Set loading as false
+  this.loading(false);
 };
 
 //CoverViewer parse the data
