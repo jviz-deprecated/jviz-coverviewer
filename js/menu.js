@@ -22,4 +22,7 @@ jviz.modules.coverviewer.prototype.menuClickSamples = function()
 {
   //Emit the event
   this.emit('btn:samples');
+
+  //Show/Hide the samples table
+  this.table();
 };
