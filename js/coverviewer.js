@@ -85,7 +85,7 @@ jviz.modules.coverviewer = function(opt)
   this._points.layer = 2; //Points layer
   this._points.gap = 1000; //Control points nucleotides gap
   this._points.letter = 'K'; //Control points letter
-  this._points.margin = 30; //Points margin
+  this._points.margin = 35; //Points margin
 
   //Points line
   this._points.line = {};
