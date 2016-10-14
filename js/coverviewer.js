@@ -60,6 +60,7 @@ jviz.modules.coverviewer = function(opt)
   this._samples.names = []; //Samples names
   this._samples.empty = []; //Samples empty array
   this._samples.layer = 3; //Samples layer
+  this._samples.default = jviz.colors.navy3.hex; //Samples default color
 
   //Samples active
   this._samples.active = {};
@@ -170,6 +171,31 @@ jviz.modules.coverviewer = function(opt)
   this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
   this._menu.samples.class = this._menu.class.btn.water; //Samples button class
   this._menu.samples.text = 'Show/Hide samples'; //Samples button text
+
+  //Samples table
+  this._table = {};
+  this._table.id = this._id + '-table'; //Samples table id
+  this._table.class = this._class + '-table'; //Samples table class
+  this._table.active = false; //Samples table active
+  this._table.build = false; //Table is built
+
+  //Table cell
+  this._table.cell = {};
+  this._table.cell.id = this._table.id + '-cell'; //Table cell ID
+  this._table.cell.class = this._table.class + '-cell'; //Table cell class
+
+  //Table cell switch
+  this._table.cell.switch = {};
+  this._table.cell.switch.id = this._table.cell.id + '-switch'; //Table cell switch ID
+  this._table.cell.switch.class = this._table.cell.class + '-switch'; //Table cell switch class
+
+  //table cell text
+  this._table.cell.text = {};
+  this._table.cell.text.id = this._table.cell.id + '-text'; //Table cell text ID
+  this._table.cell.text.class = this._table.cell.class + '-text'; //Table cell text class
+
+  //Build the table
+  this.tableBuild();
 
   //Build the menu
   this.menu();
