@@ -46,8 +46,8 @@ jviz.modules.coverviewer.prototype.mouseDown = function(e, x, y)
   //Clear the label
   this.labelClear();
 
-  //Emit the click down event
-  this.emit('mouse:down', this._draw.start, this._draw.end);
+  //Emit the drag start event
+  this.emit('drag:start', this._draw.start, this._draw.end);
 };
 
 //Mouse move event
@@ -68,8 +68,8 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
     //Draw the region
     this.draw();
 
-    //Emit the move event
-    this.emit('mouse:move', this._draw.start, this._draw.end);
+    //Emit the drag move event
+    this.emit('drag:move', this._draw.start, this._draw.end);
 
     //Continue
     return;
@@ -103,6 +103,6 @@ jviz.modules.coverviewer.prototype.mouseUp = function(e, x, y)
   //Draw the region
   this.draw();
 
-  //Emit the mouse up event
-  this.emit('mouse:up', this._draw.start, this._draw.end);
+  //Emit the drag stop event
+  this.emit('drag:stop', this._draw.start, this._draw.end);
 };
