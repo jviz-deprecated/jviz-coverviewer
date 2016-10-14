@@ -30,23 +30,23 @@ Clear all layers.
 
 ### Events
 
-#### coverviewer.on('mouse:down', handler)
+#### coverviewer.on('drag:start', handler)
 
 Emit the `handler` function when the user press the left mouse button. The `handler` function will be called with the following arguments:
 - `start`: coverage draw start position.
 - `end`: coverage draw end position.
 
-#### coverviewer.on('mouse:move', handler)
+#### coverviewer.on('drag:move', handler)
 
 Emit the `handler` function when the user moves the coverage graphic. The `handler` function will be called with the following arguments:
 - `start`: actual coverage draw start position.
 - `end`: actual coverage draw end position.
 
-#### coverviewer.on('mouse:up', handler)
+#### coverviewer.on('drag:stop', handler)
 
 Emit the `handler` function when the user release the left mouse button. The `handler` function will be called with the following arguments:
 - `start`: actual coverage draw start position.
-- `end`: actual coverage draw end position. 
+- `end`: actual coverage draw end position.
 
 ## License
 
