@@ -39,6 +39,7 @@ jviz.modules.coverviewer.prototype.mouseDown = function(e, x, y)
   this._draw.click.start = this._draw.start;
 
   //Add the cursor
+  jviz.cursor.set('move');
 
   //Clear the background
   this.backgroundClear();
@@ -99,6 +100,7 @@ jviz.modules.coverviewer.prototype.mouseUp = function(e, x, y)
   this._draw.move = false;
 
   //Remove the cursor
+  jviz.cursor.remove('move');
 
   //Draw the region
   this.draw();
