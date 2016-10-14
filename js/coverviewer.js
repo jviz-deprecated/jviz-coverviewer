@@ -111,7 +111,7 @@ jviz.modules.coverviewer = function(opt)
   this._label.height = 20; //Label height
   this._label.posx = 0; //Position x
   this._label.posy = 0; //Position y
-  this._label.margin = 5; //Label margin top
+  this._label.margin = 7; //Label margin top
 
   //Label rectangle
   this._label.rect = {};
