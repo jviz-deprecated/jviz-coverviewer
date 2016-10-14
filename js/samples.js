@@ -24,6 +24,9 @@ jviz.modules.coverviewer.prototype.samples = function(data)
 
   //Calulate the background lines opacity
   this._bg.opacity = (this._samples.count === 0) ? 0 : 1 / this._samples.count;
+
+  //Build the table samples
+  this.tableBuildSamples();
 };
 
 //Draw the samples
