@@ -40,6 +40,15 @@ jviz.modules.coverviewer.prototype.data = function(data)
   //Initialize the draw start position
   this._draw.start = this._data.start;
 
+  //Get the start point
+  var point_start = jviz.math.formatNumber(this._data.start, '.');
+
+  //Get the end point
+  var point_end = jviz.math.formatNumber(this._data.end, '.');
+
+  //Update the panel detail
+  this._panel.detail('<b>Chromosome ' + this._data.chromosome + '</b> start: ' + point_start + ', end: ' + point_end);
+
   //Draw the data
   this.draw();
 
