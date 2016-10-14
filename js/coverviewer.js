@@ -160,6 +160,20 @@ jviz.modules.coverviewer = function(opt)
   this._colors = this._colors.concat(jviz.colors.get(2, [ 'navy', 'grey', 'white' ]));
   this._colors = this._colors.concat(jviz.colors.get(1, [ 'navy', 'grey', 'white' ]));
 
+  //Menu
+  this._menu = {};
+  this._menu.id = this._id + '-menu'; //Menu ID
+  this._menu.class = this._panel.el(); //Menu class styles
+
+  //Samples button
+  this._menu.samples = {};
+  this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
+  this._menu.samples.class = this._menu.class.btn.water; //Samples button class
+  this._menu.samples.text = 'Show/Hide samples'; //Samples button text
+
+  //Build the menu
+  this.menu();
+
   //Call the events factory
   jviz.factory.events(this);
 
