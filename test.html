@@ -33,11 +33,11 @@
     //Build the coverviewer element
     el = new jviz.modules.coverviewer(opt);
 
-    //Add the mouse down event
-    el.on('mouse:down', function(start, end){ console.log('Down: ' + start + ' - ' + end); });
+    //Add the drag start event
+    el.on('drag:start', function(start, end){ console.log('Down: ' + start + ' - ' + end); });
 
-    //Add the mouse up event
-    el.on('mouse:up', function(start, end){ console.log('Up: ' + start + ' - ' + end); });
+    //Add the drag end event
+    el.on('drag:stop', function(start, end){ console.log('Up: ' + start + ' - ' + end); });
   });
 </script>
 <!-- Test div -->
