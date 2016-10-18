@@ -110,7 +110,7 @@ jviz.modules.coverviewer.prototype.labelCirclesDraw = function(canvas, px, py)
     canvas.Circle({ x: circ.posx, y: circ.posy, radius: this._label.circle.radius });
 
     //Get the color
-    circ.color = this.samplesColor(i);
+    circ.color = this._samples.color[i];
 
     //Add the style
     canvas.Fill({ color: circ.color, opacity: this._label.circle.opacity });
