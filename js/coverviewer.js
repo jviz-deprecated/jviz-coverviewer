@@ -188,6 +188,7 @@ jviz.modules.coverviewer = function(opt)
   this._table.cell.switch = {};
   this._table.cell.switch.id = this._table.cell.id + '-switch'; //Table cell switch ID
   this._table.cell.switch.class = this._table.cell.class + '-switch'; //Table cell switch class
+  this._table.cell.switch.el = []; //Switch elements list
 
   //table cell text
   this._table.cell.text = {};
