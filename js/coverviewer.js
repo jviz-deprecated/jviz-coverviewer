@@ -200,8 +200,8 @@ jviz.modules.coverviewer = function(opt)
   //Build the menu
   this.menu();
 
-  //Call the events factory
-  jviz.factory.events(this);
+  //Build the events
+  this._events = new jviz.events();
 
   //Register the resize event
   this.resizeEvent();
