@@ -26,7 +26,7 @@ jviz.modules.coverviewer.prototype.samples = function(data)
   this._bg.opacity = (this._samples.count === 0) ? 0 : 1 / this._samples.count;
 
   //Build the table samples
-  this.tableBuildSamples();
+  this.tableBuild();
 };
 
 //Draw the samples
