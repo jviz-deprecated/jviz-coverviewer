@@ -218,3 +218,6 @@ jviz.modules.coverviewer = function(opt)
   //Return this
   return this;
 };
+
+//On method
+jviz.modules.coverviewer.prototype.on = function(name, listener){ return this._events.add(name, listener); };
