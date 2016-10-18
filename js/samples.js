@@ -22,6 +22,9 @@ jviz.modules.coverviewer.prototype.samples = function(data)
   //Initialize the samples empty array
   this._samples.empty = jviz.math.array.zeros(data.length);
 
+  //Initialize the colors array
+  this._samples.color = jviz.math.array.create(data.length, this._samples.default);
+
   //Calulate the background lines opacity
   this._bg.opacity = (this._samples.count === 0) ? 0 : 1 / this._samples.count;
 
@@ -79,11 +82,14 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
   //Draw all the lines
   for(var j = 0; j < this._samples.active.index.length; j++)
   {
+    //Get the index
+    var index = this._samples.active.index[j];
+
     //Draw the line
     canvas.Line(lines[j]);
 
     //Set the line style
-    canvas.Stroke({ width: this._samples.line.width, color: this._colors[j] });
+    canvas.Stroke({ width: this._samples.line.width, color: this._samples.color[index] });
   }
 };
 
@@ -109,6 +115,9 @@ jviz.modules.coverviewer.prototype.showSample = function(index)
   //Save the sample index
   this._samples.active.index.push(index);
 
+  //Update the color
+  this._samples.color[index] = this.samplesColor();
+
   //Draw the actual position
   this.draw();
 };
@@ -124,6 +133,9 @@ jviz.modules.coverviewer.prototype.hideSample = function(index)
 
   //Remove the index
   this._samples.active.index = jviz.math.array.remove(this._samples.active.index, index);
+
+  //Reset the sample color
+  this._samples.color[index] = this._samples.default;
 
   //Clear the samples layer
   this.samplesClear();
@@ -142,15 +154,19 @@ jviz.modules.coverviewer.prototype.isSample = function(n)
   return (index === -1) ? false : true;
 };
 
-//Get the sample color
-jviz.modules.coverviewer.prototype.samplesColor = function(n)
+//Get a color for a new sample
+jviz.modules.coverviewer.prototype.samplesColor = function()
 {
-  //Check if sample is active
-  if(this._samples.active.list[n] === false){ return this._bg.color; }
+  //Read all the colors
+  for(var i = 0; i < this._colors.length; i++)
+  {
+    //Get the color
+    var color = this._colors[i];
 
-  //Get the sample index
-  var index = this._samples.active.index.indexOf(n);
+    //Check if color exists
+    if(this._samples.color.indexOf(color) === -1){ return color; }
+  }
 
-  //Return the color
-  return this._colors[index];
+  //Return the first color
+  return this._colors[0];
 };
