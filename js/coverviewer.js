@@ -181,12 +181,21 @@ jviz.modules.coverviewer = function(opt)
   this._table.id = this._id + '-table'; //Samples table id
   this._table.class = this._class + '-table'; //Samples table class
   this._table.active = false; //Samples table active
-  this._table.build = false; //Table is built
+
+  //Table scroll
+  this._table.scroll = null;
+
+  //Table row
+  this._table.row = {};
+  this._table.row.id = this._table.id + '-row'; //Table row ID
+  this._table.row.class = this._table.class + '-row'; //Table row class
+  this._table.row.cells = 3; //Number of cells for each row
 
   //Table cell
   this._table.cell = {};
   this._table.cell.id = this._table.id + '-cell'; //Table cell ID
   this._table.cell.class = this._table.class + '-cell'; //Table cell class
+  this._table.cell.size = 50 + 10; //Table cell size
 
   //Table cell switch
   this._table.cell.switch = {};
@@ -199,14 +208,14 @@ jviz.modules.coverviewer = function(opt)
   this._table.cell.text.id = this._table.cell.id + '-text'; //Table cell text ID
   this._table.cell.text.class = this._table.cell.class + '-text'; //Table cell text class
 
-  //Build the table
-  this.tableBuild();
+  //Build the events
+  this._events = new jviz.events();
+
+  //Build module
+  this.build();
 
   //Build the menu
   this.menu();
-
-  //Build the events
-  this._events = new jviz.events();
 
   //Register the resize event
   this.resizeEvent();
