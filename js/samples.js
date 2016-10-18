@@ -14,13 +14,13 @@ jviz.modules.coverviewer.prototype.samples = function(data)
   this._samples.count = data.length;
 
   //Initialize the active samples list
-  this._samples.active.list = jviz.array.create(data.length, false);
+  this._samples.active.list = jviz.math.array.create(data.length, false);
 
   //Initialize the active samples index
   this._samples.active.index = [];
 
   //Initialize the samples empty array
-  this._samples.empty = jviz.array.zeros(data.length);
+  this._samples.empty = jviz.math.array.zeros(data.length);
 
   //Calulate the background lines opacity
   this._bg.opacity = (this._samples.count === 0) ? 0 : 1 / this._samples.count;
@@ -123,7 +123,7 @@ jviz.modules.coverviewer.prototype.hideSample = function(index)
   this._samples.active.list[index] = false;
 
   //Remove the index
-  this._samples.active.index = jviz.array.remove(this._samples.active.index, index);
+  this._samples.active.index = jviz.math.array.remove(this._samples.active.index, index);
 
   //Clear the samples layer
   this.samplesClear();
