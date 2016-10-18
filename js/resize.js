@@ -33,5 +33,5 @@ jviz.modules.coverviewer.prototype.resize = function()
   this.draw();
 
   //Emit the resize event
-  this.emit('resize', this._draw.start, this._draw.end, this._draw.length);
+  this._events.emit('resize', this._draw.start, this._draw.end, this._draw.length);
 };
