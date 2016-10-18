@@ -21,7 +21,7 @@ jviz.modules.coverviewer.prototype.menu = function()
 jviz.modules.coverviewer.prototype.menuClickSamples = function()
 {
   //Emit the event
-  this.this._events.emit('btn:samples');
+  this._events.emit('btn:samples');
 
   //Show/Hide the samples table
   this.table();
