@@ -44,7 +44,7 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
     var lt_y = line_y_end - this._points.text.margin.top;
 
     //Add the text value
-    var lt_text = jviz.math.formatNumber(i, '.') + this._points.letter;
+    var lt_text = jviz.utils.format.number(i, '.') + this._points.letter;
 
     //Add the text size
     var lt_size = this._points.text.size;
