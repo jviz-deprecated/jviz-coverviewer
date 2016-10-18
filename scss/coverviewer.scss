@@ -35,7 +35,10 @@
       padding: { top: 10px; bottom: 10px; left: 10px; right: 10px; }
 
       //Margin
-      margin: { top: 5px; bottom: 5px; left: 5px; right: 5px; } 
+      margin: { top: 5px; bottom: 5px; left: 5px; right: 5px; }
+
+      //Table cell text
+      &-text { font-weight: bold; transition: all 0.3s; }
     }
   }
 }
