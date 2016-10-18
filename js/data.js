@@ -41,10 +41,10 @@ jviz.modules.coverviewer.prototype.data = function(data)
   this._draw.start = this._data.start;
 
   //Get the start point
-  var point_start = jviz.math.formatNumber(this._data.start, '.');
+  var point_start = jviz.utils.format.number(this._data.start, '.');
 
   //Get the end point
-  var point_end = jviz.math.formatNumber(this._data.end, '.');
+  var point_end = jviz.utils.format.number(this._data.end, '.');
 
   //Update the panel detail
   this._panel.detail('<b>Chromosome ' + this._data.chromosome + '</b> &nbsp; ' + point_start + ' - ' + point_end);
@@ -72,19 +72,19 @@ jviz.modules.coverviewer.prototype.dataParse = function()
     var cover = this._data.values[key];
 
     //Get the min value
-    //Math.min(jviz.array.min(cover), this._data.min);
+    //Math.min(jviz.math.array.min(cover), this._data.min);
 
     //Get the max value
-    //Math.max(jviz.array.max(cover), this._data.max);
+    //Math.max(jviz.math.array.max(cover), this._data.max);
 
     //Get the cover min value
-    var cover_min = jviz.array.min(cover);
+    var cover_min = jviz.math.array.min(cover);
 
     //Compare
     if(cover_min < this._data.min){ this._data.min = cover_min; }
 
     //Get the cover max value
-    var cover_max = jviz.array.max(cover);
+    var cover_max = jviz.math.array.max(cover);
 
     //Compare the values
     if(this._data.max < cover_max){ this._data.max = cover_max; }
