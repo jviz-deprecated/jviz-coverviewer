@@ -58,6 +58,7 @@ jviz.modules.coverviewer = function(opt)
   this._samples = {};
   this._samples.count = 0; //Count the number of samples
   this._samples.names = []; //Samples names
+  this._samples.color = []; //Samples colors
   this._samples.empty = []; //Samples empty array
   this._samples.layer = 3; //Samples layer
   this._samples.default = jviz.colors.navy3.hex; //Samples default color
@@ -156,10 +157,13 @@ jviz.modules.coverviewer = function(opt)
 
   //Colors
   this._colors = [];
-
-  //Add the colors
-  this._colors = this._colors.concat(jviz.colors.get(2, [ 'navy', 'grey', 'white' ]));
-  this._colors = this._colors.concat(jviz.colors.get(1, [ 'navy', 'grey', 'white' ]));
+  this._colors.push(jviz.colors.red2.hex); //Red color
+  this._colors.push(jviz.colors.blue2.hex); //Blue color
+  this._colors.push(jviz.colors.pink2.hex); //Pink color
+  this._colors.push(jviz.colors.green2.hex); //Green color
+  this._colors.push(jviz.colors.water2.hex); //Water color
+  this._colors.push(jviz.colors.orange2.hex); //Orange color
+  this._colors.push(jviz.colors.purple2.hex); //Purple color
 
   //Menu
   this._menu = {};
