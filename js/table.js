@@ -31,8 +31,8 @@ jviz.modules.coverviewer.prototype.tableBuild = function()
   //Reset the table content
   jviz.dom.html(this._table.id, '');
 
-  //Reset the switch elements list
-  this._table.cell.switch.el = [];
+  //Reset the checkbox elements list
+  this._table.cell.checkbox.el = [];
 
   //Check the samples count
   if(this._samples.count === 0){ return; }
@@ -104,17 +104,17 @@ jviz.modules.coverviewer.prototype.tableSampleAdd = function(index, parent)
   //Add the cell
   jviz.dom.append(parent, { id: cell_id, class: cell_class });
 
-  //Get the switch ID
-  var switch_id = this._table.cell.switch.id + index;
+  //Get the checkbox ID
+  var checkbox_id = this._table.cell.checkbox.id + index;
 
-  //Build the switch element
-  var switch_el = new jviz.components.switch({ id: switch_id, parent: cell_id });
+  //Build the checkbox element
+  var checkbox_el = new jviz.components.checkbox({ id: checkbox_id, parent: cell_id });
 
-  //Add the switch event
-  switch_el.on('change', function(value){ self.tableSampleToggle(index, value); });
+  //Add the checkbox event
+  checkbox_el.on('change', function(value){ self.tableSampleToggle(index, value); });
 
-  //Save the switch element
-  //this._table.cell.switch.el.push(switch_el);
+  //Save the checkbox element
+  this._table.cell.checkbox.el.push(checkbox_el);
 
   //Get the text id
   var text_id = this._table.cell.text.id + index;
