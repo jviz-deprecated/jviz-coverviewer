@@ -197,11 +197,11 @@ jviz.modules.coverviewer = function(opt)
   this._table.cell.class = this._table.class + '-cell'; //Table cell class
   this._table.cell.size = 50 + 10; //Table cell size
 
-  //Table cell switch
-  this._table.cell.switch = {};
-  this._table.cell.switch.id = this._table.cell.id + '-switch'; //Table cell switch ID
-  this._table.cell.switch.class = this._table.cell.class + '-switch'; //Table cell switch class
-  this._table.cell.switch.el = []; //Switch elements list
+  //Table cell checkbox
+  this._table.cell.checkbox = {};
+  this._table.cell.checkbox.id = this._table.cell.id + '-checkbox'; //Table cell checkbox ID
+  this._table.cell.checkbox.class = this._table.cell.class + '-checkbox'; //Table cell checkbox class
+  this._table.cell.checkbox.el = []; //Checkbox elements list
 
   //table cell text
   this._table.cell.text = {};
