@@ -46,8 +46,11 @@
         font-weight: bold; transition: all 0.3s; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
 
         //Style
-        width: calc(100% - 40px); display: inline-block; height: 30px; line-height: 30px; float: right; 
+        width: calc(100% - 40px); display: inline-block; height: 30px; line-height: 30px; float: right;
       }
+
+      //Cell hover
+      &:hover { cursor: pointer; } 
     }
   }
 }
