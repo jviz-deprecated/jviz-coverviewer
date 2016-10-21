@@ -123,7 +123,7 @@ jviz.modules.coverviewer.prototype.tableSampleAdd = function(index, parent)
   var text_class = this._table.cell.text.class;
 
   //Add the sample name
-  jviz.dom.append(cell_id, { _tag: 'span', id: text_id, class: text_class, _html: sample_name });
+  jviz.dom.append(cell_id, { id: text_id, class: text_class, _html: sample_name });
 
   //Add the color
   jviz.dom.style(text_id, 'color', this._samples.color[index]);
