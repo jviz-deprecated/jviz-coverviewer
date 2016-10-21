@@ -41,7 +41,13 @@
       margin: { top: 5px; bottom: 5px; left: 5px; right: 5px; }
 
       //Table cell text
-      &-text { font-weight: bold; transition: all 0.3s; }
+      &-text
+      {
+        font-weight: bold; transition: all 0.3s; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+
+        //Style
+        width: calc(100% - 40px); display: inline-block; height: 30px; line-height: 30px; float: right; 
+      }
     }
   }
 }
