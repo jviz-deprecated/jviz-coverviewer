@@ -11,13 +11,13 @@ jviz.modules.coverviewer.prototype.mouseEvent = function()
   var self = this;
 
   //Add the mouse down event
-  jviz.mouse.down(id, function(e, x, y){ return self.mouseDown(e, x, y); });
+  jviz.commons.mouse.down(id, function(e, x, y){ return self.mouseDown(e, x, y); });
 
   //Add the mouse move event
-  jviz.mouse.move(id, function(e, x, y){ return self.mouseMove(e, x, y); });
+  jviz.commons.mouse.move(id, function(e, x, y){ return self.mouseMove(e, x, y); });
 
   //ADd the mouse up event
-  jviz.mouse.up(id, function(e, x, y){ return self.mouseUp(e, x, y); });
+  jviz.commons.mouse.up(id, function(e, x, y){ return self.mouseUp(e, x, y); });
 };
 
 //Mouse click down event
