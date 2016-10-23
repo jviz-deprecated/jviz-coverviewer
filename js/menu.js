@@ -14,7 +14,7 @@ jviz.modules.coverviewer.prototype.menu = function()
   var self = this;
 
   //Add the preview button icon event
-  jviz.mouse.down(this._menu.samples.id, function(e){ return self.menuClickSamples(); });
+  jviz.dom.event(this._menu.samples.id, 'click', function(e){ return self.menuClickSamples(); });
 };
 
 //Click on the samples button
