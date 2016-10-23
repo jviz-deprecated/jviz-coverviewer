@@ -9,5 +9,5 @@ jviz.modules.coverviewer.prototype.build = function()
   jviz.dom.style(this._table.id, 'display', 'none');
 
   //Add the scroll event
-  this._table.scroll = new jviz.plugins.scrollBlock({ id: this._table.id, num: 1, size: this._table.cell.size });
+  this._table.scroll = new jviz.commons.scrollBlock({ id: this._table.id, num: 1, size: this._table.cell.size });
 };
