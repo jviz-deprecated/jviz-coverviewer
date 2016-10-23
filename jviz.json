@@ -1,0 +1,26 @@
+{
+  "name": "coverviewer",
+  "description": "An interactive module for visualizing sequence coverage in delimited regions",
+  "version": "0.0.1",
+  "author": { "id": "jmjuanes", "name": "Jose Miguel Juanes", "email": "josemijuanes@gmail.com" },
+  "directory": "./build",
+  "repository": "https://github.com/jviz/module-coverviewer",
+  "dependencies": { "jviz": "dev" },
+  "build": [ "build:js", "build:scss" ],
+  "install": [ ],
+  "tasks":
+  {
+    "build:js":
+    [
+      { "name": "src", "args": [ "./js/coverviewer.js", "./js/**.js" ] },
+      { "name": "concat", "args": "coverviewer.js" },
+      { "name": "dest", "args": "./" }
+    ],
+    "build:scss":
+    [
+      { "name": "src", "args": "./scss/**.scss" },
+      { "name": "sass" },
+      { "name": "dest", "args": "./" }
+    ]
+  }
+}
