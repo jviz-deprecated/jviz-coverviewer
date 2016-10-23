@@ -58,7 +58,7 @@ jviz.modules.coverviewer.prototype.labelBoxDraw = function(canvas, px, py)
   canvas.Fill(this._label.rect.color);
 
   //Save the text
-  var text_text = jviz.utils.format.number(this._draw.position, '.');
+  var text_text = jviz.math.format(this._draw.position, '.');
 
   //Save the text font
   var text_font = this._label.text.font;
