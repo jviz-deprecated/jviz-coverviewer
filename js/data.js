@@ -47,7 +47,7 @@ jviz.modules.coverviewer.prototype.data = function(data)
   var point_end = jviz.math.format(this._data.end, '.');
 
   //Update the panel detail
-  this._panel.detail('<b>Chromosome ' + this._data.chromosome + '</b> &nbsp; ' + point_start + ' - ' + point_end);
+  this._panel.detail('<b>Chromosome ' + this._data.chromosome + '</b>&nbsp;' + point_start + ' - ' + point_end);
 
   //Draw the data
   this.draw();
