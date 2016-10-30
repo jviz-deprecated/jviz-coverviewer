@@ -20,6 +20,9 @@ jviz.modules.coverviewer.prototype.resize = function()
   //Get the draw element
   var draw = this._canvas.draw();
 
+  //Calculate the draw width
+  this._draw.width = draw.width;
+
   //Calculate the draw zone
   this._draw.height = draw.height;
 
@@ -33,5 +36,5 @@ jviz.modules.coverviewer.prototype.resize = function()
   this.draw();
 
   //Emit the resize event
-  this._events.emit('resize', this._draw.start, this._draw.end, this._draw.length, this._draw.height);
+  this._events.emit('resize', this._draw.width, this._draw.height);
 };
