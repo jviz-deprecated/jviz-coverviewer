@@ -1,8 +1,20 @@
 //CoverViewer draw
-jviz.modules.coverviewer.prototype.draw = function(start)
+jviz.modules.coverviewer.prototype.draw = function(opt)
 {
-  //Save the start position
-  if(typeof start !== 'undefined'){ this._draw.region.start = parseInt(start); }
+  //Save the options
+  if(typeof opt === 'undefined'){ var opt = {}; }
+
+  //Check the background
+  if(typeof opt.background !== 'boolean'){ opt.background = this._draw.default.background; }
+
+  //Check the samples
+  if(typeof opt.samples !== 'boolean'){ opt.samples = this._draw.default.samples; }
+
+  //Check the points
+  if(typeof opt.points !== 'boolean'){ opt.points = this._draw.default.points; }
+
+  //Check the marks
+  if(typeof opt.marks !== 'boolean'){ opt.marks = this._draw.default.marks; }
 
   //Check if has data to display
   if(this._data.has === false){ return; }
@@ -24,24 +36,19 @@ jviz.modules.coverviewer.prototype.draw = function(start)
   this._draw.region.end = this._draw.region.start + this._draw.region.length;
 
   //Draw the background
-  this.backgroundDraw();
+  if(opt.background === true) { this.backgroundDraw(); }
 
   //Draw the control points
-  this.pointsDraw();
-  //this.PointsDraw(canvas, this.cover.draw.start, this.cover.draw.end, this.cover.height, this.cover.draw.margin);
+  if(opt.points === true){ this.pointsDraw(); }
 
   //Draw the samples
-  this.samplesDraw();
-};
+  if(opt.samples === true){ this.samplesDraw(); }
 
-//Manage the move status
-jviz.modules.coverviewer.prototype.move = function(status)
-{
-  //Check the status
-  if(typeof status === 'undefined'){ return this._draw.move; }
+  //Draw the marks
+  //if(opt.marks === true){ this.marksDraw(); }
 
-  //Update the move status
-  this._draw.move = status;
+  //Return this
+  return this;
 };
 
 //Clear
@@ -58,4 +65,10 @@ jviz.modules.coverviewer.prototype.clear = function()
 
   //Clear the label
   this.labelClear();
+
+  //Clear the marks
+  //this.marksClear();
+
+  //Return this
+  return this;
 };
