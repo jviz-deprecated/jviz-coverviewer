@@ -67,7 +67,7 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
     this._draw.region.start = this._draw.click.start + diff;
 
     //Draw the region
-    this.draw();
+    this.draw({ background: false });
 
     //Emit the drag move event
     this._events.emit('drag:move', this._draw.region.start, this._draw.region.end, this._draw.region.length);
@@ -103,7 +103,7 @@ jviz.modules.coverviewer.prototype.mouseUp = function(e, x, y)
   jviz.cursor.remove('move');
 
   //Draw the region
-  this.draw();
+  this.draw({ background: true });
 
   //Emit the drag stop event
   this._events.emit('drag:stop', this._draw.region.start, this._draw.region.end, this._draw.region.length);
