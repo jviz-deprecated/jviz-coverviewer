@@ -36,7 +36,7 @@ jviz.modules.coverviewer.prototype.mouseDown = function(e, x, y)
   this._draw.click.point = x;
 
   //Save the start position
-  this._draw.click.start = this._draw.start;
+  this._draw.click.start = this._draw.region.start;
 
   //Add the cursor
   jviz.cursor.set('move');
@@ -48,7 +48,7 @@ jviz.modules.coverviewer.prototype.mouseDown = function(e, x, y)
   this.labelClear();
 
   //Emit the drag start event
-  this._events.emit('drag:start', this._draw.start, this._draw.end);
+  this._events.emit('drag:start', this._draw.region.start, this._draw.region.end, this._draw.region.length);
 };
 
 //Mouse move event
@@ -64,13 +64,13 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
     var diff = this._draw.click.point - x;
 
     //Calculate the start point
-    this._draw.start = this._draw.click.start + diff;
+    this._draw.region.start = this._draw.click.start + diff;
 
     //Draw the region
     this.draw();
 
     //Emit the drag move event
-    this._events.emit('drag:move', this._draw.start, this._draw.end);
+    this._events.emit('drag:move', this._draw.region.start, this._draw.region.end, this._draw.region.length);
 
     //Continue
     return;
@@ -86,7 +86,7 @@ jviz.modules.coverviewer.prototype.mouseMove = function(e, x, y)
   if(draw.margin.left <= x && x <= draw.margin.left + draw.width)
   {
     //Calculate the position
-    this._draw.position = Math.floor(this._draw.start + x - draw.margin.left);
+    this._draw.position = Math.floor(this._draw.region.start + x - draw.margin.left);
 
     //Draw the label
     this.labelDraw(x, y);
@@ -106,5 +106,5 @@ jviz.modules.coverviewer.prototype.mouseUp = function(e, x, y)
   this.draw();
 
   //Emit the drag stop event
-  this._events.emit('drag:stop', this._draw.start, this._draw.end);
+  this._events.emit('drag:stop', this._draw.region.start, this._draw.region.end, this._draw.region.length);
 };
