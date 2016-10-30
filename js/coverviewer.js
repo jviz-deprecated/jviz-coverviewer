@@ -141,12 +141,16 @@ jviz.modules.coverviewer = function(opt)
 
   //Draw object
   this._draw = {};
-  this._draw.start = 0; //Draw start position
-  this._draw.end = 0; //Draw end positon
-  this._draw.length = 0; //Draw length
+  this._draw.width = 0; //Draw width
   this._draw.height = 0 //Draw zone height
   this._draw.move = false; //Draw on move
   this._draw.position = 0; //Draw over position
+
+  //Draw region
+  this._draw.region = {};
+  this._draw.region.start = 0; //Region start point
+  this._draw.region.end = 0; //Region end point
+  this._draw.length = 0; //Region length
 
   //Draw click
   this._draw.click = {};
