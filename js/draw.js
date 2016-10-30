@@ -2,32 +2,26 @@
 jviz.modules.coverviewer.prototype.draw = function(start)
 {
   //Save the start position
-  if(typeof start !== 'undefined'){ this._draw.start = parseInt(start); }
+  if(typeof start !== 'undefined'){ this._draw.region.start = parseInt(start); }
 
   //Check if has data to display
   if(this._data.has === false){ return; }
 
-  //Get the actual draw
-  var draw = this._canvas.draw();
-
   //Save the length window
-  this._draw.length = draw.width;
+  this._draw.region.length = this._draw.width;
 
   //Check the start point
-  if(this._draw.start < this._data.start){ this._draw.start = this._data.start; }
-
-  //Save the end point
-  this._draw.end = this._draw.start + this._draw.length;
+  if(this._draw.region.start < this._data.start){ this._draw.region.start = this._data.start; }
 
   //Check the end point
-  if(this._data.end < this._draw.end)
+  if(this._data.end < this._draw.region.start + this._draw.region.length)
   {
-    //Replace the end point
-    this._draw.end = this._data.end;
-
-    //Replace the start point
-    this._draw.start = this._draw.end - this._draw.length;
+    //Update the region start
+    this._draw.region.start = this._data.end - this._draw.region.length;
   }
+
+  //Save the end point
+  this._draw.region.end = this._draw.region.start + this._draw.region.length;
 
   //Draw the background
   this.backgroundDraw();
