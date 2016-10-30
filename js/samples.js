@@ -57,7 +57,7 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
   var p = draw.margin.left;
 
   //Read all the positions
-  for(var i = this._draw.start; i < this._draw.end; i++)
+  for(var i = this._draw.region.start; i < this._draw.region.end; i++)
   {
     //Get the cover array
     var cover = (typeof this._data.normalized[i] === 'undefined') ? this._samples.empty : this._data.normalized[i];
