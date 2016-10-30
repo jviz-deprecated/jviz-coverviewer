@@ -2,7 +2,14 @@
 jviz.modules.coverviewer.prototype.data = function(data)
 {
   //Check the data
-  if(typeof data !== 'object'){ return this._data.values; }
+  if(typeof data !== 'object')
+  {
+    //Check if has data
+    if(this._data.has === false){ return false; }
+    
+    //Return the actual chromosome, start and end position and the values
+    return { chromosome: this._data.chromosome, start: this._data.start, end: this._data.end, values: this._data.values };
+  }
 
   //Check the chromosome
   if(typeof data.chromosome === 'undefined'){ return jviz.console.error('Undefined data chromosome'); }
