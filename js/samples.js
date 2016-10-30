@@ -30,6 +30,9 @@ jviz.modules.coverviewer.prototype.samples = function(data)
 
   //Build the table samples
   this.tableBuild();
+
+  //Return this
+  return this;
 };
 
 //Draw the samples
@@ -91,6 +94,9 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
     //Set the line style
     canvas.Stroke({ width: this._samples.line.width, color: this._samples.color[index] });
   }
+
+  //Return this
+  return this;
 };
 
 //Clear the samples layer
@@ -98,6 +104,9 @@ jviz.modules.coverviewer.prototype.samplesClear = function()
 {
   //Clear the samples layer
   this._canvas.layer(this._samples.layer).Clear();
+
+  //Return this
+  return this;
 };
 
 //Display a sample
