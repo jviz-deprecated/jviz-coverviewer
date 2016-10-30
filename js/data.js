@@ -50,10 +50,13 @@ jviz.modules.coverviewer.prototype.data = function(data)
   this._panel.detail('<b>Chromosome ' + this._data.chromosome + '</b>&nbsp;' + point_start + ' - ' + point_end);
 
   //Draw the data
-  this.draw();
+  this.draw({ background: true });
 
   //Set loading as false
   this.loading(false);
+
+  //Return this
+  return this;
 };
 
 //CoverViewer parse the data
