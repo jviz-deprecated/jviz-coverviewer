@@ -1,9 +1,6 @@
 //Draw the background
 jviz.modules.coverviewer.prototype.backgroundDraw = function()
 {
-  //Check the draw on move
-  if(this._draw.move === true){ return; }
-
   //Get the draw zone
   var draw = this._canvas.draw();
 
@@ -57,6 +54,9 @@ jviz.modules.coverviewer.prototype.backgroundDraw = function()
 
   //Initialize the height for the line
   //this.cover.hover.height = this.cover.draw.height;
+
+  //Return this
+  return this;
 };
 
 //Clear the background
@@ -64,4 +64,7 @@ jviz.modules.coverviewer.prototype.backgroundClear = function()
 {
   //Clear the layer
   this._canvas.layer(this._bg.layer).Clear();
+
+  //Return this
+  return this;
 };
