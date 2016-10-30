@@ -37,8 +37,8 @@ jviz.modules.coverviewer.prototype.data = function(data)
   //Parse the data values
   this.dataParse();
 
-  //Initialize the draw start position
-  this._draw.start = this._data.start;
+  //Initialize the region draw start position
+  this._draw.region.start = this._data.start;
 
   //Get the start point
   var point_start = jviz.math.format(this._data.start, '.');
