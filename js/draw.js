@@ -45,7 +45,7 @@ jviz.modules.coverviewer.prototype.draw = function(opt)
   if(opt.samples === true){ this.samplesDraw(); }
 
   //Draw the marks
-  //if(opt.marks === true){ this.marksDraw(); }
+  if(opt.marks === true){ this.marksDraw(); }
 
   //Return this
   return this;
@@ -67,7 +67,7 @@ jviz.modules.coverviewer.prototype.clear = function()
   this.labelClear();
 
   //Clear the marks
-  //this.marksClear();
+  this.marksClear();
 
   //Return this
   return this;
