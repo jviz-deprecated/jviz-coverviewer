@@ -219,6 +219,13 @@ jviz.modules.coverviewer = function(opt)
   this._table.cell.text.id = this._table.cell.id + '-text'; //Table cell text ID
   this._table.cell.text.class = this._table.cell.class + '-text'; //Table cell text class
 
+  //Marks
+  this._marks = {};
+  this._marks.src = []; //Marks source data
+  this._marks.layer = 2; //Marks layer
+  this._marks.color = jviz.colors.purple2.hex; //Marks color
+  this._marks.opacity = 0.3; //Marks opacity
+
   //Build the events
   this._events = new jviz.commons.events();
 
@@ -236,6 +243,9 @@ jviz.modules.coverviewer = function(opt)
 
   //Parse the samples
   if(typeof opt.samples !== 'undefined'){ this.samples(opt.samples); }
+
+  //Parse the marks
+  if(typeof opt.marks !== 'undefined'){ this.marks(opt.marks); } 
 
   //Parse the data
   (typeof opt.ajax === 'undefined') ? this.data(opt.data) : this.ajax(opt.ajax);
