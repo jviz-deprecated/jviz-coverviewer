@@ -5,7 +5,7 @@ jviz.modules.coverviewer.prototype.moveStart = function(pos)
   if(typeof pos === 'undefined'){ return this; }
 
   //Save the start position
-  this._draw.start = parseInt(pos);
+  this._draw.region.start = parseInt(pos);
 
   //Clear the background
   this.backgroundClear();
@@ -27,7 +27,7 @@ jviz.modules.coverviewer.prototype.moveTo = function(pos)
   if(typeof pos === 'undefined'){ return this; }
 
   //Set the draw start position
-  this._draw.start = parseInt(pos);
+  this._draw.region.start = parseInt(pos);
 
   //Draw this new position
   this.draw({ background: false });
@@ -43,7 +43,7 @@ jviz.modules.coverviewer.prototype.moveStop = function(pos)
   if(typeof pos === 'undefined'){ return this; }
 
   //Set the draw start position
-  this._draw.start = parseInt(pos);
+  this._draw.region.start = parseInt(pos);
 
   //Draw with the background
   this.draw({ background: true });
