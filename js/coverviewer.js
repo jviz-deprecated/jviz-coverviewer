@@ -26,7 +26,7 @@ jviz.modules.coverviewer = function(opt)
   this._loading = false;
 
   //Margins
-  this._margins = { top: 10, bottom: 30, left: 40, right: 40 };
+  this._margins = { top: 30, bottom: 30, left: 40, right: 40 };
 
   //Default layout width
   this._width = (typeof opt.width !== 'undefined') ? opt.width : '100%';
@@ -245,7 +245,7 @@ jviz.modules.coverviewer = function(opt)
   if(typeof opt.samples !== 'undefined'){ this.samples(opt.samples); }
 
   //Parse the marks
-  if(typeof opt.marks !== 'undefined'){ this.marks(opt.marks); } 
+  if(typeof opt.marks !== 'undefined'){ this.marks(opt.marks); }
 
   //Parse the data
   (typeof opt.ajax === 'undefined') ? this.data(opt.data) : this.ajax(opt.ajax);
