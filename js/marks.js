@@ -96,6 +96,75 @@ jviz.modules.coverviewer.prototype.marksDraw = function()
 
     //Draw the color
     canvas.Fill({ color: this._marks.color, opacity: this._marks.opacity });
+
+    //Get the mark label x
+    var mark_label_x = draw.margin.left + ( mark_end + mark_start ) / 2 - this._marks.label.width / 2;
+
+    //Get the mark label y
+    var mark_label_y = draw.margin.top - this._marks.label.height - this._marks.label.triangle;
+
+    //Get the mark label width
+    var mark_label_width = this._marks.label.width;
+
+    //Get the mark label height
+    var mark_label_height = this._marks.label.height;
+
+    //Get the mark label radius
+    var mark_label_radius = this._marks.label.radius;
+
+    //Draw the mark position rectangle
+    canvas.Rect({ x: mark_label_x, y: mark_label_y, width: mark_label_width, height: mark_label_height, radius: mark_label_radius });
+
+    //Fill color
+    canvas.Fill({ color: this._marks.label.color, opacity: this._marks.label.opacity });
+
+    //Create the triangle
+    var mark_tri = [];
+
+    //Get the triangle position x
+    var mark_tri_x = mark_label_x + this._marks.label.width / 2;
+
+    //Get the triangle position y
+    var mark_tri_y = mark_label_y + this._marks.label.height;
+
+    //Add the first point
+    mark_tri.push([ mark_tri_x - this._marks.label.triangle, mark_tri_y ]);
+
+    //Add the middle point
+    mark_tri.push([ mark_tri_x, mark_tri_y + this._marks.label.triangle ]);
+
+    //Add the last point
+    mark_tri.push([ mark_tri_x + this._marks.label.triangle, mark_tri_y ]);
+
+    //Draw the triangle
+    canvas.Line(mark_tri);
+
+    //Fill color
+    canvas.Fill({ color: this._marks.label.fill });
+
+    //Get the text
+    var mark_text = jviz.math.format(mark.start) + ' - ' + jviz.math.format(mark.end);
+
+    //Get the text position x
+    var mark_text_x = mark_label_x + this._marks.label.width / 2;
+
+    //Get the text position y
+    var mark_text_y = mark_label_y + this._marks.label.text.margin;
+
+    //Get the text font
+    var mark_text_font = this._marks.label.text.font;
+
+    //Get the text size
+    var mark_text_size = this._marks.label.text.size;
+
+    //Get the text color
+    var mark_text_color = this._marks.label.text.color;
+
+    //Get the text align
+    var mark_text_align = this._marks.label.text.align;
+
+    //Draw the text
+    canvas.Text({ text: mark_text, x: mark_text_x, y: mark_text_y, color: mark_text_color, font: mark_text_font, size: mark_text_size, align: mark_text_align });
   }
 
   //Return this
