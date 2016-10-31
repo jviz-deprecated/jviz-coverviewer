@@ -10,6 +10,7 @@
 <script type="text/javascript" src="./build/coverviewer.js"></script>
 <!-- Test files -->
 <script type="text/javascript" src="./test/data.js"></script>
+<script type="text/javascript" src="./test/marks.js"></script>
 <script type="text/javascript" src="./test/samples.js"></script>
 <!-- Styles -->
 <style>body { padding: 50px !important; } </style>
@@ -29,6 +30,9 @@
 
     //Add the data
     opt.data = test_data;
+
+    //Add the marks
+    opt.marks = test_marks;
 
     //Build the coverviewer element
     el = new jviz.modules.coverviewer(opt);
