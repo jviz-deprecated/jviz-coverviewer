@@ -172,7 +172,7 @@ jviz.modules.coverviewer = function(opt)
   this._colors.push(jviz.colors.blue2.hex); //Blue color
   this._colors.push(jviz.colors.pink2.hex); //Pink color
   this._colors.push(jviz.colors.green2.hex); //Green color
-  this._colors.push(jviz.colors.water2.hex); //Water color
+  this._colors.push(jviz.colors.teal2.hex); //Teal color
   this._colors.push(jviz.colors.orange2.hex); //Orange color
   this._colors.push(jviz.colors.purple2.hex); //Purple color
 
