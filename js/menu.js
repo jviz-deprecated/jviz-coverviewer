@@ -2,13 +2,16 @@
 jviz.modules.coverviewer.prototype.menu = function()
 {
   //Get the menu container id
-  var id = this._panel.head().content.id;
+  //var id = this._panel.head().content.id;
 
   //Reset the menu content
-  jviz.dom.empty(id);
+  //jviz.dom.empty(id);
 
   //Add the samples button
-  jviz.dom.append(id, { id: this._menu.samples.id, class: this._menu.samples.class, _html: this._menu.samples.text });
+  //jviz.dom.append(id, { id: this._menu.samples.id, class: this._menu.samples.class, _html: this._menu.samples.text });
+
+  //Add the samples button
+  this._panel.addBtn(this._menu.samples);
 
   //Save this
   var self = this;
