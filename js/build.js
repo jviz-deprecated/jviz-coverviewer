@@ -1,7 +1,6 @@
 //Coverviewer build
 jviz.modules.coverviewer.prototype.build = function()
 {
-
   //Create the table container
   jviz.dom.append(this._panel.body().id, { id: this._table.id, class: this._table.class });
 
