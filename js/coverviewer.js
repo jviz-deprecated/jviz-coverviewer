@@ -35,13 +35,13 @@ jviz.modules.coverviewer = function(opt)
   this._height = (typeof opt.height !== 'undefined') ? opt.height : 200;
 
   //Build the element
-  jviz.dom.append(this._parent, { _tag: 'div', id: this._id, class: this._class });
+  jviz.dom.append(this._parent, { id: this._id, class: this._class });
 
   //Build the panel
   this._panel = new jviz.components.panel({ id: this._id + '-panel', parent: this._id, title: this._title, detail: this._detail, showFoot: false });
 
   //Build the canvas layers
-  this._canvas = new jviz.components.canvas({ id: this._id + '-canvas', parent: this._panel.body().id, layers: this._layers, width: this._width, height: this._height, margin: this._margins });
+  this._canvas = new jviz.components.canvas({ id: this._id + '-canvas', parent: this._panel.body(), layers: this._layers, width: this._width, height: this._height, margin: this._margins });
 
   //Data
   this._data = {};
@@ -179,12 +179,11 @@ jviz.modules.coverviewer = function(opt)
   //Menu
   this._menu = {};
   this._menu.id = this._id + '-menu'; //Menu ID
-  this._menu.class = this._panel.el(); //Menu class styles
 
   //Samples button
   this._menu.samples = {};
   this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
-  this._menu.samples.class = this._menu.class.btn.water; //Samples button class
+  this._menu.samples.color = 'teal'; //Samples button color
   this._menu.samples.text = 'Show/Hide samples'; //Samples button text
 
   //Samples table
