@@ -35,17 +35,17 @@ jviz.modules.coverviewer.prototype.cover = function(data)
   //Save the end position
   this._cover.end = parseInt(data.end);
 
+  //Calculate the data length
+  this._cover.length = Math.abs(this._cover.end - this._cover.start) + 1;
+
   //Save the values
-  this._cover.values = data.values;
+  this._cover.values = this.coverParse(data.values);
 
   //Set has data as true
   this._cover.has = true;
 
-  //Parse the data values
-  this.dataParse();
-
   //Initialize the region draw start position
-  this._draw.region.start = this._cover.start;
+  this._draw.start = this._cover.start;
 
   //Get the start point
   var point_start = jviz.math.format(this._cover.start, '.');
@@ -56,8 +56,11 @@ jviz.modules.coverviewer.prototype.cover = function(data)
   //Update the panel detail
   this._panel.el.detail('<b>Chromosome ' + this._cover.chromosome + '</b>&nbsp;' + point_start + ' - ' + point_end);
 
+  //Update the zoom values
+  this.zoomUpdate();
+
   //Draw the data
-  this.draw({ background: true });
+  this.draw();
 
   //Set loading as false
   this.loading(false);
@@ -66,8 +69,8 @@ jviz.modules.coverviewer.prototype.cover = function(data)
   return this;
 };
 
-//CoverViewer parse the data
-jviz.modules.coverviewer.prototype.dataParse = function()
+//CoverViewer parse the coverage data
+jviz.modules.coverviewer.prototype.coverParse = function(values)
 {
   //Reset the min value
   this._cover.min = 99999999;
@@ -76,25 +79,16 @@ jviz.modules.coverviewer.prototype.dataParse = function()
   this._cover.max = 0;
 
   //Read the values
-  for(var key in this._cover.values)
+  for(var key in values)
   {
-    //Get the cover values
-    var cover = this._cover.values[key];
-
-    //Get the min value
-    //Math.min(jviz.array.min(cover), this._cover.min);
-
-    //Get the max value
-    //Math.max(jviz.array.max(cover), this._cover.max);
-
     //Get the cover min value
-    var cover_min = jviz.array.min(cover);
+    var cover_min = jviz.array.min(values[key]);
 
     //Compare
     if(cover_min < this._cover.min){ this._cover.min = cover_min; }
 
     //Get the cover max value
-    var cover_max = jviz.array.max(cover);
+    var cover_max = jviz.array.max(values[key]);
 
     //Compare the values
     if(this._cover.max < cover_max){ this._cover.max = cover_max; }
@@ -106,26 +100,29 @@ jviz.modules.coverviewer.prototype.dataParse = function()
   //Check 0 value in min
   this._cover.min = Math.max(1, this._cover.min);
 
-  //Reset the normalized data values
-  this._cover.normalized = {};
+  //Initialize the output cover values
+  var out = {};
 
   //Transform the original data to a new data
-  for(var key in this._cover.values)
+  for(var key in values)
   {
     //Initialize the normalized position
-    this._cover.normalized[key] = [];
+    out[key] = [];
 
     //Get all the coverages
-    for(var j = 0; j < this._cover.values[key].length; j++)
+    for(var j = 0; j < values[key].length; j++)
     {
-      //Calculate the new height
-      var h = this._cover.values[key][j]/this._cover.max;
-
       //Save the value
-      this._cover.normalized[key][j] = h * this._draw.height;
+      out[key][j] = values[key][j] * this._draw.height / this._cover.max;
     }
   }
 
-  //Continue
-  return;
+  //Return the coverage values
+  return out;
+};
+
+//Draw the coverage values
+jviz.modules.coverviewer.prototype.coverDraw = function()
+{
+
 };
