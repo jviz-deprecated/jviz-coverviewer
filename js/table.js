@@ -104,43 +104,34 @@ jviz.modules.coverviewer.prototype.tableSampleAdd = function(index, parent)
   //Add the cell
   jviz.dom.append(parent, { id: cell_id, class: cell_class });
 
-  //Get the checkbox ID
-  var checkbox_id = this._table.cell.checkbox.id + index;
+  //Add the cell text
+  jviz.dom.html(cell_id, sample_name);
 
-  //Build the checkbox element
-  var checkbox_el = new jviz.components.checkbox({ id: checkbox_id, parent: cell_id });
-
-  //Add the checkbox event
-  checkbox_el.on('change', function(value){ self.tableSampleToggle(index, value); });
-
-  //Save the checkbox element
-  this._table.cell.checkbox.el.push(checkbox_el);
-
-  //Get the text id
-  var text_id = this._table.cell.text.id + index;
-
-  //Get the text class
-  var text_class = this._table.cell.text.class;
-
-  //Add the sample name
-  jviz.dom.append(cell_id, { id: text_id, class: text_class, _html: sample_name });
+  //Add the cell click event
+  jviz.dom.on(cell_id, 'click', function(){ self.tableSampleToggle(index); });
 
   //Add the color
   jviz.dom.style(text_id, 'color', this._samples.color[index]);
 
-  //Add the click event
-  //jviz.dom.events(cell_id, 'click', function(){ self.tableSampleToggle(); });
+  //Exit
+  return this;
 };
 
 //Show the sample
-jviz.modules.coverviewer.prototype.tableSampleToggle = function(index, value)
+jviz.modules.coverviewer.prototype.tableSampleToggle = function(index)
 {
-  //Check the value
-  (value === true) ? this.showSample(index) : this.hideSample(index);
+  //Check if sample is active
+  var is_active = this.isSample(index);
+
+  //Hide or show the sample
+  (is_active === true) ? this.hideSample(index) : this.showSample(index);
+
+  //Get the background color
+  var color = (is_active === true) ? '' this._samples.color[index];
 
   //Get the sample text id
-  var id = this._table.cell.text.id + index;
+  var id = this._table.cell.id + index;
 
   //Update the sample color
-  jviz.dom.style(id, 'color', this._samples.color[index]);
+  jviz.dom.style(id, 'background-color', color);
 };
