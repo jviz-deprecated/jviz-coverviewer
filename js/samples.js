@@ -42,10 +42,10 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
   if(this._samples.active.index.length === 0){ return; }
 
   //Get the draw zone
-  var draw = this._canvas.draw();
+  var draw = this._canvas.el.draw();
 
   //Get the canvas layer
-  var canvas = this._canvas.layer(this._samples.layer);
+  var canvas = this._canvas.el.layer(this._samples.layer);
 
   //Clear the layer
   canvas.Clear();
@@ -103,7 +103,7 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
 jviz.modules.coverviewer.prototype.samplesClear = function()
 {
   //Clear the samples layer
-  this._canvas.layer(this._samples.layer).Clear();
+  this._canvas.el.layer(this._samples.layer).Clear();
 
   //Return this
   return this;
