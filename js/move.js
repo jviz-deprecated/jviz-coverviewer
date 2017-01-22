@@ -1,3 +1,19 @@
+//Move to a position
+jviz.modules.coverviewer.prototype.move = function(pos)
+{
+  //Check the position
+  if(typeof pos === 'undefined'){ return this; }
+
+  //Set the draw start position
+  this._draw.start = parseInt(pos);
+
+  //Draw this new position
+  this.draw();
+
+  //Return this
+  return this;
+};
+
 //Coverviewer move start
 jviz.modules.coverviewer.prototype.moveStart = function(pos)
 {
@@ -15,23 +31,7 @@ jviz.modules.coverviewer.prototype.moveStart = function(pos)
   this.labelClear();
 
   //Draw this new position
-  this.draw({ background: false });
-
-  //Return this
-  return this;
-};
-
-//Move to a position
-jviz.modules.coverviewer.prototype.move = function(pos)
-{
-  //Check the position
-  if(typeof pos === 'undefined'){ return this; }
-
-  //Set the draw start position
-  this._draw.region.start = parseInt(pos);
-
-  //Draw this new position
-  this.draw({ background: false });
+  this.draw();
 
   //Return this
   return this;
@@ -39,23 +39,6 @@ jviz.modules.coverviewer.prototype.move = function(pos)
 
 //Stop moving
 jviz.modules.coverviewer.prototype.moveStop = function(pos)
-{
-  //Check the position
-  if(typeof pos !== 'undefined')
-  {
-    //Set the draw start position
-    this._draw.region.start = parseInt(pos);
-  }
-
-  //Draw with the background
-  this.draw({ background: true });
-
-  //Return this
-  return this;
-};
-
-//Move to a position
-jviz.modules.coverviewer.prototype.moveTo = function(pos)
 {
   //Check the position
   if(typeof pos !== 'undefined')
