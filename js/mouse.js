@@ -5,7 +5,7 @@ jviz.modules.coverviewer.prototype.mouseEvent = function()
   var self = this;
 
   //Get the last layer ID
-  var id = this._canvas.el.layerID(this._layers - 1);
+  var id = this._canvas.el.layerID(this._canvas.layers - 1);
 
   //Save this
   var self = this;
