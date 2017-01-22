@@ -27,7 +27,7 @@ jviz.modules.coverviewer.prototype.resize = function()
   this._draw.height = draw.height;
 
   //Calculate the zooming values
-  this.zoom();
+  this.zoomUpdate();
 
   //Calculate the label position y
   this._label.posy = this._height - draw.margin.bottom + this._label.margin;
@@ -36,7 +36,7 @@ jviz.modules.coverviewer.prototype.resize = function()
   this._label.line.height = draw.height;
 
   //Draw the graphic
-  this.draw({ background: true });
+  this.draw();
 
   //Emit the resize event
   this._events.emit('resize', this._draw.width, this._draw.height);
