@@ -35,6 +35,9 @@ jviz.modules.coverviewer.prototype.resize = function()
   //Calculate the label line height
   this._label.line.height = draw.height;
 
+  //Clear the background
+  this.backgroundClear();
+
   //Draw the graphic
   this.draw();
 
