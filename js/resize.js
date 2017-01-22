@@ -1,16 +1,3 @@
-//Resize events
-jviz.modules.coverviewer.prototype.resizeEvent = function()
-{
-  //Save this
-  var self = this;
-
-  //Add the resize event
-  $(window).resize(function(){ self.resize(); });
-
-  //Resize the first time
-  this.resize();
-};
-
 //Resize the panel
 jviz.modules.coverviewer.prototype.resize = function()
 {
@@ -35,12 +22,9 @@ jviz.modules.coverviewer.prototype.resize = function()
   //Calculate the label line height
   this._label.line.height = draw.height;
 
-  //Clear the background
-  this.backgroundClear();
-
-  //Draw the graphic
-  this.draw();
-
   //Emit the resize event
   this._events.emit('resize', this._draw.width, this._draw.height);
+
+  //Return this
+  return this;
 };
