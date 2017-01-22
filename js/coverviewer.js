@@ -104,10 +104,6 @@ jviz.modules.coverviewer = function(opt)
   this._points.text.color = jviz.colors.navy3.hex; //Points text color
   this._points.text.margin = { top: 15, left: 4 }; //Points text margin
 
-  //Marks
-  this._marks = {};
-  this._marks.layer = 0; //Marks layer
-
   //Label
   this._label = {};
   this._label.layer = 4; //Label layer
@@ -259,15 +255,6 @@ jviz.modules.coverviewer = function(opt)
 
   //Register the mouse action events
   this.mouseEvent();
-
-  //Parse the samples
-  if(typeof opt.samples !== 'undefined'){ this.samples(opt.samples); }
-
-  //Parse the marks
-  if(typeof opt.marks !== 'undefined'){ this.marks(opt.marks); }
-
-  //Parse the data
-  (typeof opt.ajax === 'undefined') ? this.data(opt.data) : this.ajax(opt.ajax);
 
   //Return this
   return this;
