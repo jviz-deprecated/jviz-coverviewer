@@ -18,7 +18,7 @@ jviz.modules.coverviewer.prototype.draw = function()
   this._draw.end = this._draw.start + this._draw.length;
 
   //Draw the background
-  if(this._bg.draw === true){ this.backgroundDraw(); }
+  if(this._draw.move === false){ this.backgroundDraw(); }
 
   //Draw the control points
   //this.pointsDraw();
