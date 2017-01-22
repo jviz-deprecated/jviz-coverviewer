@@ -25,17 +25,20 @@
     //Options
     var opt = { id: 'MyCoverViewer', parent: 'test' };
 
-    //Add the samples
-    opt.samples = test_samples;
-
-    //Add the data
-    opt.data = test_data;
-
-    //Add the marks
-    opt.marks = test_marks;
-
     //Build the coverviewer element
     el = new jviz.modules.coverviewer(opt);
+
+    //Add the samples
+    el.samples(test_samples);
+
+    //Add the coverage values
+    el.cover(test_data);
+
+    //Add the marks
+    //el.marks(test_marks);
+
+    //Draw
+    el.draw();
 
     //Add the drag start event
     el.on('drag:start', function(start, end){ console.log('Down: ' + start + ' - ' + end); });
