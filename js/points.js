@@ -8,10 +8,10 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
   var pend = this._draw.end / this._points.gap;
 
   //Get the draw zone
-  var draw = this._canvas.draw();
+  var draw = this._canvas.el.draw();
 
   //Get the canvas layer
-  var canvas = this._canvas.layer(this._points.layer);
+  var canvas = this._canvas.el.layer(this._points.layer);
 
   //Clear the layer
   canvas.Clear();
@@ -64,5 +64,5 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
 jviz.modules.coverviewer.prototype.pointsClear = function()
 {
   //Clear the layer
-  this._canvas.layer(this._points.layer).Clear();
+  this._canvas.el.layer(this._points.layer).Clear();
 };
