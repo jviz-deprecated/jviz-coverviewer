@@ -60,10 +60,10 @@ jviz.modules.coverviewer.prototype.samplesDraw = function()
   var p = draw.margin.left;
 
   //Read all the positions
-  for(var i = this._draw.region.start; i < this._draw.region.end; i++)
+  for(var i = this._draw.start; i < this._draw.end; i++)
   {
     //Get the cover array
-    var cover = (typeof this._data.normalized[i] === 'undefined') ? this._samples.empty : this._data.normalized[i];
+    var cover = (typeof this._cover.normalized[i] === 'undefined') ? this._samples.empty : this._cover.normalized[i];
 
     //Draw the lines
     for(var j = 0; j < this._samples.active.index.length; j++)
