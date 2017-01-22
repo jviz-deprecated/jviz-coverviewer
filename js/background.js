@@ -2,10 +2,10 @@
 jviz.modules.coverviewer.prototype.backgroundDraw = function()
 {
   //Get the draw zone
-  var draw = this._canvas.draw();
+  var draw = this._canvas.el.draw();
 
   //Get the canvas layer
-  var canvas = this._canvas.layer(this._bg.layer);
+  var canvas = this._canvas.el.layer(this._bg.layer);
 
   //Clear the layer
   canvas.Clear();
@@ -63,7 +63,7 @@ jviz.modules.coverviewer.prototype.backgroundDraw = function()
 jviz.modules.coverviewer.prototype.backgroundClear = function()
 {
   //Clear the layer
-  this._canvas.layer(this._bg.layer).Clear();
+  this._canvas.el.layer(this._bg.layer).Clear();
 
   //Return this
   return this;
