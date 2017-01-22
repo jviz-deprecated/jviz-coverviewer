@@ -7,6 +7,12 @@
   //Style
   display: block; width: 100%;
 
+  //Disable selection
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari*/
+  -moz-user-select: none; /* Firefox */
+  user-select: none;
+
   //Samples table styñe
   &-table
   {
