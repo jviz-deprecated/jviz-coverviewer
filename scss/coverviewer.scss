@@ -11,7 +11,7 @@
   &-table
   {
     //Style
-    display: block; width: 100%; height: 120px; overflow: auto;
+    display: block; width: 100%; height: 100px; overflow: auto;
 
     //Font
     @include jviz-font; font-size: 14px; color: $jviz-navy-3;
@@ -26,10 +26,13 @@
     &-cell
     {
       //Style
-      display: inline-block; width: calc(33.33% - 30px); transition: all 0.3s; height: 30px;
+      display: inline-block; width: calc(25% - 30px); transition: all 0.3s; height: 20px;
 
       //Background
-      background-color: $jviz-white;
+      background-color: $jviz-navy-4;
+
+      //Text
+      font-weight: bold; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: $jviz-white; line-height: 20px;
 
       //Border
       border-radius: 5px;
@@ -39,15 +42,6 @@
 
       //Margin
       margin: { top: 5px; bottom: 5px; left: 5px; right: 5px; }
-
-      //Table cell text
-      &-text
-      {
-        font-weight: bold; transition: all 0.3s; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
-
-        //Style
-        width: calc(100% - 40px); display: inline-block; height: 30px; line-height: 30px; float: right;
-      }
 
       //Cell hover
       &:hover { cursor: pointer; }
