@@ -15,7 +15,7 @@ jviz.modules.coverviewer.prototype.resizeEvent = function()
 jviz.modules.coverviewer.prototype.resize = function()
 {
   //Resize the canvas element
-  this._canvas.resize();
+  this._canvas.el.resize();
 
   //Get the draw element
   var draw = this._canvas.el.draw();
