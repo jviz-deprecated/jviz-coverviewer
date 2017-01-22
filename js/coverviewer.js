@@ -51,6 +51,7 @@ jviz.modules.coverviewer = function(opt)
   this._cover.chromosome = ''; //Data chromosome
   this._cover.start = 0; //Data start position
   this._cover.end = 0; //Data end position
+  this._cover.length = 0; //Coverage data length
   this._cover.values = {}; //Data values
   this._cover.normalized = {}; //Normalized data values
   this._cover.min = 0; //Cover data min value
@@ -78,6 +79,7 @@ jviz.modules.coverviewer = function(opt)
 
   //Background samples
   this._bg = {};
+  this._bg.draw = true; //Draw the background
   this._bg.layer = 1; //Background layer
   this._bg.color = jviz.colors.navy.hex; //Background lines color
   this._bg.opacity = 0; //Background lines opacity
@@ -145,7 +147,6 @@ jviz.modules.coverviewer = function(opt)
   this._draw.position = 0; //Draw over position
   this._draw.start = 0; //Region start point
   this._draw.end = 0; //Region end point
-  this._draw.scale = 1; //Draw scale
   this._draw.length = 0; //Region length
 
   //Default draws
@@ -238,8 +239,21 @@ jviz.modules.coverviewer = function(opt)
   this._marks.label.text.size = '11px'; //Marks label text size
   this._marks.label.text.margin = 3; //Marks label text margin
 
+  //Check the zoom options
+  if(typeof opt.zoom !== 'object'){ opt.zoom = {}; }
+
   //Zoom options
   this._zoom = {};
+  this._zoom.max = 1; //Max zoom level
+  this._zoom.min = 0; //Min zoom level
+  this._zoom.value = 1; //Zoom value
+  this._zoom.increment = 0.1; //Zoom increment
+  this._zoom.default = (typeof opt.zoom.default === 'number') ? opt.zoom.default : 1; //Default zoom value
+  this._zoom.fixed = (typeof opt.zoom.fixed === 'boolean') ? opt.zoom.fixed : false; //Zooming is fixed
+
+  //Zoom buttons
+  this._zoom.btn = {};
+  this._zoom.btn.visible = (typeof opt.zoom.btn === 'boolean') ? opt.zoom.btn : true; //Zoom buttons are visible
 
   //Build the events
   this._events = new jviz.commons.events();
