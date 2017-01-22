@@ -257,15 +257,9 @@ jviz.modules.coverviewer = function(opt)
   //Build the menu
   this.menu();
 
-  //Register the resize event
-  this.resizeEvent();
-
-  //Register the mouse action events
-  this.mouseEvent();
+  //Register the events
+  this.events();
 
   //Return this
   return this;
 };
-
-//On method
-jviz.modules.coverviewer.prototype.on = function(name, listener){ return this._events.add(name, listener); };
