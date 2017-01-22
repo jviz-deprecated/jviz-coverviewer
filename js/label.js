@@ -92,7 +92,7 @@ jviz.modules.coverviewer.prototype.labelCirclesDraw = function(canvas, px, py)
   var pos = this._draw.position;
 
   //Get the cover for this position
-  var cover = (typeof this._data.normalized[pos] === 'undefined') ? this._samples.empty : this._data.normalized[pos];
+  var cover = (typeof this._cover.normalized[pos] === 'undefined') ? this._samples.empty : this._cover.normalized[pos];
 
   //Create one circle for each bam file
   for(var i = 0; i < this._samples.count; i++)
