@@ -23,7 +23,7 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
     var value = i * this._points.gap;
 
     //Line position x
-    var line_x = draw.margin.left + (value - this._draw.start);
+    var line_x = draw.margin.left + (value - this._draw.start) * this._zoom.value;
 
     //Line position y start
     var line_y_start = draw.margin.top;
@@ -58,6 +58,9 @@ jviz.modules.coverviewer.prototype.pointsDraw = function()
     //Add the text
     canvas.Text({ x: lt_x, y: lt_y, text: lt_text, color: lt_color, font: lt_font, size: lt_size });
   }
+
+  //Return this
+  return this;
 };
 
 //Clear the points layer
