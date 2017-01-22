@@ -127,7 +127,7 @@ jviz.modules.coverviewer.prototype.tableSampleToggle = function(index)
   (is_active === true) ? this.hideSample(index) : this.showSample(index);
 
   //Get the background color
-  var color = (is_active === true) ? '' this._samples.color[index];
+  var color = (is_active === true) ? '' : this._samples.color[index];
 
   //Get the sample text id
   var id = this._table.cell.id + index;
