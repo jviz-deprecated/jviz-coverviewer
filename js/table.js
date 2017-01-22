@@ -108,7 +108,7 @@ jviz.modules.coverviewer.prototype.tableSampleAdd = function(index, parent)
   jviz.dom.on(cell_id, 'click', function(){ self.tableSampleToggle(index); });
 
   //Add the color
-  jviz.dom.style(text_id, 'color', this._samples.color[index]);
+  //jviz.dom.style(text_id, 'color', this._samples.color[index]);
 
   //Exit
   return this;
