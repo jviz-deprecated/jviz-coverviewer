@@ -13,6 +13,9 @@ jviz.modules.coverviewer.prototype.zoom = function(value)
   //Check the zoom max value
   if(this._zoom.value > this._zoom.max){ this._zoom.value = this._zoom.max; }
 
+  //Update the draw length
+  this._draw.length = this._draw.width / this._zoom.value;
+
   //Return this
   return this;
 };
@@ -25,9 +28,6 @@ jviz.modules.coverviewer.prototype.zoomUpdate = function()
 
   //Apply the zoom level
   this.zoom(this._zoom.value);
-
-  //Update the draw length
-  this._draw.length = this._draw.width / this._zoom.value;
 
   //Return this
   return this;
