@@ -1,51 +1,33 @@
 //CoverViewer draw
-jviz.modules.coverviewer.prototype.draw = function(opt)
+jviz.modules.coverviewer.prototype.draw = function()
 {
-  //Save the options
-  if(typeof opt === 'undefined'){ var opt = {}; }
-
-  //Check the background
-  if(typeof opt.background !== 'boolean'){ opt.background = this._draw.default.background; }
-
-  //Check the samples
-  if(typeof opt.samples !== 'boolean'){ opt.samples = this._draw.default.samples; }
-
-  //Check the points
-  if(typeof opt.points !== 'boolean'){ opt.points = this._draw.default.points; }
-
-  //Check the marks
-  if(typeof opt.marks !== 'boolean'){ opt.marks = this._draw.default.marks; }
-
   //Check if has data to display
-  if(this._data.has === false){ return; }
-
-  //Save the length window
-  this._draw.region.length = this._draw.width;
+  if(this._cover.has === false){ return; }
 
   //Check the start point
-  if(this._draw.region.start < this._data.start){ this._draw.region.start = this._data.start; }
+  if(this._draw.start < this._cover.start){ this._draw.start = this._cover.start; }
 
   //Check the end point
-  if(this._data.end < this._draw.region.start + this._draw.region.length)
+  if(this._cover.end < this._draw.start + this._draw.length)
   {
     //Update the region start
-    this._draw.region.start = this._data.end - this._draw.region.length;
+    this._draw.start = this._cover.end - this._draw.length;
   }
 
   //Save the end point
-  this._draw.region.end = this._draw.region.start + this._draw.region.length;
+  this._draw.end = this._draw.start + this._draw.length;
 
   //Draw the background
-  if(opt.background === true) { this.backgroundDraw(); }
+  if(this._bg.draw === true){ this.backgroundDraw(); }
 
   //Draw the control points
-  if(opt.points === true){ this.pointsDraw(); }
+  //this.pointsDraw();
 
-  //Draw the samples
-  if(opt.samples === true){ this.samplesDraw(); }
+  //Draw the coverage values
+  this.samplesDraw();
 
   //Draw the marks
-  if(opt.marks === true){ this.marksDraw(); }
+  //this.marksDraw();
 
   //Return this
   return this;
