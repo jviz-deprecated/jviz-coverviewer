@@ -166,24 +166,12 @@ jviz.modules.coverviewer = function(opt)
   this._colors.push(jviz.colors.orange2.hex); //Orange color
   this._colors.push(jviz.colors.purple2.hex); //Purple color
 
-  //Menu
-  this._menu = {};
-  this._menu.id = this._id + '-menu'; //Menu ID
-
-  //Samples button
-  this._menu.samples = {};
-  this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
-  this._menu.samples.color = 'teal'; //Samples button color
-  this._menu.samples.text = 'Show/Hide samples'; //Samples button text
-
   //Samples table
   this._table = {};
   this._table.id = this._id + '-table'; //Samples table id
   this._table.class = this._class + '-table'; //Samples table class
   this._table.active = false; //Samples table active
-
-  //Table scroll
-  this._table.scroll = null;
+  this._table.scroll = null; //Table scroll element
 
   //Table row
   this._table.row = {};
@@ -232,10 +220,27 @@ jviz.modules.coverviewer = function(opt)
   this._zoom.increment = 0.1; //Zoom increment
   this._zoom.default = (typeof opt.zoom.default === 'number') ? opt.zoom.default : 1; //Default zoom value
   this._zoom.fixed = (typeof opt.zoom.fixed === 'boolean') ? opt.zoom.fixed : false; //Zooming is fixed
+  this._zoom.buttons = (typeof opt.zoom.buttons === 'boolean') ? opt.zoom.buttons : true; //Zoom buttons are visible
 
-  //Zoom buttons
-  this._zoom.btn = {};
-  this._zoom.btn.visible = (typeof opt.zoom.btn === 'boolean') ? opt.zoom.btn : true; //Zoom buttons are visible
+  //Menu
+  this._menu = {};
+  this._menu.id = this._id + '-menu'; //Menu ID
+
+  //Samples button
+  this._menu.samples = {};
+  this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
+  this._menu.samples.color = 'teal'; //Samples button color
+  this._menu.samples.text = 'Show/Hide samples'; //Samples button text
+
+  //Zoom in button
+  this._menu.zoomin = {};
+  this._menu.zoomin.id = this._menu.id + '-zoom-in'; //Zoom in button ID
+  this._menu.zoomin.color = 'grey'; //Zoom in button color
+
+  //Zoom out button
+  this._menu.zoomout = {};
+  this._menu.zoomout.id = this._menu.id + '-zoom-out'; //Zoom out button ID
+  this._menu.zoomout.color = 'grey'; //Zoom out button color
 
   //Build the events
   this._events = new jviz.commons.events();
