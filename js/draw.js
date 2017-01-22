@@ -21,7 +21,7 @@ jviz.modules.coverviewer.prototype.draw = function()
   if(this._draw.move === false){ this.backgroundDraw(); }
 
   //Draw the control points
-  //this.pointsDraw();
+  this.pointsDraw();
 
   //Draw the coverage values
   this.samplesDraw();
