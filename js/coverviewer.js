@@ -45,16 +45,16 @@ jviz.modules.coverviewer = function(opt)
   this._canvas.margin = { top: 30, bottom: 30, left: 40, right: 40 };
   this._canvas.el = null; //Canvas element
 
-  //Data
-  this._data = {};
-  this._data.has = false; //Has data
-  this._data.chromosome = ''; //Data chromosome
-  this._data.start = 0; //Data start position
-  this._data.end = 0; //Data end position
-  this._data.values = {}; //Data values
-  this._data.normalized = {}; //Normalized data values
-  this._data.min = 0; //Cover data min value
-  this._data.max = 0; //Cover data max value
+  //Coverage data
+  this._cover = {};
+  this._cover.has = false; //Has data
+  this._cover.chromosome = ''; //Data chromosome
+  this._cover.start = 0; //Data start position
+  this._cover.end = 0; //Data end position
+  this._cover.values = {}; //Data values
+  this._cover.normalized = {}; //Normalized data values
+  this._cover.min = 0; //Cover data min value
+  this._cover.max = 0; //Cover data max value
 
   //Samples object
   this._samples = {};
@@ -143,11 +143,8 @@ jviz.modules.coverviewer = function(opt)
   this._draw.height = 0 //Draw zone height
   this._draw.move = false; //Draw on move
   this._draw.position = 0; //Draw over position
-
-  //Draw region
-  this._draw.region = {};
-  this._draw.region.start = 0; //Region start point
-  this._draw.region.end = 0; //Region end point
+  this._draw.start = 0; //Region start point
+  this._draw.end = 0; //Region end point
   this._draw.scale = 1; //Draw scale
   this._draw.length = 0; //Region length
 
@@ -240,6 +237,9 @@ jviz.modules.coverviewer = function(opt)
   this._marks.label.text.align = 'center'; //Marks label text align
   this._marks.label.text.size = '11px'; //Marks label text size
   this._marks.label.text.margin = 3; //Marks label text margin
+
+  //Zoom options
+  this._zoom = {};
 
   //Build the events
   this._events = new jviz.commons.events();
