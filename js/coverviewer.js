@@ -13,11 +13,8 @@ jviz.modules.coverviewer = function(opt)
   //Parent element
   this._parent = opt.parent;
 
-  //Number of layers
-  this._layers = 5;
-
   //Title
-  this._title = 'CoverViewer';
+  this._title = (typeof opt.title === 'string') ? opt.title : 'CoverViewer';
 
   //Detail
   this._detail = '';
@@ -25,23 +22,28 @@ jviz.modules.coverviewer = function(opt)
   //Loading
   this._loading = false;
 
-  //Margins
-  this._margins = { top: 30, bottom: 30, left: 40, right: 40 };
-
   //Default layout width
   this._width = (typeof opt.width !== 'undefined') ? opt.width : '100%';
 
   //Default canvas height
   this._height = (typeof opt.height !== 'undefined') ? opt.height : 200;
 
-  //Build the element
-  jviz.dom.append(this._parent, { id: this._id, class: this._class });
+  //Panel
+  this._panel = {};
+  this._panel.id = this._id + '-panel'; //Panel ID
+  this._panel.parent = this._id; //Panel parent ID
+  this._panel.showFoot = false; //Show foot
+  this._panel.el = null; //Panel element
 
-  //Build the panel
-  this._panel = new jviz.components.panel({ id: this._id + '-panel', parent: this._id, title: this._title, detail: this._detail, showFoot: false });
-
-  //Build the canvas layers
-  this._canvas = new jviz.components.canvas({ id: this._id + '-canvas', parent: this._panel.body(), layers: this._layers, width: this._width, height: this._height, margin: this._margins });
+  //Canvas
+  this._canvas = {};
+  this._canvas.id = this._id + '-canvas'; //Canvas ID
+  this._canvas.parent = this._id; //Canvas parent element
+  this._canvas.layers = 5; //Number of canvas layers
+  this._canvas.width = this._width; //Canvas width
+  this._canvas.height = this._height; //Canvas height
+  this._canvas.margin = { top: 30, bottom: 30, left: 40, right: 40 };
+  this._canvas.el = null; //Canvas element
 
   //Data
   this._data = {};
@@ -150,6 +152,7 @@ jviz.modules.coverviewer = function(opt)
   this._draw.region = {};
   this._draw.region.start = 0; //Region start point
   this._draw.region.end = 0; //Region end point
+  this._draw.scale = 1; //Draw scale
   this._draw.length = 0; //Region length
 
   //Default draws
