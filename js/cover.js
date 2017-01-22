@@ -6,7 +6,7 @@ jviz.modules.coverviewer.prototype.data = function(data)
   {
     //Check if has data
     if(this._data.has === false){ return false; }
-    
+
     //Return the actual chromosome, start and end position and the values
     return { chromosome: this._data.chromosome, start: this._data.start, end: this._data.end, values: this._data.values };
   }
@@ -54,7 +54,7 @@ jviz.modules.coverviewer.prototype.data = function(data)
   var point_end = jviz.math.format(this._data.end, '.');
 
   //Update the panel detail
-  this._panel.detail('<b>Chromosome ' + this._data.chromosome + '</b>&nbsp;' + point_start + ' - ' + point_end);
+  this._panel.el.detail('<b>Chromosome ' + this._data.chromosome + '</b>&nbsp;' + point_start + ' - ' + point_end);
 
   //Draw the data
   this.draw({ background: true });
@@ -122,7 +122,7 @@ jviz.modules.coverviewer.prototype.dataParse = function()
       var h = this._data.values[key][j]/this._data.max;
 
       //Save the value
-      this._data.normalized[key][j] = Math.floor(h * this._draw.height);
+      this._data.normalized[key][j] = h * this._draw.height;
     }
   }
 
