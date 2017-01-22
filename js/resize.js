@@ -18,13 +18,16 @@ jviz.modules.coverviewer.prototype.resize = function()
   this._canvas.resize();
 
   //Get the draw element
-  var draw = this._canvas.draw();
+  var draw = this._canvas.el.draw();
 
   //Calculate the draw width
   this._draw.width = draw.width;
 
   //Calculate the draw zone
   this._draw.height = draw.height;
+
+  //Calculate the zooming values
+  this.zoom();
 
   //Calculate the label position y
   this._label.posy = this._height - draw.margin.bottom + this._label.margin;
