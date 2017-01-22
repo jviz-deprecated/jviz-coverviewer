@@ -149,13 +149,6 @@ jviz.modules.coverviewer = function(opt)
   this._draw.end = 0; //Region end point
   this._draw.length = 0; //Region length
 
-  //Default draws
-  this._draw.default = {};
-  this._draw.default.background = false; //By default, do not draw the background
-  this._draw.default.samples = true; //By default, draw the samples lines
-  this._draw.default.points = true; //By default, draw the points
-  this._draw.default.marks = true; //By default, draw the marks
-
   //Draw click
   this._draw.click = {};
   this._draw.click.first = false; //Prevent errors
