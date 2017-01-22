@@ -189,24 +189,13 @@ jviz.modules.coverviewer = function(opt)
   this._table.row = {};
   this._table.row.id = this._table.id + '-row'; //Table row ID
   this._table.row.class = this._table.class + '-row'; //Table row class
-  this._table.row.cells = 3; //Number of cells for each row
+  this._table.row.cells = 4; //Number of cells for each row
 
   //Table cell
   this._table.cell = {};
   this._table.cell.id = this._table.id + '-cell'; //Table cell ID
   this._table.cell.class = this._table.class + '-cell'; //Table cell class
-  this._table.cell.size = 50 + 10; //Table cell size
-
-  //Table cell checkbox
-  this._table.cell.checkbox = {};
-  this._table.cell.checkbox.id = this._table.cell.id + '-checkbox'; //Table cell checkbox ID
-  this._table.cell.checkbox.class = this._table.cell.class + '-checkbox'; //Table cell checkbox class
-  this._table.cell.checkbox.el = []; //Checkbox elements list
-
-  //table cell text
-  this._table.cell.text = {};
-  this._table.cell.text.id = this._table.cell.id + '-text'; //Table cell text ID
-  this._table.cell.text.class = this._table.cell.class + '-text'; //Table cell text class
+  this._table.cell.size = 40 + 10; //Table cell size
 
   //Marks
   this._marks = {};
