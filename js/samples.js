@@ -130,8 +130,8 @@ jviz.modules.coverviewer.prototype.showSample = function(index)
   //Update the color
   this._samples.color[index] = this.samplesColor();
 
-  //Draw the actual position
-  this.draw();
+  //Draw the samples
+  this.samplesDraw();
 };
 
 //Hide a sample
@@ -149,11 +149,11 @@ jviz.modules.coverviewer.prototype.hideSample = function(index)
   //Reset the sample color
   this._samples.color[index] = this._samples.default;
 
-  //Clear the samples layer
+  //Clear the samples
   this.samplesClear();
 
-  //Draw the actual positon
-  this.draw();
+  //Draw the samples
+  this.samplesDraw();
 };
 
 //Check if sample is active
