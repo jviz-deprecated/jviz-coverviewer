@@ -31,9 +31,6 @@ jviz.modules.coverviewer.prototype.tableBuild = function()
   //Reset the table content
   jviz.dom.html(this._table.id, '');
 
-  //Reset the checkbox elements list
-  this._table.cell.checkbox.el = [];
-
   //Check the samples count
   if(this._samples.count === 0){ return; }
 
