@@ -267,7 +267,7 @@ jviz.modules.coverviewer = function(opt)
   this._axis.text.font = jviz.font.normal; //Axis Text font
   this._axis.text.size = '12px'; //Axis text size
   this._axis.text.color = jviz.colors.navy3.hex; //Axis text color
-  this._axis.text.margin = { top: 12, left: 4 }; //Axis text margin
+  this._axis.text.margin = { top: 8, left: 4 }; //Axis text margin
   this._axis.text.align = 'right'; //Axis text align
 
   //Menu
