@@ -72,14 +72,41 @@ jviz.modules.coverviewer.prototype.selectionDown = function(x, y)
   //Active the click
   this._selection.click.active = true;
 
-  //Save the original click position
-  this._selection.click.original = x;
+  //Set the selection type as create
+  this._selection.click.type = 0;
 
   //Initialize the start point
   this._selection.click.start = x;
 
   //Initialize the end point
   this._selection.click.end = x;
+
+  //Check if has selection
+  if(this._selection.has === true)
+  {
+    //Check the click point
+    if(this._selection.rect.posx < x && x < this._selection.rect.posx + this._selection.rect.width)
+    {
+      //Set the selection type to move
+      this._selection.click.type = 1;
+
+      //Get the min value
+      this._selection.move.min = this._draw.margin + this._selection.rect.width / 2;
+
+      //Get the max value
+      this._selection.move.max = this._draw.margin + this._draw.width - this._selection.rect.width / 2;
+
+      //Save the move width
+      this._selection.move.width = this._selection.rect.width;
+    }
+    else
+    {
+      //
+    }
+  }
+
+  //Save the original click position
+  this._selection.click.original = x;
 
   //Disable the selection click move
   this._selection.click.move = false;
@@ -91,34 +118,59 @@ jviz.modules.coverviewer.prototype.selectionDown = function(x, y)
 //Selection move
 jviz.modules.coverviewer.prototype.selectionMove = function(x, y)
 {
+  //Check if has selection
+  if(this._selection.has === false){ return; }
+
   //Check if selection click is active
-  if(this._selection.click.active === false){ return; }
-
-  //Check the position x
-  if(x < this._draw.margin){ x = this._draw.margin; }
-
-  //Check the position x
-  if(this._draw.margin + this._draw.width < x){ x = this._draw.margin + this._draw.width; }
-
-  //Get the difference
-  var diff = x - this._selection.click.original;
-
-  //Check the orientation
-  if(diff < 0)
+  if(this._selection.click.active === false)
   {
-    //Save the click start point
-    this._selection.click.start = x;
+    //Exit
+    return;
+  }
 
-    //Save the click end point
-    this._selection.click.end = this._selection.click.original;
+  //Check the selection click type
+  if(this._selection.click.type === 1)
+  {
+    //Check the position x
+    if(x < this._selection.move.min){ x = this._selection.move.min; }
+
+    //Check the position x
+    if(this._selection.move.max < x){ x = this._selection.move.max; }
+
+    //Get the click start point
+    this._selection.click.start = x - this._selection.move.width / 2;
+
+    //Get the click end point
+    this._selection.click.end = x + this._selection.move.width / 2;
   }
   else
   {
-    //Save the click start point
-    this._selection.click.start = this._selection.click.original;
+    //Check the position x
+    if(x < this._draw.margin){ x = this._draw.margin; }
 
-    //Save the click end point
-    this._selection.click.end = x;
+    //Check the position x
+    if(this._draw.margin + this._draw.width < x){ x = this._draw.margin + this._draw.width; }
+
+    //Get the difference
+    var diff = x - this._selection.click.original;
+
+    //Check the orientation
+    if(diff < 0)
+    {
+      //Save the click start point
+      this._selection.click.start = x;
+
+      //Save the click end point
+      this._selection.click.end = this._selection.click.original;
+    }
+    else
+    {
+      //Save the click start point
+      this._selection.click.start = this._selection.click.original;
+
+      //Save the click end point
+      this._selection.click.end = x;
+    }
   }
 
   //Get the selection start
@@ -126,6 +178,9 @@ jviz.modules.coverviewer.prototype.selectionMove = function(x, y)
 
   //Get the selection end
   this._selection.end = this._draw.start + this._draw.length * (this._selection.click.end - this._draw.margin) / this._draw.width;
+
+  //Get the selection length
+  //this._selection.length = Math.abs(this._selection.end - this._selection.start);
 
   //Draw the selection
   this.selectionDraw();
