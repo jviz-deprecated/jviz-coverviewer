@@ -39,7 +39,7 @@ jviz.modules.coverviewer = function(opt)
   this._canvas = {};
   this._canvas.id = this._id + '-canvas'; //Canvas ID
   this._canvas.parent = this._id; //Canvas parent element
-  this._canvas.layers = 5; //Number of canvas layers
+  this._canvas.layers = 7; //Number of canvas layers
   this._canvas.width = this._width; //Canvas width
   this._canvas.height = this._height; //Canvas height
   this._canvas.margin = { top: 30, bottom: 30, left: 40, right: 40 };
@@ -188,7 +188,7 @@ jviz.modules.coverviewer = function(opt)
   //Marks
   this._marks = {};
   this._marks.src = []; //Marks source data
-  this._marks.layer = 2; //Marks layer
+  this._marks.layer = 5; //Marks layer
   this._marks.color = jviz.colors.purple2.hex; //Marks color
   this._marks.opacity = 0.3; //Marks opacity
 
@@ -231,7 +231,7 @@ jviz.modules.coverviewer = function(opt)
   this._selection.end = -1; //Selection end position
   this._selection.enabled = (typeof opt.selection.enabled === 'boolean') ? opt.selection.enabled : true; //Selection is enabled
   this._selection.active = (typeof opt.selection.active === 'boolean') ? opt.selection.active : false; //Selection is active
-  this._selection.layer = 0; //Selection layer num
+  this._selection.layer = 6; //Selection layer num
   this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
   this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
 
@@ -249,6 +249,26 @@ jviz.modules.coverviewer = function(opt)
   this._selection.btn.color = 'green'; //Selection button color
   this._selection.btn.el = null; //Button element
 
+  //Axis
+  this._axis = {};
+  this._axis.active = (typeof opt.axis === 'boolean') ? opt.axis : true; //Axis are active
+  this._axis.draw = false; //Axis draw
+  this._axis.layer = 0; //Axis layer
+  this._axis.values = []; //Axis values
+
+  //Axis lines values
+  this._axis.lines = {};
+  this._axis.lines.width = 2; //Lines width
+  this._axis.lines.opacity = 0.8; //Lines opacity
+  this._axis.lines.color = jviz.colors.navy4.hex; //Axis color
+
+  //Axis text values
+  this._axis.text = {};
+  this._axis.text.font = jviz.font.normal; //Axis Text font
+  this._axis.text.size = '11px'; //Axis text size
+  this._axis.text.color = jviz.colors.navy3.hex; //Axis text color
+  this._axis.text.margin = { top: 12, left: 4 }; //Axis text margin
+
   //Menu
   this._menu = {};
   this._menu.id = this._id + '-menu'; //Menu ID
@@ -263,11 +283,13 @@ jviz.modules.coverviewer = function(opt)
   this._menu.zoomin = {};
   this._menu.zoomin.id = this._menu.id + '-zoom-in'; //Zoom in button ID
   this._menu.zoomin.color = 'grey'; //Zoom in button color
+  this._menu.zoomin.text = 'Zoom In'; //Zoom in button text
 
   //Zoom out button
   this._menu.zoomout = {};
   this._menu.zoomout.id = this._menu.id + '-zoom-out'; //Zoom out button ID
   this._menu.zoomout.color = 'grey'; //Zoom out button color
+  this._menu.zoomout.text = 'Zoom Out'; //Zoom out button text
 
   //Build the events
   this._events = new jviz.commons.events();
