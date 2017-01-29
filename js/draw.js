@@ -21,7 +21,7 @@ jviz.modules.coverviewer.prototype.draw = function()
   if(this._draw.move === false){ this.backgroundDraw(); }
 
   //Draw the axis
-  if(this._axis.draw === true){ this.axisDraw(); } 
+  if(this._axis.draw === true && this._axis.active === true){ this.axisDraw(); } 
 
   //Draw the control points
   this.pointsDraw();
