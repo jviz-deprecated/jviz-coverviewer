@@ -91,7 +91,7 @@ jviz.modules.coverviewer = function(opt)
   this._points.layer = 2; //Points layer
   this._points.gap = 1000; //Control points nucleotides gap
   this._points.letter = 'K'; //Control points letter
-  this._points.margin = 35; //Points margin
+  this._points.margin = 45; //Points margin
 
   //Points line
   this._points.line = {};
@@ -104,7 +104,7 @@ jviz.modules.coverviewer = function(opt)
   this._points.text.font = jviz.font.normal; //Points Text font
   this._points.text.size = '12px'; //Points text size
   this._points.text.color = jviz.colors.navy3.hex; //Points text color
-  this._points.text.margin = { top: 15, left: 4 }; //Points text margin
+  this._points.text.margin = { top: 12, left: 4 }; //Points text margin
 
   //Label
   this._label = {};
@@ -221,6 +221,33 @@ jviz.modules.coverviewer = function(opt)
   this._zoom.default = (typeof opt.zoom.default === 'number') ? opt.zoom.default : 1; //Default zoom value
   this._zoom.fixed = (typeof opt.zoom.fixed === 'boolean') ? opt.zoom.fixed : false; //Zooming is fixed
   this._zoom.buttons = (typeof opt.zoom.buttons === 'boolean') ? opt.zoom.buttons : true; //Zoom buttons are visible
+
+  //Check the selection options
+  if(typeof opt.selection !== 'object'){ opt.selection = {}; }
+
+  //Selection options
+  this._selection = {};
+  this._selection.start = -1; //Selection start position
+  this._selection.end = -1; //Selection end position
+  this._selection.enabled = (typeof opt.selection.enabled === 'boolean') ? opt.selection.enabled : true; //Selection is enabled
+  this._selection.active = (typeof opt.selection.active === 'boolean') ? opt.selection.active : false; //Selection is active
+  this._selection.layer = 0; //Selection layer num
+  this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
+  this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
+
+  //Selection draw values
+  this._selection.draw = {};
+  this._selection.draw.posx = 0; //Selection draw position x
+  this._selection.draw.posy = 0; //Selection draw position y
+  this._selection.draw.width = 0; //Selection draw width
+  this._selection.draw.height = 0; //Selection draw height
+
+  //Selection button
+  this._selection.btn = {};
+  this._selection.btn.text = 'Selection'; //Selection button text
+  this._selection.btn.enabled = (typeof opt.selection.button === 'boolean') ? opt.selection.button : true; //Selection button is active
+  this._selection.btn.color = 'green'; //Selection button color
+  this._selection.btn.el = null; //Button element
 
   //Menu
   this._menu = {};
