@@ -21,7 +21,7 @@ jviz.modules.coverviewer.prototype.selection = function(start, end)
 jviz.modules.coverviewer.prototype.selectionDraw = function()
 {
   //Check if selection is enabled
-  if(this._selection.enabled === false){ return this; }
+  if(this._selection.enabled === false || this._selection.has === false){ return this; }
 
   //Get the draw zone
   var draw = this._canvas.el.draw();
@@ -83,6 +83,9 @@ jviz.modules.coverviewer.prototype.selectionDown = function(x, y)
 
   //Disable the selection click move
   this._selection.click.move = false;
+
+  //Has a selection
+  this._selection.has = true;
 };
 
 //Selection move
@@ -140,7 +143,11 @@ jviz.modules.coverviewer.prototype.selectionUp = function(x, y)
   //Check for no move
   if(this._selection.click.move === false)
   {
-    //
+    //Does not has a selection
+    this._selection.has = false;
+
+    //Clear the selection
+    this.selectionClear();
   }
 
   //Set active as false
@@ -148,8 +155,6 @@ jviz.modules.coverviewer.prototype.selectionUp = function(x, y)
 
   //Disable the selection move
   this._selection.click.move = false;
-
-  //Emit the selection event
 };
 
 //Clear the selection
