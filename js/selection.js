@@ -81,11 +81,26 @@ jviz.modules.coverviewer.prototype.selectionDown = function(x, y)
   //Initialize the end point
   this._selection.click.end = x;
 
+  //Save the original click position
+  this._selection.click.original = x;
+
   //Check if has selection
-  if(this._selection.has === true)
+  if(this._selection.has === true && this.selectionOver(x, y) === true || this._selection.fixed === true)
   {
-    //Check the click point
-    if(this._selection.rect.posx < x && x < this._selection.rect.posx + this._selection.rect.width)
+    //Check the rectangle start
+    if(x < this._selection.rect.posx + this._selection.margin && this._selection.fixed === false)
+    {
+      //Change the end point
+      this._selection.click.original = this._selection.rect.posx + this._selection.rect.width;
+    }
+    //Check the rectangle end
+    else if(this._selection.rect.posx + this._selection.rect.width - this._selection.margin < x && this._selection.fixed === false)
+    {
+      //Change the start point
+      this._selection.click.original = this._selection.rect.posx;
+    }
+    //Only move
+    else
     {
       //Set the selection type to move
       this._selection.click.type = 1;
@@ -99,14 +114,7 @@ jviz.modules.coverviewer.prototype.selectionDown = function(x, y)
       //Save the move width
       this._selection.move.width = this._selection.rect.width;
     }
-    else
-    {
-      //
-    }
   }
-
-  //Save the original click position
-  this._selection.click.original = x;
 
   //Disable the selection click move
   this._selection.click.move = false;
@@ -196,7 +204,7 @@ jviz.modules.coverviewer.prototype.selectionUp = function(x, y)
   if(this._selection.click.active === false){ return; }
 
   //Check for no move
-  if(this._selection.click.move === false)
+  if(this._selection.click.move === false && this._selection.fixed === false)
   {
     //Does not has a selection
     this._selection.has = false;
@@ -210,6 +218,19 @@ jviz.modules.coverviewer.prototype.selectionUp = function(x, y)
 
   //Disable the selection move
   this._selection.click.move = false;
+};
+
+//Selection over
+jviz.modules.coverviewer.prototype.selectionOver = function(x, y)
+{
+  //Check the left point
+  if(x < this._selection.rect.posx - this._selection.margin){ return false; }
+
+  //Check the right side
+  if(this._selection.rect.posx + this._selection.rect.width + this._selection.margin < x){ return false; }
+
+  //Return true
+  return true;
 };
 
 //Clear the selection
