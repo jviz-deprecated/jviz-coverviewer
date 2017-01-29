@@ -81,15 +81,15 @@ jviz.modules.coverviewer.prototype.selectionDown = function(x, y)
   //Initialize the end point
   this._selection.click.end = x;
 
-  //Activeate the selection move
-  this._selection.click.move = true;
+  //Disable the selection click move
+  this._selection.click.move = false;
 };
 
 //Selection move
 jviz.modules.coverviewer.prototype.selectionMove = function(x, y)
 {
-  //Check if selection move is active
-  if(this._selection.click.move === false){ return; }
+  //Check if selection click is active
+  if(this._selection.click.active === false){ return; }
 
   //Check the position x
   if(x < this._draw.margin){ x = this._draw.margin; }
@@ -126,6 +126,9 @@ jviz.modules.coverviewer.prototype.selectionMove = function(x, y)
 
   //Draw the selection
   this.selectionDraw();
+
+  //Set selection move as true
+  this._selection.click.move = true;
 };
 
 //Selection up
@@ -134,6 +137,12 @@ jviz.modules.coverviewer.prototype.selectionUp = function(x, y)
   //Check if is active
   if(this._selection.click.active === false){ return; }
 
+  //Check for no move
+  if(this._selection.click.move === false)
+  {
+    //
+  }
+
   //Set active as false
   this._selection.click.active = false;
 
@@ -141,4 +150,14 @@ jviz.modules.coverviewer.prototype.selectionUp = function(x, y)
   this._selection.click.move = false;
 
   //Emit the selection event
+};
+
+//Clear the selection
+jviz.modules.coverviewer.prototype.selectionClear = function()
+{
+  //Clear the selection
+  this._canvas.el.layer(this._selection.layer).Clear();
+
+  //Continue
+  return this;
 };
