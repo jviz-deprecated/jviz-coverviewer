@@ -20,6 +20,9 @@ jviz.modules.coverviewer.prototype.draw = function()
   //Draw the background
   if(this._draw.move === false){ this.backgroundDraw(); }
 
+  //Draw the axis
+  if(this._axis.draw === true){ this.axisDraw(); } 
+
   //Draw the control points
   this.pointsDraw();
 
