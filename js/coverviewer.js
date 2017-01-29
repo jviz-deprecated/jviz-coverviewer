@@ -253,7 +253,13 @@ jviz.modules.coverviewer = function(opt)
   this._selection.click.start = 0; //Click start point
   this._selection.click.end = 0; //Click end point
   this._selection.click.move = false; //Selection move is active
-  this._selection.click.type = 0; //Selection type 
+  this._selection.click.type = 0; //Selection type
+
+  //Selection move
+  this._selection.move = {};
+  this._selection.move.max = 0; //Move max value
+  this._selection.move.min = 0; //Move min value
+  this._selection.move.width = 0; //Move width
 
   //Selection button
   this._selection.btn = {};
