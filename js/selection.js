@@ -1,6 +1,18 @@
 //Add a selection
 jviz.modules.coverviewer.prototype.selection = function(start, end)
 {
+  //Update the selection start position
+  this._selection.start = parseInt(start);
+
+  //Update the selection end position
+  this._selection.end = parseInt(end);
+
+  //Set selection active as true
+  this._selection.active = true;
+
+  //Draw the selection
+  this.selectionDraw();
+
   //Continue
   return this;
 };
@@ -9,7 +21,7 @@ jviz.modules.coverviewer.prototype.selection = function(start, end)
 jviz.modules.coverviewer.prototype.selectionDraw = function()
 {
   //Check if selection is enabled
-  if(this._selection.enabled === false){ return this; }
+  if(this._selection.enabled === false){ return this; } 
 
   //Get the draw zone
   var draw = this._canvas.el.draw();
@@ -20,20 +32,32 @@ jviz.modules.coverviewer.prototype.selectionDraw = function()
   //Clear the layer
   canvas.Clear();
 
+  //Check the start point
+  if(this._draw.end < this._selection.start){ return this; }
+
+  //Check the end point
+  if(this._selection.end < this._draw.start){ return this; }
+
+  //Get the start position
+  var pos_start = Math.max(0, draw.width * (this._selection.start - this._draw.start) / this._draw.length);
+
+  //Get the end position
+  var pos_end = Math.min(draw.width, draw.width * (this._selection.end - this._draw.start) / this._draw.length);
+
   //Get the rectangle position x
-  var rect_x = this._selection.click.start;
+  var rect_x = draw.margin.left + pos_start;
 
   //Get the rectangle position y
   var rect_y = draw.margin.top;
 
   //Get the rectangle width
-  var rect_width = this._selection.click.end - this._selection.click.start;
+  var rect_width = Math.abs(pos_end - pos_start);
 
   //Get the rectangle height
   var rect_height = draw.height;
 
   //Draw the selection rectangle
-  canvas.Rect({ x: rect_x, y: rect_y, width: rect_width, height: rect_height });
+  canvas.Rect({ x: this._selection.rect.posx, y: this._selection.rect.posy, width: this._selection.rect.width, height: this._selection.rect.height });
 
   //Fill the rectanle
   canvas.Fill({ color: this._selection.color, opacity: this._selection.rect.opacity });
