@@ -237,6 +237,7 @@ jviz.modules.coverviewer = function(opt)
   this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
   this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
   this._selection.has = false; //Has selection region
+  this._selection.margin = 5; //Selection margin
 
   //Selection rectanle values
   this._selection.rect = {};
@@ -245,6 +246,9 @@ jviz.modules.coverviewer = function(opt)
   this._selection.rect.width = 0; //Selection rectangle width
   this._selection.rect.height = 0; //Selection rectangle height
   this._selection.rect.opacity = 0.3; //Selection rectangle opacity
+
+  //Selection line left
+  this._se
 
   //Selection click
   this._selection.click = {};
