@@ -22,6 +22,9 @@ jviz.modules.coverviewer.prototype.resize = function()
   //Calculate the label line height
   this._label.line.height = draw.height;
 
+  //Draw the axis again
+  this._axis.draw = true;
+
   //Emit the resize event
   this._events.emit('resize', this._draw.width, this._draw.height);
 
