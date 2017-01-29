@@ -235,6 +235,7 @@ jviz.modules.coverviewer = function(opt)
   this._selection.layer = 6; //Selection layer num
   this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
   this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
+  this._selection.has = false; //Has selection region
 
   //Selection rectanle values
   this._selection.rect = {};
