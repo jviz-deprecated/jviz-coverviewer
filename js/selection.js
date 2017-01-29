@@ -21,7 +21,7 @@ jviz.modules.coverviewer.prototype.selection = function(start, end)
 jviz.modules.coverviewer.prototype.selectionDraw = function()
 {
   //Check if selection is enabled
-  if(this._selection.enabled === false){ return this; } 
+  if(this._selection.enabled === false){ return this; }
 
   //Get the draw zone
   var draw = this._canvas.el.draw();
@@ -45,16 +45,16 @@ jviz.modules.coverviewer.prototype.selectionDraw = function()
   var pos_end = Math.min(draw.width, draw.width * (this._selection.end - this._draw.start) / this._draw.length);
 
   //Get the rectangle position x
-  var rect_x = draw.margin.left + pos_start;
+  this._selection.rect.posx = draw.margin.left + pos_start;
 
   //Get the rectangle position y
-  var rect_y = draw.margin.top;
+  this._selection.rect.posy = draw.margin.top;
 
   //Get the rectangle width
-  var rect_width = Math.abs(pos_end - pos_start);
+  this._selection.rect.width = Math.abs(pos_end - pos_start);
 
   //Get the rectangle height
-  var rect_height = draw.height;
+  this._selection.rect.height = draw.height;
 
   //Draw the selection rectangle
   canvas.Rect({ x: this._selection.rect.posx, y: this._selection.rect.posy, width: this._selection.rect.width, height: this._selection.rect.height });
