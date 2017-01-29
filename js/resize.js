@@ -13,6 +13,9 @@ jviz.modules.coverviewer.prototype.resize = function()
   //Calculate the draw zone
   this._draw.height = draw.height;
 
+  //Get the draw margin left
+  this._draw.margin = draw.margin.left;
+
   //Calculate the zooming values
   this.zoomUpdate();
 
