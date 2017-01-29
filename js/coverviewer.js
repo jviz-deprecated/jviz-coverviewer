@@ -230,6 +230,7 @@ jviz.modules.coverviewer = function(opt)
   this._selection = {};
   this._selection.start = -1; //Selection start position
   this._selection.end = -1; //Selection end position
+  this._selection.length = 0; //Selection length
   this._selection.enabled = (typeof opt.selection.enabled === 'boolean') ? opt.selection.enabled : true; //Selection is enabled
   this._selection.active = (typeof opt.selection.active === 'boolean') ? opt.selection.active : false; //Selection is active
   this._selection.layer = 6; //Selection layer num
