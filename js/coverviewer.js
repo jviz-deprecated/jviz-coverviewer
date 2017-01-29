@@ -148,6 +148,7 @@ jviz.modules.coverviewer = function(opt)
   this._draw.start = 0; //Region start point
   this._draw.end = 0; //Region end point
   this._draw.length = 0; //Region length
+  this._draw.margin = 0; //Draw margin left
 
   //Draw click
   this._draw.click = {};
@@ -235,12 +236,21 @@ jviz.modules.coverviewer = function(opt)
   this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
   this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
 
-  //Selection draw values
-  this._selection.draw = {};
-  this._selection.draw.posx = 0; //Selection draw position x
-  this._selection.draw.posy = 0; //Selection draw position y
-  this._selection.draw.width = 0; //Selection draw width
-  this._selection.draw.height = 0; //Selection draw height
+  //Selection rectanle values
+  this._selection.rect = {};
+  this._selection.rect.posx = 0; //Selection rectangle position x
+  this._selection.rect.posy = 0; //Selection rectangle position y
+  this._selection.rect.width = 0; //Selection rectangle width
+  this._selection.rect.height = 0; //Selection rectangle height
+  this._selection.rect.opacity = 0.6; //Selection rectangle opacity
+
+  //Selection click
+  this._selection.click = {};
+  this._selection.click.active = false; //Selection click is active
+  this._selection.click.original = 0; //Click original position
+  this._selection.click.start = 0; //Click start point
+  this._selection.click.end = 0; //Click end point
+  this._selection.click.orientation = 0; //Click orientation
 
   //Selection button
   this._selection.btn = {};
