@@ -67,7 +67,11 @@ jviz.modules.coverviewer.prototype.selectionMove = function(x, y)
   //Check if selection move is active
   if(this._selection.click.move === false){ return; }
 
-  //Check the posiiton x
+  //Check the position x
+  if(x < this._draw.margin){ x = this._draw.margin; }
+
+  //Check the position x
+  if(this._draw.margin + this._draw.width < x){ x = this._draw.margin + this._draw.width; }
 
   //Get the difference
   var diff = x - this._selection.click.original;
