@@ -242,7 +242,7 @@ jviz.modules.coverviewer = function(opt)
   this._selection.rect.posy = 0; //Selection rectangle position y
   this._selection.rect.width = 0; //Selection rectangle width
   this._selection.rect.height = 0; //Selection rectangle height
-  this._selection.rect.opacity = 0.6; //Selection rectangle opacity
+  this._selection.rect.opacity = 0.3; //Selection rectangle opacity
 
   //Selection click
   this._selection.click = {};
@@ -251,6 +251,7 @@ jviz.modules.coverviewer = function(opt)
   this._selection.click.start = 0; //Click start point
   this._selection.click.end = 0; //Click end point
   this._selection.click.orientation = 0; //Click orientation
+  this._selection.click.move = false; //Selection move is active
 
   //Selection button
   this._selection.btn = {};
