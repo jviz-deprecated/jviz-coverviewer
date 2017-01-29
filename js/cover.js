@@ -59,6 +59,9 @@ jviz.modules.coverviewer.prototype.cover = function(data)
   //Update the zoom values
   this.zoomUpdate();
 
+  //Draw the axis again
+  this._axis.draw = true;
+
   //Draw the data
   this.draw();
 
