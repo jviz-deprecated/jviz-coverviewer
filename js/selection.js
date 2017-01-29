@@ -24,7 +24,7 @@ jviz.modules.coverviewer.prototype.selectionDraw = function()
   var rect_x = this._selection.click.start;
 
   //Get the rectangle position y
-  var rect_y = draw.margin.left;
+  var rect_y = draw.margin.top;
 
   //Get the rectangle width
   var rect_width = this._selection.click.end - this._selection.click.start;
