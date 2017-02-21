@@ -1,0 +1,64 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+<script>
+
+//Get the zoom value
+jviz.components.coverviewer.get_zoom = function(){ return this._zoom.value; };
+
+//Apply a zoom level
+jviz.components.coverviewer.set_zoom = function(value)
+{
+  //Save the zoom value
+  this._zoom.value = (this._zoom.fixed === true) ? this._zoom.default : value;
+
+  //Check the zoom min value
+  if(this._zoom.value < this._zoom.min){ this._zoom.value = this._zoom.min; }
+
+  //Check the zoom max value
+  if(this._zoom.value > this._zoom.max){ this._zoom.value = this._zoom.max; }
+
+  //Update the draw length
+  this._draw.length = this._draw.width / this._zoom.value;
+};
+
+//Updte the zoom value
+jviz.components.coverviewer.update_zoom = function()
+{
+  //Calculate the min zoom value
+  this._zoom.min = this._draw.width / this._cover.length;
+
+  //Apply the zoom level
+  this.set_zoom(this._zoom.value);
+};
+
+//Zoom in
+jviz.components.coverviewer.zoom_in = function()
+{
+  //Check if zoom is fixed
+  if(this._zoom.fixed === true){ return this; }
+
+  //Update the zoom
+  this.set_zoom(this._zoom.value + this._zoom.increment);
+
+  //Draw all
+  this.draw();
+};
+
+//Zoom out
+jviz.components.coverviewer.zoom_out = function()
+{
+  //Check if zoom is fixed
+  if(this._zoom.fixed === true){ return this; }
+
+  //Update the zoom
+  this.set_zoom(this._zoom.value - this._zoom.increment);
+
+  //Draw all
+  this.draw();
+};
+
+
+</script>

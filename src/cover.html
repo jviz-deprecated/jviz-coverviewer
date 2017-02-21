@@ -65,13 +65,13 @@ jviz.components.coverviewer.set_cover = function(data)
   this.$.panel.set_detail('Chromosome ' + this._cover.chromosome + '  ' + point_start + ' - ' + point_end);
 
   //Update the zoom values
-  //this.zoomUpdate();
+  this.update_zoom();
 
   //Draw the axis again
-  //this._axis.draw = true;
+  this._axis.draw = true;
 
   //Draw the data
-  //this.draw();
+  this.draw();
 
   //Set loading as false
   //this.loading(false);

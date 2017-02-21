@@ -25,19 +25,19 @@ jviz.components.coverviewer.draw = function()
   this._draw.end = this._draw.start + this._draw.length;
 
   //Draw the background
-  //if(this._draw.move === false){ this.draw_background(); }
+  if(this._draw.move === false){ this.draw_background(); }
 
   //Draw the axis
-  //if(this._axis.draw === true && this._axis.active === true){ this.draw_axis(); }
+  if(this._axis.draw === true && this._axis.active === true){ this.draw_axis(); }
 
   //Draw the control points
-  //this.draw_points();
+  this.draw_points();
 
   //Draw the coverage values
   this.draw_samples();
 
   //Draw the selection
-  //this.draw_selection();
+  this.draw_selection();
 
   //Draw the marks
   //this.marksDraw();

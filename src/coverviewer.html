@@ -1,0 +1,346 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+<script>
+
+//Initialize the coverviewer component
+jviz.components.coverviewer = { is: 'jviz-coverviewer' };
+
+//Add the properties
+jviz.components.coverviewer.properties = {};
+jviz.components.coverviewer.properties.coverviewerHeight = { type: Number, value: 200, reflectToAttribute: true };
+
+//Coverviewer created
+jviz.components.coverviewer.created = function()
+{
+  //Initialize the object width
+  this._width = 0;
+
+  //Initialize the object height
+  this._height = 0;
+
+  //Canvas
+  this._canvas = {};
+  this._canvas.layers = 7; //Number of canvas layers
+  this._canvas.margin = { top: 30, bottom: 30, left: 40, right: 40 };
+
+  //Coverage data
+  this._cover = {};
+  this._cover.has = false; //Has data
+  this._cover.chromosome = ''; //Data chromosome
+  this._cover.start = 0; //Data start position
+  this._cover.end = 0; //Data end position
+  this._cover.length = 0; //Coverage data length
+  this._cover.values = {}; //Data values
+  this._cover.normalized = {}; //Normalized data values
+  this._cover.min = 0; //Cover data min value
+  this._cover.max = 0; //Cover data max value
+
+  //Samples object
+  this._samples = {};
+  this._samples.count = 0; //Count the number of samples
+  this._samples.names = []; //Samples names
+  this._samples.color = []; //Samples colors
+  this._samples.empty = []; //Samples empty array
+  this._samples.layer = 3; //Samples layer
+  this._samples.default = jviz.colors('navy', 3); //Samples default color
+
+  //Samples active
+  this._samples.active = {};
+  this._samples.active.list = []; //Samples active list
+  this._samples.active.index = []; //Samples active index
+
+  //Samples line
+  this._samples.line = {};
+  this._samples.line.opacity = 1.0; //Samples lines opacity
+  this._samples.line.width = 2; //Samples lines width
+  this._samples.line.join = 'round'; //Background lines join
+
+  //Background samples
+  this._bg = {};
+  this._bg.draw = true; //Draw the background
+  this._bg.layer = 1; //Background layer
+  this._bg.color = jviz.colors('navy'); //Background lines color
+  this._bg.opacity = 0; //Background lines opacity
+  this._bg.width = 2; //Background lines stroke width
+  this._bg.join = 'round'; //Background lines join
+
+  //Points definition
+  this._points = {};
+  this._points.layer = 2; //Points layer
+  this._points.gap = 1000; //Control points nucleotides gap
+  this._points.letter = 'K'; //Control points letter
+  this._points.margin = 45; //Points margin
+
+  //Points line
+  this._points.line = {};
+  this._points.line.color = jviz.colors('navy', 3); //Points line color
+  this._points.line.width = 1; //Points line width
+  this._points.line.opacity = 0.4; //Points line opacity
+
+  //Points text
+  this._points.text = {};
+  this._points.text.font ='11px ' + jviz.font; //Points Text font
+  this._points.text.color = jviz.colors('navy', 3); //Points text color
+  this._points.text.margin = { top: 12, left: 4 }; //Points text margin
+
+  //Label
+  this._label = {};
+  this._label.layer = 4; //Label layer
+  this._label.width = 90; //Label width
+  this._label.height = 20; //Label height
+  this._label.posx = 0; //Position x
+  this._label.posy = 0; //Position y
+  this._label.margin = 7; //Label margin top
+
+  //Label rectangle
+  this._label.rect = {};
+  this._label.rect.color = jviz.colors('blue', 3); //Fill color
+  this._label.rect.radius = 5; //Label rectangle radius
+
+  //Label text
+  this._label.text = {};
+  this._label.text.font = '11px ' + jviz.font; //Label text font
+  this._label.text.align = 'center'; //Label text align
+  this._label.text.color = jviz.colors('white'); //Label text color
+
+  //Label line
+  this._label.line = {};
+  this._label.line.width = 1; // Line width
+  this._label.line.height = 0; //Line height
+  this._label.line.color = jviz.colors('blue', 3); //Fill color
+  this._label.line.opacity = 0.4; //Label line opacity
+
+  //Label circle
+  this._label.circle = {};
+  this._label.circle.radius = 3; //Circle radius
+  this._label.circle.opacity = 0.9; //Circle opacity
+
+  // */
+  //Draw object
+  this._draw = {};
+  this._draw.width = 0; //Draw width
+  this._draw.height = 0 //Draw zone height
+  this._draw.move = false; //Draw on move
+  this._draw.position = 0; //Draw over position
+  this._draw.start = 0; //Region start point
+  this._draw.end = 0; //Region end point
+  this._draw.length = 0; //Region length
+  this._draw.margin = 0; //Draw margin left
+
+  //Draw click
+  this._draw.click = {};
+  this._draw.click.first = false; //Prevent errors
+  this._draw.click.point = 0//Click point
+  this._draw.click.start = 0; //Click orginal position
+  this._draw.click.value = 0; //Click value
+
+
+  //Colors
+  this._colors = [];
+  this._colors.push('' + jviz.colors('red') + ''); //Red color
+  this._colors.push('' + jviz.colors('blue') + ''); //Blue color
+  this._colors.push('' + jviz.colors('yellow') + ''); //Yellow color
+  this._colors.push('' + jviz.colors('green') + ''); //Green color
+  this._colors.push('' + jviz.colors('teal') + ''); //Teal color
+  this._colors.push('' + jviz.colors('orange') + ''); //Orange color
+  this._colors.push('' + jviz.colors('purple') + ''); //Purple color
+
+  /*
+
+  //Samples table
+  this._table = {};
+  this._table.id = this._id + '-table'; //Samples table id
+  this._table.class = this._class + '-table'; //Samples table class
+  this._table.active = false; //Samples table active
+  this._table.scroll = null; //Table scroll element
+
+  //Table row
+  this._table.row = {};
+  this._table.row.id = this._table.id + '-row'; //Table row ID
+  this._table.row.class = this._table.class + '-row'; //Table row class
+  this._table.row.cells = 4; //Number of cells for each row
+
+  //Table cell
+  this._table.cell = {};
+  this._table.cell.id = this._table.id + '-cell'; //Table cell ID
+  this._table.cell.class = this._table.class + '-cell'; //Table cell class
+  this._table.cell.size = 40 + 10; //Table cell size
+
+  //Marks
+  this._marks = {};
+  this._marks.src = []; //Marks source data
+  this._marks.layer = 5; //Marks layer
+  this._marks.color = jviz.colors.purple2.hex; //Marks color
+  this._marks.opacity = 0.3; //Marks opacity
+
+  //Marks label
+  this._marks.label = {};
+  this._marks.label.width = 150; //Marks label width
+  this._marks.label.height = 20; //Marks label height
+  this._marks.label.fill = jviz.colors.purple2.hex; //Marks label fill color
+  this._marks.label.triangle = 6; //Marks label triangle
+  this._marks.label.radius = 5; //Marks label radius
+  this._marks.label.margin = { top: 4 }; //Marks label margin top
+
+  //Marks position text
+  this._marks.label.text = {};
+  this._marks.label.text.color = jviz.colors.white.hex; //Marks label text color
+  this._marks.label.text.font = jviz.font.normal; //Marks label text font
+  this._marks.label.text.align = 'center'; //Marks label text align
+  this._marks.label.text.size = '11px'; //Marks label text size
+  this._marks.label.text.margin = 3; //Marks label text margin
+
+  */
+  //Zoom options
+  this._zoom = {};
+  this._zoom.max = 1; //Max zoom level
+  this._zoom.min = 0; //Min zoom level
+  this._zoom.value = 1; //Zoom value
+  this._zoom.increment = 0.1; //Zoom increment
+  //this._zoom.default = (typeof opt.zoom.default === 'number') ? opt.zoom.default : 1; //Default zoom value
+  this._zoom.default = 1;
+  //this._zoom.fixed = (typeof opt.zoom.fixed === 'boolean') ? opt.zoom.fixed : false; //Zooming is fixed
+  this._zoom.fixed = false;
+  //this._zoom.buttons = (typeof opt.zoom.buttons === 'boolean') ? opt.zoom.buttons : true; //Zoom buttons are visible
+  this._zoom.buttons = true;
+
+  //Check the selection options
+  //if(typeof opt.selection !== 'object'){ opt.selection = {}; }
+
+  //Selection options
+  this._selection = {};
+  this._selection.start = -1; //Selection start position
+  this._selection.end = -1; //Selection end position
+  this._selection.length = 0; //Selection length
+  //this._selection.enabled = (typeof opt.selection.enabled === 'boolean') ? opt.selection.enabled : true; //Selection is enabled
+  this._selection.enabled = true;
+  //this._selection.active = (typeof opt.selection.active === 'boolean') ? opt.selection.active : false; //Selection is active
+  this._selection.active = false;
+  this._selection.layer = 6; //Selection layer num
+  //this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
+  this._selection.color = jviz.colors('green');
+  //this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
+  this._selection.fixed = false;
+  this._selection.has = false; //Has selection region
+  this._selection.margin = 5; //Selection margin
+
+  //Selection rectanle values
+  this._selection.rect = {};
+  this._selection.rect.posx = 0; //Selection rectangle position x
+  this._selection.rect.posy = 0; //Selection rectangle position y
+  this._selection.rect.width = 0; //Selection rectangle width
+  this._selection.rect.height = 0; //Selection rectangle height
+  this._selection.rect.opacity = 0.3; //Selection rectangle opacity
+
+  //Selection click
+  this._selection.click = {};
+  this._selection.click.active = false; //Selection click is active
+  this._selection.click.original = 0; //Click original position
+  this._selection.click.start = 0; //Click start point
+  this._selection.click.end = 0; //Click end point
+  this._selection.click.move = false; //Selection move is active
+  this._selection.click.type = 0; //Selection type
+
+  //Selection move
+  this._selection.move = {};
+  this._selection.move.max = 0; //Move max value
+  this._selection.move.min = 0; //Move min value
+  this._selection.move.width = 0; //Move width
+
+  /*
+  //Selection button
+  this._selection.btn = {};
+  this._selection.btn.text = 'Selection'; //Selection button text
+  this._selection.btn.enabled = (typeof opt.selection.button === 'boolean') ? opt.selection.button : true; //Selection button is active
+  this._selection.btn.color = 'green'; //Selection button color
+  this._selection.btn.el = null; //Button element
+
+  */
+  //Axis
+  this._axis = {};
+  this._axis.active = true; //Axis are active
+  this._axis.draw = true; //Axis draw
+  this._axis.layer = 0; //Axis layer
+  this._axis.values = []; //Axis values
+
+  //Axis lines values
+  this._axis.lines = {};
+  this._axis.lines.width = 2; //Lines width
+  this._axis.lines.opacity = 0.8; //Lines opacity
+  this._axis.lines.color = jviz.colors('navy', 4); //Axis color
+
+  //Axis text values
+  this._axis.text = {};
+  this._axis.text.font = '10px ' + jviz.font; //Axis Text font
+  this._axis.text.color = jviz.colors('navy', 3); //Axis text color
+  this._axis.text.margin = { top: 8, left: 4 }; //Axis text margin
+  this._axis.text.align = 'right'; //Axis text align
+
+  /*
+  //Menu
+  this._menu = {};
+  this._menu.id = this._id + '-menu'; //Menu ID
+
+  //Samples button
+  this._menu.samples = {};
+  this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
+  this._menu.samples.color = 'teal'; //Samples button color
+  this._menu.samples.text = 'Show/Hide samples'; //Samples button text
+
+  //Zoom in button
+  this._menu.zoomin = {};
+  this._menu.zoomin.id = this._menu.id + '-zoom-in'; //Zoom in button ID
+  this._menu.zoomin.color = 'grey'; //Zoom in button color
+  this._menu.zoomin.text = 'Zoom In'; //Zoom in button text
+
+  //Zoom out button
+  this._menu.zoomout = {};
+  this._menu.zoomout.id = this._menu.id + '-zoom-out'; //Zoom out button ID
+  this._menu.zoomout.color = 'grey'; //Zoom out button color
+  this._menu.zoomout.text = 'Zoom Out'; //Zoom out button text
+
+  //*/
+
+  //Build the events
+  this._events = new jviz.commons.events();
+};
+
+//Coverviewer ready
+jviz.components.coverviewer.ready = function()
+{
+  //Save this
+  var self = this;
+
+  //Set the number of layers
+  this.$.canvas.set_layers(this._canvas.layers);
+
+  //Set the canvas margin
+  this.$.canvas.set_margin(this._canvas.margin);
+
+  //Add the event down
+  jviz.dom.mouse_down(this.$.canvas, function(e, x, y){ return self.event_down(x, y); });
+
+  //Add the event up
+  jviz.dom.mouse_up(this.$.canvas, function(e, x, y){ return self.event_up(x, y); });
+
+  //Add the event move
+  jviz.dom.mouse_move(this.$.canvas, function(e, x, y){ return self.event_move(x, y); });
+
+  //Add the resize event
+  jviz.dom.resize(function()
+  {
+    //Resize the component
+    self.event_resize();
+
+    //Draw again the data
+    self.draw();
+  });
+
+  //Resize the first time
+  this.event_resize();
+};
+
+</script>
