@@ -9,5 +9,34 @@
 <!-- Import testing components -->
 <link rel="import" href="jviz-coverviewer.html">
 
+<!-- Import data values -->
+<script type="text/javascript" src="demo/data.js"></script>
+<script type="text/javascript" src="demo/marks.js"></script>
+<script type="text/javascript" src="demo/samples.js"></script>
+
 <!-- Test -->
-<jviz-coverviewer></jviz-coverviewer>
+<jviz-coverviewer id="test"></jviz-coverviewer>
+
+<!-- Test script -->
+<script>
+
+//Get the element
+var el = null;
+
+//Dom ready
+jviz.dom.ready(function()
+{
+  //Get the coverviewer eleent
+  el = jviz.dom.id('test');
+
+  //Add the samples
+  el.set_samples(test_samples);
+
+  //Add the cover values
+  el.set_cover(test_data);
+
+  //Draw the data
+  el.draw();
+});
+
+</script>
