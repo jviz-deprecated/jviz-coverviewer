@@ -5,13 +5,13 @@ jviz.modules.coverviewer.prototype.menu = function()
   var self = this;
 
   //Add the samples button
-  this._panel.el.addBtn(this._menu.samples);
+  this._panel.el.btn(this._menu.samples);
 
   //Add the zoom in button
-  this._panel.el.addIcon(this._menu.zoomin);
+  this._panel.el.btn(this._menu.zoomin);
 
   //Add the zoom out button
-  this._panel.el.addIcon(this._menu.zoomout);
+  this._panel.el.btn(this._menu.zoomout);
 
   //Add the preview button icon event
   jviz.dom.event(this._menu.samples.id, 'click', function(e){ return self.menuSamples(); });
