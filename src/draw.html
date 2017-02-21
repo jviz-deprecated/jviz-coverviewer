@@ -1,0 +1,65 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+<script>
+
+//Draw method
+jviz.components.coverviewer.draw = function()
+{
+  //Check if has data to display
+  if(this._cover.has === false){ return; }
+
+  //Check the start point
+  if(this._draw.start < this._cover.start){ this._draw.start = this._cover.start; }
+
+  //Check the end point
+  if(this._cover.end < this._draw.start + this._draw.length)
+  {
+    //Update the region start
+    this._draw.start = this._cover.end - this._draw.length;
+  }
+
+  //Save the end point
+  this._draw.end = this._draw.start + this._draw.length;
+
+  //Draw the background
+  //if(this._draw.move === false){ this.draw_background(); }
+
+  //Draw the axis
+  //if(this._axis.draw === true && this._axis.active === true){ this.draw_axis(); }
+
+  //Draw the control points
+  //this.draw_points();
+
+  //Draw the coverage values
+  this.draw_samples();
+
+  //Draw the selection
+  //this.draw_selection();
+
+  //Draw the marks
+  //this.marksDraw();
+};
+
+//Clear
+jviz.components.coverviewer.clear = function()
+{
+  //Clear the background
+  this.clear_background();
+
+  //Clear the points
+  this.clear_points();
+
+  //Clear the samples
+  this.clear_samples();
+
+  //Clear the label
+  this.clear_label();
+
+  //Clear the marks
+  this.clear_marks();
+};
+
+</script>
