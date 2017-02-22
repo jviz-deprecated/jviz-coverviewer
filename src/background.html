@@ -6,7 +6,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 <script>
 
 //Draw the background
-jviz.components.coverviewer.draw_background = function()
+jviz.components.coverviewer.__background_draw = function()
 {
   //Get the draw zone
   var draw = this.$.canvas.get_draw();
@@ -70,7 +70,7 @@ jviz.components.coverviewer.draw_background = function()
 };
 
 //Clear the background
-jviz.components.coverviewer.clear_background = function()
+jviz.components.coverviewer.__background_clear = function()
 {
   //Clear the layer
   this.$.canvas.get_layers()[this._bg.layer].clear();
