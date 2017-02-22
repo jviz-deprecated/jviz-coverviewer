@@ -24,6 +24,52 @@ jviz.components.coverviewer.set_zoom = function(value)
   this._draw.length = this._draw.width / this._zoom.value;
 };
 
+//Configure the zoom
+jviz.components.coverviewer.config_zoom = function(opt)
+{
+  //Check the options
+  if(typeof opt !== 'object'){ return; }
+
+  //Check the default zoom value
+  if(typeof opt.default === 'number'){ this._zoom.default = opt.default; }
+
+  //Zoom is fixed
+  if(typeof opt.fixed === 'boolean'){ this._zoom.fixed = opt.fixed; }
+
+  //Check the zoom buttons
+  if(typeof opt.buttons === 'boolean'){ this._zoom.buttons = opt.buttons; }
+
+  //Check the default zoom value
+  if(this._zoom.default < 0){ this._zoom.default = 0; }
+
+  //Check the max zoom value
+  if(this._zoom.default > 1){ this._zoom.default = 1; }
+
+  //Set the default zoom value
+  this.set_zoom(this._zoom.default);
+
+  //Check the buttons
+  if(this._zoom.buttons === true)
+  {
+    //Display the zoom in button
+    jviz.dom.show(this.$.zoom_in, 'inline-block');
+
+    //Display the zoom out button
+    jviz.dom.show(this.$.zoom_out, 'inline-block');
+  }
+  else
+  {
+    //Hide the zoom in button
+    jviz.dom.hide(this.$.zoom_in);
+
+    //Hide the zoom out button
+    jviz.dom.hide(this.$.zoom_out);
+  }
+
+  //Exit
+  return;
+};
+
 //Updte the zoom value
 jviz.components.coverviewer.__zoom_update = function()
 {
@@ -31,7 +77,7 @@ jviz.components.coverviewer.__zoom_update = function()
   this._zoom.min = this._draw.width / this._cover.length;
 
   //Apply the zoom level
-  this.set_zoom(this._zoom.value);
+  this.set_zoom(this._zoom.default);
 };
 
 //Zoom in
