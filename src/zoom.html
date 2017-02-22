@@ -25,7 +25,7 @@ jviz.components.coverviewer.set_zoom = function(value)
 };
 
 //Updte the zoom value
-jviz.components.coverviewer.update_zoom = function()
+jviz.components.coverviewer.__zoom_update = function()
 {
   //Calculate the min zoom value
   this._zoom.min = this._draw.width / this._cover.length;
@@ -35,7 +35,7 @@ jviz.components.coverviewer.update_zoom = function()
 };
 
 //Zoom in
-jviz.components.coverviewer.zoom_in = function()
+jviz.components.coverviewer.__zoom_in = function()
 {
   //Check if zoom is fixed
   if(this._zoom.fixed === true){ return this; }
@@ -48,7 +48,7 @@ jviz.components.coverviewer.zoom_in = function()
 };
 
 //Zoom out
-jviz.components.coverviewer.zoom_out = function()
+jviz.components.coverviewer.__zoom_out = function()
 {
   //Check if zoom is fixed
   if(this._zoom.fixed === true){ return this; }
@@ -60,5 +60,10 @@ jviz.components.coverviewer.zoom_out = function()
   this.draw();
 };
 
+//Zoom in alias
+jviz.components.coverviewer.zoom_in = function(){ return this.__zoom_in(); };
+
+//Zoom put alias
+jviz.components.coverviewer.zoom_out = function(){ return this.__zoom_out(); };
 
 </script>
