@@ -31,6 +31,28 @@ jviz.components.coverviewer.get_selection = function()
   return { start: this._selection.start, end: this._selection.end };
 };
 
+//Initialize the selection
+jviz.components.coverviewer.__selection_init = function()
+{
+  //Check the selection button
+  if(this._selection.btn.visible === true)
+  {
+    //Display the selection button
+    jviz.dom.show(this.$.selection, 'inline-block');
+  }
+  else
+  {
+    //Hide the selection button
+    jviz.dom.hide(this.$.selection);
+  }
+
+  //Set the tooltip color
+  this._selection.tooltip.set_color(this._selection.color);
+
+  //Update the button
+  this.__selection_update_button();
+};
+
 //Draw the selection
 jviz.components.coverviewer.__selection_draw = function()
 {
@@ -144,9 +166,6 @@ jviz.components.coverviewer.__selection_mouse_down = function(x, y)
 
   //Has a selection
   this._selection.has = true;
-
-  //Update the tooltip
-  this._selection.tooltip.set_text(this._cover.start + ' - ' + this._cover.end);
 };
 
 //Selection move
@@ -283,12 +302,12 @@ jviz.components.coverviewer.__selection_update_button = function()
   if(this._selection.active === true)
   {
     //Set the color
-    this.$.selection.set_color('green');
+    this.$.selection.set_color(this._selection.btn.color_active);
   }
   else
   {
     //Set the red color
-    this.$.selection.set_color('navy');
+    this.$.selection.set_color(this._selection.btn.color_disabled);
   }
 };
 
