@@ -93,24 +93,17 @@ jviz.components.coverviewer.created = function()
   this._label.height = 20; //Label height
   this._label.posx = 0; //Position x
   this._label.posy = 0; //Position y
-  this._label.margin = 7; //Label margin top
+  this._label.margin = 0; //Label margin top
+  this._label.color = jviz.colors('blue', 3); //Label color
+  this._label.enabled = true; //Label is enabled
 
-  //Label rectangle
-  this._label.rect = {};
-  this._label.rect.color = jviz.colors('blue', 3); //Fill color
-  this._label.rect.radius = 5; //Label rectangle radius
-
-  //Label text
-  this._label.text = {};
-  this._label.text.font = '11px ' + jviz.font; //Label text font
-  this._label.text.align = 'center'; //Label text align
-  this._label.text.color = jviz.colors('white'); //Label text color
+  //Label tooltip
+  this._label.tooltip = new jviz.canvas.tooltip({ color: this._label.tooltip, position: 'bottom' });
 
   //Label line
   this._label.line = {};
   this._label.line.width = 1; // Line width
   this._label.line.height = 0; //Line height
-  this._label.line.color = jviz.colors('blue', 3); //Fill color
   this._label.line.opacity = 0.4; //Label line opacity
 
   //Label circle
@@ -186,9 +179,6 @@ jviz.components.coverviewer.created = function()
   this._zoom.buttons = true; //Display zoom buttons
   this._zoom.enabled = true; //Zoom is enabled
 
-  //Check the selection options
-  //if(typeof opt.selection !== 'object'){ opt.selection = {}; }
-
   //Selection options
   this._selection = {};
   this._selection.start = -1; //Selection start position
@@ -232,7 +222,7 @@ jviz.components.coverviewer.created = function()
   this._selection.btn = {};
   this._selection.btn.visible = true; //Selection buttons are visible
   this._selection.btn.color_active = 'green'; //Selection button active button
-  this._selection.btn.color_disabled = 'navy'; //Selection button disabled 
+  this._selection.btn.color_disabled = 'navy'; //Selection button disabled
 
   //Axis
   this._axis = {};
@@ -306,6 +296,12 @@ jviz.components.coverviewer.ready = function()
 
   //Initialize the zoom
   this.__zoom_init();
+
+  //Initialize the label
+  this.__label_init();
+
+  //Initialize the marks
+  this.__marks_init();
 
   //Add the scroll event
   this._table.scroll = new jviz.commons.scroll_block({ id: this.$.table.id, num: 1, size: this._table.cell.size });
