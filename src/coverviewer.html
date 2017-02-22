@@ -32,7 +32,7 @@ jviz.components.coverviewer.created = function()
   this._cover.chromosome = ''; //Data chromosome
   this._cover.start = 0; //Data start position
   this._cover.end = 0; //Data end position
-  this._cover.length = 0; //Coverage data length
+  this._cover.length = 1; //Coverage data length
   this._cover.values = {}; //Data values
   this._cover.normalized = {}; //Normalized data values
   this._cover.min = 0; //Cover data min value
@@ -181,12 +181,10 @@ jviz.components.coverviewer.created = function()
   this._zoom.min = 0; //Min zoom level
   this._zoom.value = 1; //Zoom value
   this._zoom.increment = 0.1; //Zoom increment
-  //this._zoom.default = (typeof opt.zoom.default === 'number') ? opt.zoom.default : 1; //Default zoom value
-  this._zoom.default = 1;
-  //this._zoom.fixed = (typeof opt.zoom.fixed === 'boolean') ? opt.zoom.fixed : false; //Zooming is fixed
-  this._zoom.fixed = false;
-  //this._zoom.buttons = (typeof opt.zoom.buttons === 'boolean') ? opt.zoom.buttons : true; //Zoom buttons are visible
-  this._zoom.buttons = true;
+  this._zoom.default = 1; //Default zoom value
+  this._zoom.fixed = false; //Zoom is fixed
+  this._zoom.buttons = true; //Display zoom buttons
+  this._zoom.enabled = true; //Zoom is enabled
 
   //Check the selection options
   //if(typeof opt.selection !== 'object'){ opt.selection = {}; }
@@ -196,15 +194,11 @@ jviz.components.coverviewer.created = function()
   this._selection.start = -1; //Selection start position
   this._selection.end = -1; //Selection end position
   this._selection.length = 0; //Selection length
-  //this._selection.enabled = (typeof opt.selection.enabled === 'boolean') ? opt.selection.enabled : true; //Selection is enabled
-  this._selection.enabled = true;
-  //this._selection.active = (typeof opt.selection.active === 'boolean') ? opt.selection.active : false; //Selection is active
-  this._selection.active = false;
+  this._selection.enabled = true; //Selection is enabled
+  this._selection.active = false; //Selection is active
   this._selection.layer = 6; //Selection layer num
-  //this._selection.color = (typeof opt.selection.color === 'string') ? opt.selection.color : jviz.colors.green2.hex; //Selection color
-  this._selection.color = jviz.colors('green');
-  //this._selection.fixed = (typeof opt.selection.fixed === 'boolean') ? opt.selection.fixed : false; //Selection is fixed
-  this._selection.fixed = false;
+  this._selection.color = jviz.colors('green'); //Selection color
+  this._selection.fixed = false; //Selection is fixed
   this._selection.has = false; //Has selection region
   this._selection.margin = 5; //Selection margin
 
@@ -232,7 +226,13 @@ jviz.components.coverviewer.created = function()
   this._selection.move.width = 0; //Move width
 
   //Selection tooltip
-  this._selection.tooltip = new jviz.canvas.tooltip({ color: jviz.colors('green'), position: 'bottom' });
+  this._selection.tooltip = new jviz.canvas.tooltip({ color: this._selection.color, position: 'bottom' });
+
+  //Selection buttons
+  this._selection.btn = {};
+  this._selection.btn.visible = true; //Selection buttons are visible
+  this._selection.btn.color_active = 'green'; //Selection button active button
+  this._selection.btn.color_disabled = 'navy'; //Selection button disabled 
 
   //Axis
   this._axis = {};
@@ -301,8 +301,11 @@ jviz.components.coverviewer.ready = function()
   //Add the selection button event
   jviz.dom.mouse_down(this.$.selection, function(){ return self.__selection_toggle(); });
 
-  //Update the selection button
-  this.__selection_update_button();
+  //Initialize the selection
+  this.__selection_init();
+
+  //Initialize the zoom
+  this.__zoom_init();
 
   //Add the scroll event
   this._table.scroll = new jviz.commons.scroll_block({ id: this.$.table.id, num: 1, size: this._table.cell.size });
