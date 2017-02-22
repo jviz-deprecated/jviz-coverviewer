@@ -43,8 +43,17 @@ jviz.components.coverviewer.set_samples = function(data)
   //this.tableBuild();
 };
 
+//Show a sample
+jviz.components.coverviewer.show_sample = function(index){ return this.__samples_show(index); };
+
+//Hide a sample
+jviz.components.coverviewer.hide_sample = function(index){ return this.__samples_hide(index); };
+
+//Check if a sample is active
+jviz.components.coverviewer.is_sample = function(index){ return this.__samples_active(index); };
+
 //Draw the samples
-jviz.components.coverviewer.draw_samples = function()
+jviz.components.coverviewer.__samples_draw = function()
 {
   //Check the active samples count
   if(this._samples.active.index.length === 0){ return; }
@@ -111,14 +120,14 @@ jviz.components.coverviewer.draw_samples = function()
 };
 
 //Clear the samples layer
-jviz.components.coverviewer.clear_samples = function()
+jviz.components.coverviewer.__samples_clear = function()
 {
   //Clear the samples layer
   this.$.canvas.get_layers()[this._samples.layer].clear();
 };
 
 //Display a sample
-jviz.components.coverviewer.show_samples = function(index)
+jviz.components.coverviewer.__samples_show = function(index)
 {
   //Check the index value
   if(index < 0 || this._samples.count <= index){ return jviz.console.error('Invalid sample index'); }
@@ -133,14 +142,14 @@ jviz.components.coverviewer.show_samples = function(index)
   this._samples.active.index.push(index);
 
   //Update the color
-  this._samples.color[index] = this.color_samples();
+  this._samples.color[index] = this.__samples_color();
 
   //Draw the samples
-  this.draw_samples();
+  this.__samples_draw();
 };
 
 //Hide a sample
-jviz.components.coverviewer.hide_samples = function(index)
+jviz.components.coverviewer.__samples_hide = function(index)
 {
   //Check the index value
   if(index < 0 || this._samples.count <= index){ return jviz.console.error('Invalid sample index'); }
@@ -155,24 +164,21 @@ jviz.components.coverviewer.hide_samples = function(index)
   this._samples.color[index] = this._samples.default;
 
   //Clear the samples
-  this.clear_samples();
+  this.__samples_clear();
 
   //Draw the samples
-  this.draw_samples();
+  this.__samples_draw();
 };
 
 //Check if sample is active
-jviz.components.coverviewer.is_samples = function(n)
+jviz.components.coverviewer.__samples_iactive = function(n)
 {
-  //Get the index
-  var index = this._samples.active.index.indexOf(n);
-
   //Return if sample is active
-  return (index === -1) ? false : true;
+  return this._samples.active.index.indexOf(n) !== -1;
 };
 
 //Get a color for a new sample
-jviz.components.coverviewer.color_samples = function()
+jviz.components.coverviewer.__samples_color = function()
 {
   //Read all the colors
   for(var i = 0; i < this._colors.length; i++)
