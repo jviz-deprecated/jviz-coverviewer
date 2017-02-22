@@ -65,7 +65,7 @@ jviz.components.coverviewer.event_down = function(x, y)
   if(this._selection.active === true)
   {
     //Call the selection down
-    return this.selectionDown(x, y);
+    return this.selection_down(x, y);
   }
 
   //Activate the move
@@ -88,7 +88,7 @@ jviz.components.coverviewer.event_up = function(x, y)
   if(this._selection.active === true)
   {
     //Call the selection up
-    return this.selectionUp(x, y);
+    return this.selection_up(x, y);
   }
 
   //Check if draw move is active
@@ -121,7 +121,7 @@ jviz.components.coverviewer.event_move = function(x, y)
   if(this._selection.active === true)
   {
     //Call the selection move
-    return this.selectionMove(x, y);
+    return this.selection_move(x, y);
   }
 
   //Check the click first
