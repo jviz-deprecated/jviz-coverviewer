@@ -13,7 +13,7 @@ jviz.components.coverviewer.on = function(name, listener)
 };
 
 //Resize event
-jviz.components.coverviewer.event_resize = function()
+jviz.components.coverviewer.__event_resize = function()
 {
   //Get the width value
   this._width = jviz.dom.width(this.$.canvas);
@@ -37,7 +37,7 @@ jviz.components.coverviewer.event_resize = function()
   this._draw.margin = draw.margin.left;
 
   //Calculate the zooming values
-  this.update_zoom();
+  this.__zoom_update();
 
   //Calculate the label position y
   //this._label.posy = this._height - draw.margin.bottom + this._label.margin;
@@ -56,7 +56,7 @@ jviz.components.coverviewer.event_resize = function()
 };
 
 //Catch the event down
-jviz.components.coverviewer.event_down = function(x, y)
+jviz.components.coverviewer.__event_down = function(x, y)
 {
   //Check for loading
   //if(this.loading() === true){ return;}
@@ -65,7 +65,7 @@ jviz.components.coverviewer.event_down = function(x, y)
   if(this._selection.active === true)
   {
     //Call the selection down
-    return this.selection_down(x, y);
+    return this.__selection_mouse_down(x, y);
   }
 
   //Activate the move
@@ -82,13 +82,13 @@ jviz.components.coverviewer.event_down = function(x, y)
 };
 
 //Catch the event up
-jviz.components.coverviewer.event_up = function(x, y)
+jviz.components.coverviewer.__event_up = function(x, y)
 {
   //Check the selection up
   if(this._selection.active === true)
   {
     //Call the selection up
-    return this.selection_up(x, y);
+    return this.__selection_mouse_up(x, y);
   }
 
   //Check if draw move is active
@@ -112,7 +112,7 @@ jviz.components.coverviewer.event_up = function(x, y)
 };
 
 //Catch the event move
-jviz.components.coverviewer.event_move = function(x, y)
+jviz.components.coverviewer.__event_move = function(x, y)
 {
   //Check for loading
   //if(this.loading() === true){ return; }
@@ -121,7 +121,7 @@ jviz.components.coverviewer.event_move = function(x, y)
   if(this._selection.active === true)
   {
     //Call the selection move
-    return this.selection_move(x, y);
+    return this.__selection_mouse_move(x, y);
   }
 
   //Check the click first
@@ -137,7 +137,7 @@ jviz.components.coverviewer.event_move = function(x, y)
     this._events.emit('drag:start', this._draw.start, this._draw.end, this._draw.length);
 
     //Clear the background
-    this.clear_background();
+    this.__background_clear();
 
     //Clear the label
     //this.labelClear();
