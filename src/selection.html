@@ -18,7 +18,7 @@ jviz.components.coverviewer.set_selection = function(start, end)
   this._selection.has = true;
 
   //Draw the selection
-  this.draw_selection();
+  this.__selection_draw();
 
   //Continue
   return this;
@@ -32,7 +32,7 @@ jviz.components.coverviewer.get_selection = function()
 };
 
 //Draw the selection
-jviz.components.coverviewer.draw_selection = function()
+jviz.components.coverviewer.__selection_draw = function()
 {
   //Check if selection is enabled
   if(this._selection.enabled === false || this._selection.has === false){ return this; }
@@ -90,7 +90,7 @@ jviz.components.coverviewer.draw_selection = function()
 };
 
 //Selection down
-jviz.components.coverviewer.selection_down = function(x, y)
+jviz.components.coverviewer.__selection_mouse_down = function(x, y)
 {
   //Active the click
   this._selection.click.active = true;
@@ -108,7 +108,7 @@ jviz.components.coverviewer.selection_down = function(x, y)
   this._selection.click.original = x;
 
   //Check if has selection
-  if(this._selection.has === true && this.selection_over(x, y) === true || this._selection.fixed === true)
+  if(this._selection.has === true && this.__selection_mouse_over(x, y) === true || this._selection.fixed === true)
   {
     //Check the rectangle start
     if(x < this._selection.rect.posx + this._selection.margin && this._selection.fixed === false)
@@ -150,7 +150,7 @@ jviz.components.coverviewer.selection_down = function(x, y)
 };
 
 //Selection move
-jviz.components.coverviewer.selection_move = function(x, y)
+jviz.components.coverviewer.__selection__mouse_move = function(x, y)
 {
   //Check if has selection
   if(this._selection.has === false){ return; }
@@ -217,14 +217,14 @@ jviz.components.coverviewer.selection_move = function(x, y)
   //this._selection.length = Math.abs(this._selection.end - this._selection.start);
 
   //Draw the selection
-  this.draw_selection();
+  this.__selection_draw();
 
   //Set selection move as true
   this._selection.click.move = true;
 };
 
 //Selection up
-jviz.components.coverviewer.selection_up = function(x, y)
+jviz.components.coverviewer.__selection_mouse_up = function(x, y)
 {
   //Check if is active
   if(this._selection.click.active === false){ return; }
@@ -236,7 +236,7 @@ jviz.components.coverviewer.selection_up = function(x, y)
     this._selection.has = false;
 
     //Clear the selection
-    this.clear_selection();
+    this.__selection_clear();
   }
 
   //Set active as false
@@ -247,7 +247,7 @@ jviz.components.coverviewer.selection_up = function(x, y)
 };
 
 //Selection over
-jviz.components.coverviewer.selection_over = function(x, y)
+jviz.components.coverviewer.__selection_mouse_over = function(x, y)
 {
   //Check the left point
   if(x < this._selection.rect.posx - this._selection.margin){ return false; }
@@ -260,24 +260,24 @@ jviz.components.coverviewer.selection_over = function(x, y)
 };
 
 //Clear the selection
-jviz.components.coverviewer.clear_selection = function()
+jviz.components.coverviewer.__selection_draw = function()
 {
   //Clear the selection
   this.$.canvas.get_layers()[this._selection.layer].clear();
 };
 
 //Toggle selection
-jviz.components.coverviewer.toggle_selection = function()
+jviz.components.coverviewer.__selection_toggle = function()
 {
   //Toggle the selection value
   this._selection.active = !this._selection.active;
 
   //Update the button
-  this.button_selection();
+  this.__selection_update_button();
 };
 
 //Update the election button
-jviz.components.coverviewer.button_selection = function()
+jviz.components.coverviewer.__selection_update_button = function()
 {
   //Update the button
   if(this._selection.active === true)
