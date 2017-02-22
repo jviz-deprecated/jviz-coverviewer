@@ -6,7 +6,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 <script>
 
 //Draw the axis
-jviz.components.coverviewer.draw_axis = function()
+jviz.components.coverviewer.__axis_draw = function()
 {
   //Get the draw zone
   var draw = this.$.canvas.get_draw();
@@ -18,7 +18,7 @@ jviz.components.coverviewer.draw_axis = function()
   canvas.clear();
 
   //Calculate the axis values
-  this.axis_values();
+  this.__axis_values();
 
   //Initialize the axis points
   var lines = [];
@@ -74,7 +74,7 @@ jviz.components.coverviewer.draw_axis = function()
 };
 
 //Calculate the axis values
-jviz.components.coverviewer.axis_values = function()
+jviz.components.coverviewer.__axis_values = function()
 {
   //Reset the values
   this._axis.values = [];
