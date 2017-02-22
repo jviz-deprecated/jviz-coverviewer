@@ -65,7 +65,10 @@ jviz.components.coverviewer.set_cover = function(data)
   this.$.panel.set_detail('Chromosome ' + this._cover.chromosome + '  ' + point_start + ' - ' + point_end);
 
   //Update the tooltip
-  this._selection.tooltip.set_text(this._cover.start + ' - ' + this._cover.end);
+  this._selection.tooltip.set_text(this._cover.end + ' - ' + this._cover.end);
+
+  //Set the label tooltip size
+  this._label.tooltip.set_text(this._cover.end);
 
   //Update the zoom values
   this.__zoom_update();
