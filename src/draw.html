@@ -40,7 +40,7 @@ jviz.components.coverviewer.draw = function()
   this.__selection_draw();
 
   //Draw the marks
-  //this.marksDraw();
+  this.__marks_draw();
 };
 
 //Clear
@@ -59,7 +59,7 @@ jviz.components.coverviewer.clear = function()
   //this.clear_label();
 
   //Clear the marks
-  //this.clear_marks();
+  this.__marks_clear();
 
   //Clear the selection
   this.__selection_clear();
