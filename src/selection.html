@@ -208,10 +208,10 @@ jviz.components.coverviewer.__selection_mouse_move = function(x, y)
   }
 
   //Get the selection start
-  this._selection.start = this._draw.start + this._draw.length * (this._selection.click.start - this._draw.margin) / this._draw.width;
+  this._selection.start = parseInt(this._draw.start + this._draw.length * (this._selection.click.start - this._draw.margin) / this._draw.width);
 
   //Get the selection end
-  this._selection.end = this._draw.start + this._draw.length * (this._selection.click.end - this._draw.margin) / this._draw.width;
+  this._selection.end = parseInt(this._draw.start + this._draw.length * (this._selection.click.end - this._draw.margin) / this._draw.width);
 
   //Get the selection length
   //this._selection.length = Math.abs(this._selection.end - this._selection.start);
