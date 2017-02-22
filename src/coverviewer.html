@@ -341,6 +341,18 @@ jviz.components.coverviewer.ready = function()
 
   //Resize the first time
   this.event_resize();
+
+  //Add the zoom in button event
+  jviz.dom.mouse_down(this.$.zoom_in, function(){ return self.zoom_in(); });
+
+  //Add the zoom out button event
+  jviz.dom.mouse_down(this.$.zoom_out, function(){ return self.zoom_out(); });
+
+  //Add the selection button event
+  jviz.dom.mouse_down(this.$.selection, function(){ return self.toggle_selection(); });
+
+  //Update the selection button
+  this.button_selection();
 };
 
 </script>
