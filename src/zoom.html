@@ -74,6 +74,9 @@ jviz.components.coverviewer.__zoom_in = function()
   //Update the zoom
   this.set_zoom(this._zoom.value + this._zoom.increment);
 
+  //Clear the label
+  this.__label_clear();
+
   //Draw all
   this.draw();
 };
@@ -86,6 +89,9 @@ jviz.components.coverviewer.__zoom_out = function()
 
   //Update the zoom
   this.set_zoom(this._zoom.value - this._zoom.increment);
+
+  //Clear the label
+  this.__label_clear();
 
   //Draw all
   this.draw();
