@@ -46,10 +46,36 @@ jviz.components.coverviewer.options = function(opt)
     if(typeof opt.selection.fixed === 'boolean'){ this._selection.fixed = opt.selection.fixed; }
 
     //Selection button
-    if(typeof opt.selection.button === 'boolean'){ this._selection.btn.visible = opt.selection.button; } 
+    if(typeof opt.selection.button === 'boolean'){ this._selection.btn.visible = opt.selection.button; }
 
     //Update the selection
     this.__selection_init();
+  }
+
+  //Check the label configuration
+  if(typeof opt.label === 'object')
+  {
+    //Check if label is enabled
+    if(typeof opt.label.enabled === 'boolean'){ this._label.enabled = opt.label.enabled; }
+
+    //Check the label color
+    if(typeof opt.label.color === 'string'){ this._label.color = opt.label.color.trim().toLowerCase(); }
+
+    //Update the label
+    this.__label_init();
+  }
+
+  //Check the marks configuration
+  if(typeof opt.marks === 'object')
+  {
+    //Check if marks is enabled
+    if(typeof opt.marks.enabled === 'boolean'){ this._marks.enabled = opt.marks.enabled; }
+
+    //Check the marks color
+    if(typeof opt.marks.color === 'string'){ this._marks.color = opt.marks.color.trim().toLowerCase(); }
+
+    //Update the marks
+    this.__marks_init();
   }
 
   //Update the draw
