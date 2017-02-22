@@ -247,4 +247,36 @@ jviz.components.coverviewer.clear_selection = function()
   this.$.canvas.get_layers()[this._selection.layer].Clear();
 };
 
+//Toggle selection
+jviz.components.coverviewer.toggle_selection = function()
+{
+  //Toggle the selection value
+  this._selection.active = !this._selection.active;
+
+  //Update the button
+  this.button_selection();
+};
+
+//Update the election button
+jviz.components.coverviewer.button_selection = function()
+{
+  //Update the button
+  if(this._selection.active === true)
+  {
+    //Set the color
+    this.$.selection.set_color('red');
+
+    //Update the text
+    this.$.selection.textContent = 'Disable selection';
+  }
+  else
+  {
+    //Set the red color
+    this.$.selection.set_color('green');
+
+    //Update the text
+    this.$.selection.textContent = 'Enable selection';
+  }
+};
+
 </script>
