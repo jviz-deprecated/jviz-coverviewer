@@ -250,15 +250,9 @@ jviz.components.coverviewer.created = function()
   this._selection.move.min = 0; //Move min value
   this._selection.move.width = 0; //Move width
 
-  /*
-  //Selection button
-  this._selection.btn = {};
-  this._selection.btn.text = 'Selection'; //Selection button text
-  this._selection.btn.enabled = (typeof opt.selection.button === 'boolean') ? opt.selection.button : true; //Selection button is active
-  this._selection.btn.color = 'green'; //Selection button color
-  this._selection.btn.el = null; //Button element
+  //Selection tooltip
+  this._selection.tooltip = new jviz.canvas.tooltip({ color: jviz.colors('green'), position: 'bottom' });
 
-  */
   //Axis
   this._axis = {};
   this._axis.active = true; //Axis are active
@@ -278,31 +272,6 @@ jviz.components.coverviewer.created = function()
   this._axis.text.color = jviz.colors('navy', 3); //Axis text color
   this._axis.text.margin = { top: 8, left: 4 }; //Axis text margin
   this._axis.text.align = 'right'; //Axis text align
-
-  /*
-  //Menu
-  this._menu = {};
-  this._menu.id = this._id + '-menu'; //Menu ID
-
-  //Samples button
-  this._menu.samples = {};
-  this._menu.samples.id = this._menu.id + '-samples'; //Samples button ID
-  this._menu.samples.color = 'teal'; //Samples button color
-  this._menu.samples.text = 'Show/Hide samples'; //Samples button text
-
-  //Zoom in button
-  this._menu.zoomin = {};
-  this._menu.zoomin.id = this._menu.id + '-zoom-in'; //Zoom in button ID
-  this._menu.zoomin.color = 'grey'; //Zoom in button color
-  this._menu.zoomin.text = 'Zoom In'; //Zoom in button text
-
-  //Zoom out button
-  this._menu.zoomout = {};
-  this._menu.zoomout.id = this._menu.id + '-zoom-out'; //Zoom out button ID
-  this._menu.zoomout.color = 'grey'; //Zoom out button color
-  this._menu.zoomout.text = 'Zoom Out'; //Zoom out button text
-
-  //*/
 
   //Build the events
   this._events = new jviz.commons.events();
