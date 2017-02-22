@@ -6,7 +6,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 <script>
 
 //Draw the points
-jviz.components.coverviewer.draw_points = function()
+jviz.components.coverviewer.__points_draw = function()
 {
   //Get the start point
   var pstart = Math.floor(this._draw.start / this._points.gap) + 1;
@@ -68,7 +68,7 @@ jviz.components.coverviewer.draw_points = function()
 };
 
 //Clear the points layer
-jviz.components.coverviewer.clear_points = function()
+jviz.components.coverviewer.__points_clear = function()
 {
   //Clear the layer
   this.$.canvas.get_layers()[this._points.layer].clear();
