@@ -283,18 +283,12 @@ jviz.components.coverviewer.__selection_update_button = function()
   if(this._selection.active === true)
   {
     //Set the color
-    this.$.selection.set_color('red');
-
-    //Update the text
-    this.$.selection.textContent = 'Disable selection';
+    this.$.selection.set_color('green');
   }
   else
   {
     //Set the red color
-    this.$.selection.set_color('green');
-
-    //Update the text
-    this.$.selection.textContent = 'Enable selection';
+    this.$.selection.set_color('navy');
   }
 };
 
