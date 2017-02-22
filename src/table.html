@@ -1,0 +1,146 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+<script>
+
+//Show the samples table
+jviz.components.coverviewer.show_table = function(){ return this.__table_show(); };
+
+//Hide the samples table
+jviz.components.coverviewer.hide_table = function(){ return this.__table_hide(); };
+
+//Show/Hide the samples table
+jviz.components.coverviewer.__table_toggle_visible = function()
+{
+  //Show/hide the table
+  return (this._table.active === false) ? this.__table_show() : this.__table_hide();
+};
+
+//Show the table
+jviz.components.coverviewer.__table_show = function()
+{
+  //Set active table as true
+  this._table.active = true;
+
+  //Show the table
+  jviz.dom.style(this.$.table, 'display', 'block');
+};
+
+//Hide the table
+jviz.components.coverviewer.__table_hide = function()
+{
+  //Set active table as false
+  this._table.active = false;
+
+  //Hide the table
+  jviz.dom.style(this.$.table, 'display', 'none');
+};
+
+//Build the table
+jviz.components.coverviewer.__table_build = function()
+{
+  //Reset the table content
+  jviz.dom.html(this.$.table, '');
+
+  //Check the samples count
+  if(this._samples.count === 0){ return; }
+
+  //Count the number of lines
+  var lines = this.__table_lines();
+
+  //Add the number of lines
+  this._table.scroll.number(lines);
+
+  //Read all the samples
+  for(var i = 0; i < this._samples.count; i++)
+  {
+    //Get the row ID
+    var row_id = this._table.row.id + Math.floor(i / this._table.row.cells).toString();
+
+    //Check the index
+    if(i % this._table.row.cells === 0)
+    {
+      //Get the row class
+      var row_class = this._table.row.class;
+
+      //Append the row
+      jviz.dom.append(this.$.table, jviz.dom.render('div', { id: row_id, class: row_class }));
+    }
+
+    //Add the sample
+    this.__table_add_sample(i, row_id);
+  }
+};
+
+//Count the number of lines
+jviz.components.coverviewer.__table_lines = function()
+{
+  //Get the number of samples
+  var count = this._samples.count;
+
+  //Get the number of cells for each row
+  var cells = this._table.row.cells
+
+  //Return the number of lines
+  return (count % cells === 0) ? count / cells : Math.floor(count / cells) + 1;
+};
+
+//Add a new sample to the table
+jviz.components.coverviewer.__table_add_sample = function(index, parent)
+{
+  //Save this
+  var self = this;
+
+  //Get the sample name
+  var sample_name = this._samples.names[index];
+
+  //Check if sample is active
+  var sample_active = this._samples.active.list[index];
+
+  //Get the sample index
+  var sample_index = this._samples.active.index.indexOf(index);
+
+  //Get the sample color
+  var sample_color = (sample_index === -1) ? this._samples.default : this._colors[sample_index];
+
+  //Get the cell id
+  var cell_id = this._table.cell.id + index;
+
+  //Get the cell class
+  var cell_class = this._table.cell.class;
+
+  //Add the cell
+  jviz.dom.append(parent, jviz.dom.render('div', { id: cell_id, class: cell_class }));
+
+  //Add the cell text
+  jviz.dom.html(cell_id, sample_name);
+
+  //Add the cell click event
+  jviz.dom.on(cell_id, 'click', function(){ self.__table_toggle_sample(index); });
+
+  //Exit
+  return this;
+};
+
+//Show the sample
+jviz.components.coverviewer.__table_toggle_sample = function(index)
+{
+  //Check if sample is active
+  var is_active = this.__samples_active(index);
+
+  //Hide or show the sample
+  (is_active === true) ? this.__samples_hide(index) : this.__samples_show(index);
+
+  //Get the background color
+  var color = (is_active === true) ? '' : this._samples.color[index];
+
+  //Get the sample text id
+  var id = this._table.cell.id + index;
+
+  //Update the sample color
+  jviz.dom.style(id, 'background-color', color);
+};
+
+</script>
