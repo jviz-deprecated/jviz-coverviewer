@@ -260,7 +260,7 @@ jviz.components.coverviewer.__selection_mouse_over = function(x, y)
 };
 
 //Clear the selection
-jviz.components.coverviewer.__selection_draw = function()
+jviz.components.coverviewer.__selection_clear = function()
 {
   //Clear the selection
   this.$.canvas.get_layers()[this._selection.layer].clear();
