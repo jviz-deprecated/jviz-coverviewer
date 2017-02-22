@@ -6,7 +6,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 <script>
 
 //Add a selection
-jviz.components.coverviewer.selection = function(start, end)
+jviz.components.coverviewer.set_selection = function(start, end)
 {
   //Update the selection start position
   this._selection.start = parseInt(start);
@@ -74,7 +74,7 @@ jviz.components.coverviewer.draw_selection = function()
 };
 
 //Selection down
-jviz.components.coverviewer.selectionDown = function(x, y)
+jviz.components.coverviewer.selection_down = function(x, y)
 {
   //Active the click
   this._selection.click.active = true;
@@ -92,7 +92,7 @@ jviz.components.coverviewer.selectionDown = function(x, y)
   this._selection.click.original = x;
 
   //Check if has selection
-  if(this._selection.has === true && this.selectionOver(x, y) === true || this._selection.fixed === true)
+  if(this._selection.has === true && this.selection_over(x, y) === true || this._selection.fixed === true)
   {
     //Check the rectangle start
     if(x < this._selection.rect.posx + this._selection.margin && this._selection.fixed === false)
@@ -131,7 +131,7 @@ jviz.components.coverviewer.selectionDown = function(x, y)
 };
 
 //Selection move
-jviz.components.coverviewer.selectionMove = function(x, y)
+jviz.components.coverviewer.selection_move = function(x, y)
 {
   //Check if has selection
   if(this._selection.has === false){ return; }
@@ -205,7 +205,7 @@ jviz.components.coverviewer.selectionMove = function(x, y)
 };
 
 //Selection up
-jviz.components.coverviewer.selectionUp = function(x, y)
+jviz.components.coverviewer.selection_up = function(x, y)
 {
   //Check if is active
   if(this._selection.click.active === false){ return; }
@@ -228,7 +228,7 @@ jviz.components.coverviewer.selectionUp = function(x, y)
 };
 
 //Selection over
-jviz.components.coverviewer.selectionOver = function(x, y)
+jviz.components.coverviewer.selection_over = function(x, y)
 {
   //Check the left point
   if(x < this._selection.rect.posx - this._selection.margin){ return false; }
