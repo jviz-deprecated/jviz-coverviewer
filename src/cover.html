@@ -46,7 +46,7 @@ jviz.components.coverviewer.set_cover = function(data)
   this._cover.length = Math.abs(this._cover.end - this._cover.start) + 1;
 
   //Save the values
-  this._cover.values = this.parse_cover(data.values);
+  this._cover.values = this.__cover_parse(data.values);
 
   //Set has data as true
   this._cover.has = true;
@@ -65,7 +65,7 @@ jviz.components.coverviewer.set_cover = function(data)
   this.$.panel.set_detail('Chromosome ' + this._cover.chromosome + '  ' + point_start + ' - ' + point_end);
 
   //Update the zoom values
-  this.update_zoom();
+  this.__zoom_update();
 
   //Draw the axis again
   this._axis.draw = true;
@@ -78,7 +78,7 @@ jviz.components.coverviewer.set_cover = function(data)
 };
 
 //CoverViewer parse the coverage data
-jviz.components.coverviewer.parse_cover = function(values)
+jviz.components.coverviewer.__cover_parse = function(values)
 {
   //Reset the min value
   this._cover.min = 99999999;
@@ -127,6 +127,12 @@ jviz.components.coverviewer.parse_cover = function(values)
 
   //Return the coverage values
   return out;
+};
+
+//Draw the cover
+jviz.components.coverviewer.__cover_draw = function()
+{
+
 };
 
 </script>
