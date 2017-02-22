@@ -1,0 +1,84 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+<script>
+
+//Initialize the label
+jviz.components.coverviewer.__label_init = function()
+{
+  //Set the label tooltip color
+  this._label.tooltip.set_color(this._label.color);
+
+  //Clear the label
+  this.__label_clear();
+};
+
+//Draw the label
+jviz.components.coverviewer.__label_draw = function(px, py)
+{
+  //Check if label is enabled
+  if(this._label.enabled === false){ return; }
+
+  //Get the up layer
+  var canvas = this.$.canvas.get_layers()[this._label.layer];
+
+  //Get the draw
+  var draw = this.$.canvas.get_draw();
+
+  //Clear the canvas
+  canvas.clear();
+
+  //Draw the line
+  canvas.line([ [ px, draw.margin.top ], [px, draw.margin.top + this._label.line.height ] ]);
+
+  //Add the style
+  canvas.stroke({ width: this._label.line.width, color: this._label.color, opacity: this._label.line.opacity });
+
+  //ove the tooltip
+  this._label.tooltip.move({ posx: px, posy: this._label.posy });
+
+  //Set the tooltip text
+  this._label.tooltip.set_text(jviz.math.format(this._draw.position, '.'));
+
+  //Draw the tooltip
+  this._label.tooltip.draw(canvas);
+
+  //Get the actual position
+  var pos = this._draw.position;
+
+  //Get the cover for this position
+  var cover = (typeof this._cover.values[pos] === 'undefined') ? this._samples.empty : this._cover.values[pos];
+
+  //Create one circle for each bam file
+  for(var i = 0; i < this._samples.count; i++)
+  {
+    //Create the new object circle
+    var circ = {};
+
+    //Calculate the position x
+    circ.posx = px;
+
+    //Calculate the position y
+    circ.posy = this._height - draw.margin.bottom - cover[i];
+
+    //Set the radius
+    canvas.circle({ x: circ.posx, y: circ.posy, radius: this._label.circle.radius });
+
+    //Get the color
+    circ.color = this._samples.color[i];
+
+    //Add the style
+    canvas.fill({ color: circ.color, opacity: this._label.circle.opacity });
+  }
+};
+
+//Clear the label
+jviz.components.coverviewer.__label_clear = function()
+{
+  //Clear the layer
+  this.$.canvas.get_layers()[this._label.layer].clear();
+};
+
+</script>
