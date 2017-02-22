@@ -25,19 +25,19 @@ jviz.components.coverviewer.draw = function()
   this._draw.end = this._draw.start + this._draw.length;
 
   //Draw the background
-  if(this._draw.move === false){ this.draw_background(); }
+  if(this._draw.move === false){ this.__background_draw(); }
 
   //Draw the axis
-  if(this._axis.draw === true && this._axis.active === true){ this.draw_axis(); }
+  if(this._axis.draw === true && this._axis.active === true){ this.__axis_draw(); }
 
   //Draw the control points
-  this.draw_points();
+  this.__points_draw();
 
   //Draw the coverage values
-  this.draw_samples();
+  this.__samples_draw();
 
   //Draw the selection
-  this.draw_selection();
+  this.__selection_draw();
 
   //Draw the marks
   //this.marksDraw();
@@ -47,19 +47,22 @@ jviz.components.coverviewer.draw = function()
 jviz.components.coverviewer.clear = function()
 {
   //Clear the background
-  this.clear_background();
+  this.__background_clear();
 
   //Clear the points
-  this.clear_points();
+  this.__points_clear();
 
   //Clear the samples
-  this.clear_samples();
+  this.__samples_clear();
 
   //Clear the label
-  this.clear_label();
+  //this.clear_label();
 
   //Clear the marks
-  this.clear_marks();
+  //this.clear_marks();
+
+  //Clear the selection
+  this.__selection_clear();
 };
 
 </script>
