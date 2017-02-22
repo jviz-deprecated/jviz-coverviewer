@@ -1,0 +1,59 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+<script>
+
+//Set the options
+jviz.components.coverviewer.options = function(opt)
+{
+  //Check the options ofbject
+  if(typeof opt !== 'object'){ return; }
+
+  //Zoom options
+  if(typeof opt.zoom === 'object')
+  {
+    //Check if zoom is enabled
+    if(typeof opt.zoom.enabled === 'boolean'){ this._zoom.enabled = opt.zoom.enabled; }
+
+    //Check the default zoom value
+    if(typeof opt.zoom.default === 'number'){ this._zoom.default = opt.zoom.default; }
+
+    //Zoom is fixed
+    if(typeof opt.zoom.fixed === 'boolean'){ this._zoom.fixed = opt.zoom.fixed; }
+
+    //Check the zoom buttons
+    if(typeof opt.zoom.buttons === 'boolean'){ this._zoom.buttons = opt.zoom.buttons; }
+
+    //Update the zoom
+    this.__zoom_init();
+  }
+
+  //Check the selection configuration
+  if(typeof opt.selection === 'object')
+  {
+    //Check if selection is enabled
+    if(typeof opt.selection.enabled === 'boolean'){ this._selection.enabled = opt.selection.enabled; }
+
+    //Check if selection is active
+    if(typeof opt.selection.active === 'boolean'){ this._selection.active = opt.selection.active; }
+
+    //Check the selection color
+    if(typeof opt.selection.color === 'string'){ this._selection.color = opt.selection.color.trim().toLowerCase(); }
+
+    //Check if selection is fixed
+    if(typeof opt.selection.fixed === 'boolean'){ this._selection.fixed = opt.selection.fixed; }
+
+    //Selection button
+    if(typeof opt.selection.button === 'boolean'){ this._selection.btn.visible = opt.selection.button; } 
+
+    //Update the selection
+    this.__selection_init();
+  }
+
+  //Update the draw
+  this.draw();
+};
+
+</script>
