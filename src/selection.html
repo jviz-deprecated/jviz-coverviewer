@@ -14,8 +14,8 @@ jviz.components.coverviewer.set_selection = function(start, end)
   //Update the selection end position
   this._selection.end = parseInt(end);
 
-  //Set selection active as true
-  this._selection.active = true;
+  //Set that has selection
+  this._selection.has = true;
 
   //Draw the selection
   this.draw_selection();
