@@ -148,12 +148,10 @@ jviz.components.coverviewer.created = function()
   this._colors.push('' + jviz.colors('orange') + ''); //Orange color
   this._colors.push('' + jviz.colors('purple') + ''); //Purple color
 
-  /*
-
   //Samples table
   this._table = {};
-  this._table.id = this._id + '-table'; //Samples table id
-  this._table.class = this._class + '-table'; //Samples table class
+  this._table.id = jviz.misc.id({ prefix: 'table-' }); //Table id
+  this._table.class = 'table'; //Table class
   this._table.active = false; //Samples table active
   this._table.scroll = null; //Table scroll element
 
@@ -169,6 +167,7 @@ jviz.components.coverviewer.created = function()
   this._table.cell.class = this._table.class + '-cell'; //Table cell class
   this._table.cell.size = 40 + 10; //Table cell size
 
+  /*
   //Marks
   this._marks = {};
   this._marks.src = []; //Marks source data
@@ -290,38 +289,44 @@ jviz.components.coverviewer.ready = function()
   this.$.canvas.set_margin(this._canvas.margin);
 
   //Add the event down
-  jviz.dom.mouse_down(this.$.canvas, function(e, x, y){ return self.event_down(x, y); });
+  jviz.dom.mouse_down(this.$.canvas, function(e, x, y){ return self.__event_down(x, y); });
 
   //Add the event up
-  jviz.dom.mouse_up(this.$.canvas, function(e, x, y){ return self.event_up(x, y); });
+  jviz.dom.mouse_up(this.$.canvas, function(e, x, y){ return self.__event_up(x, y); });
 
   //Add the event move
-  jviz.dom.mouse_move(this.$.canvas, function(e, x, y){ return self.event_move(x, y); });
+  jviz.dom.mouse_move(this.$.canvas, function(e, x, y){ return self.__event_move(x, y); });
 
   //Add the resize event
   jviz.dom.resize(function()
   {
     //Resize the component
-    self.event_resize();
+    self.__event_resize();
 
     //Draw again the data
     self.draw();
   });
 
   //Resize the first time
-  this.event_resize();
+  this.__event_resize();
 
   //Add the zoom in button event
-  jviz.dom.mouse_down(this.$.zoom_in, function(){ return self.zoom_in(); });
+  jviz.dom.mouse_down(this.$.zoom_in, function(){ return self.__zoom_in(); });
 
   //Add the zoom out button event
-  jviz.dom.mouse_down(this.$.zoom_out, function(){ return self.zoom_out(); });
+  jviz.dom.mouse_down(this.$.zoom_out, function(){ return self.__zoom_out(); });
 
   //Add the selection button event
-  jviz.dom.mouse_down(this.$.selection, function(){ return self.toggle_selection(); });
+  jviz.dom.mouse_down(this.$.selection, function(){ return self.__selection_toggle(); });
 
   //Update the selection button
-  this.button_selection();
+  this.__selection_update_button();
+
+  //Add the scroll event
+  this._table.scroll = new jviz.commons.scroll_block({ id: this.$.table.id, num: 1, size: this._table.cell.size });
+
+  //Hide the table
+  jviz.dom.hide(this.$.table);
 };
 
 </script>
