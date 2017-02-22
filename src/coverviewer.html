@@ -167,32 +167,14 @@ jviz.components.coverviewer.created = function()
   this._table.cell.class = this._table.class + '-cell'; //Table cell class
   this._table.cell.size = 40 + 10; //Table cell size
 
-  /*
   //Marks
   this._marks = {};
   this._marks.src = []; //Marks source data
   this._marks.layer = 5; //Marks layer
-  this._marks.color = jviz.colors.purple2.hex; //Marks color
+  this._marks.color = jviz.colors('purple', 2); //Marks color
   this._marks.opacity = 0.3; //Marks opacity
+  this._marks.tooltip = new jviz.canvas.tooltip({ color: this._marks.color, position: 'top' });
 
-  //Marks label
-  this._marks.label = {};
-  this._marks.label.width = 150; //Marks label width
-  this._marks.label.height = 20; //Marks label height
-  this._marks.label.fill = jviz.colors.purple2.hex; //Marks label fill color
-  this._marks.label.triangle = 6; //Marks label triangle
-  this._marks.label.radius = 5; //Marks label radius
-  this._marks.label.margin = { top: 4 }; //Marks label margin top
-
-  //Marks position text
-  this._marks.label.text = {};
-  this._marks.label.text.color = jviz.colors.white.hex; //Marks label text color
-  this._marks.label.text.font = jviz.font.normal; //Marks label text font
-  this._marks.label.text.align = 'center'; //Marks label text align
-  this._marks.label.text.size = '11px'; //Marks label text size
-  this._marks.label.text.margin = 3; //Marks label text margin
-
-  */
   //Zoom options
   this._zoom = {};
   this._zoom.max = 1; //Max zoom level
