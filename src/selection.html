@@ -77,7 +77,7 @@ jviz.components.coverviewer.__selection_draw = function()
   canvas.fill({ color: this._selection.color, opacity: this._selection.rect.opacity });
 
   //Set the tooltip text
-  this._selection.tooltip.set_text(this._selection.start + ' - ' + this._selection.end, false);
+  this._selection.tooltip.set_text(jviz.math.format(this._selection.start) + ' - ' + jviz.math.format(this._selection.end), false);
 
   //Move the tooltip
   this._selection.tooltip.move({ posx: this._selection.rect.posx + this._selection.rect.width / 2, posy: this._selection.rect.posy + this._selection.rect.height });
