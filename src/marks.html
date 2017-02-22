@@ -24,6 +24,19 @@ jviz.components.coverviewer.set_marks = function(data)
 //Get the actual marks
 jviz.components.coverviewer.get_marks = function(){ return this._marks.src; };
 
+//Reset the marks
+jviz.components.coverviewer.reset_marks = function(){ return this.__marks_reset(); };
+
+//Initialize the marks
+jviz.components.coverviewer.__marks_init = function()
+{
+  //Update the marks tooltip color
+  this._marks.tooltip.set_color(this._marks.color);
+
+  //Clear the marks
+  this.__marks_clear();
+};
+
 //Parse the marks data
 jviz.components.coverviewer.__marks_parse = function(data)
 {
@@ -59,6 +72,8 @@ jviz.components.coverviewer.__marks_parse = function(data)
 //Draw the marks
 jviz.components.coverviewer.__marks_draw = function()
 {
+  //Check if the marks is enabled
+  if(this._marks.enabled === false){ return; }
   //Get the draw zone
   var draw = this.$.canvas.get_draw();
 
@@ -134,6 +149,5 @@ jviz.components.coverviewer.__marks_reset = function()
   //Clear the marks layer
   this.__marks_clear();
 };
-
 
 </script>
