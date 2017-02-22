@@ -40,10 +40,10 @@ jviz.components.coverviewer.__event_resize = function()
   this.__zoom_update();
 
   //Calculate the label position y
-  //this._label.posy = this._height - draw.margin.bottom + this._label.margin;
+  this._label.posy = this._height - draw.margin.bottom + this._label.margin;
 
   //Calculate the label line height
-  //this._label.line.height = draw.height;
+  this._label.line.height = draw.height;
 
   //Draw the axis again
   this._axis.draw = true;
@@ -140,7 +140,7 @@ jviz.components.coverviewer.__event_move = function(x, y)
     this.__background_clear();
 
     //Clear the label
-    //this.labelClear();
+    this.__label_clear();
 
     //Add the cursor
     //jviz.cursor.set('move');
@@ -172,10 +172,10 @@ jviz.components.coverviewer.__event_move = function(x, y)
   if(draw.margin.left <= x && x <= draw.margin.left + draw.width)
   {
     //Calculate the position
-    this._draw.position = Math.floor(this._draw.start + x - draw.margin.left);
+    this._draw.position = Math.floor(this._draw.start + (x - draw.margin.left) / this._zoom.value);
 
     //Draw the label
-    //this.labelDraw(x, y);
+    this.__label_draw(x, y);
   }
 
   //Exit
