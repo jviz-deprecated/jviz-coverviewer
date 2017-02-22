@@ -291,6 +291,9 @@ jviz.components.coverviewer.__selection_toggle = function()
   //Toggle the selection value
   this._selection.active = !this._selection.active;
 
+  //Clear the labek
+  this.__label_clear();
+
   //Update the button
   this.__selection_update_button();
 };
