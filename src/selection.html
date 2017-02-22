@@ -76,6 +76,15 @@ jviz.components.coverviewer.draw_selection = function()
   //Fill the rectanle
   canvas.fill({ color: this._selection.color, opacity: this._selection.rect.opacity });
 
+  //Set the tooltip text
+  this._selection.tooltip.set_text(this._selection.start + ' - ' + this._selection.end, false);
+
+  //Move the tooltip
+  this._selection.tooltip.move({ posx: this._selection.rect.posx + this._selection.rect.width / 2, posy: this._selection.rect.posy + this._selection.rect.height });
+
+  //Draw the tooltip
+  this._selection.tooltip.draw(canvas);
+
   //Continue
   return this;
 };
@@ -135,6 +144,9 @@ jviz.components.coverviewer.selection_down = function(x, y)
 
   //Has a selection
   this._selection.has = true;
+
+  //Update the tooltip
+  this._selection.tooltip.set_text('    ' + this._cover.start + ' - ' + this._cover.end + '    ');
 };
 
 //Selection move
